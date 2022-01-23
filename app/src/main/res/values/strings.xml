@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FitHelper</string>
+
+    <string name="navigation_home">Дом</string>
+    <string name="navigation_guide">Руководство</string>
+    <string name="navigation_workout">Тренировки</string>
+    <string name="navigation_profile">Профиль</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

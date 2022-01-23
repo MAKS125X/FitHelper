@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_item1"
+        android:title="@string/navigation_home"
+        android:orderInCategory="1"/>
+    <item android:id="@+id/navigation_guide"
+        android:icon="@drawable/ic_item2"
+        android:title="@string/navigation_guide"
+        android:orderInCategory="2"/>
+    <item android:id="@+id/navigation_workout"
+        android:icon="@drawable/ic_item3"
+        android:title="@string/navigation_workout"
+        android:orderInCategory="3"/>
+    <item android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_item4"
+        android:title="@string/navigation_profile"
+        android:orderInCategory="4"/>
+
+</menu>
