@@ -11,4 +11,5 @@
     <color name="bNavCheckedItem">#FF03DAC5</color>
     <color name="bNavUncheckedItem">#FFFFFFFF</color>
     <color name="recyclerviewWorkoutItem">#D6D7D8</color>
+    <color name="buttonBackground">#B581D5</color>
 </resources>

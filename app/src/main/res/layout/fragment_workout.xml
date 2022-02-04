@@ -10,11 +10,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/createNewWorkoutFlActButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:clickable="true"
+            android:contentDescription="@string/add_new_workout"
+            android:src="@android:drawable/ic_input_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workoutRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
 
+            android:scrollbars="horizontal"
+
+            tools:listitem="@layout/recyclerview_workout_item"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

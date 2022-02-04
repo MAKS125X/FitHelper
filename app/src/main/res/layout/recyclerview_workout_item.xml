@@ -3,59 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@color/recyclerviewWorkoutItem"
+            android:orientation="vertical"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp">
 
             <TextView
-                android:id="@+id/nameTV"
+                android:id="@+id/trainingNameTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
-                android:text="@string/workoutname"
+                android:text="@string/workoutName"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                />
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/dateTV"
+                android:id="@+id/trainingDateTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:text="@string/workoutDate"
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                />
+                android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/exercisesTV"
+                android:id="@+id/exercisesNameTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/ExerciseInWorkout"
+                android:text="@string/exerciseInWorkout"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -63,11 +63,12 @@
                 android:id="@+id/dividingLine"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
                 android:background="#7b7b7b" />
 
             <TextView
-                android:id="@+id/anotherExercisesTV"
+                android:id="@+id/anotherExercisesCountTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

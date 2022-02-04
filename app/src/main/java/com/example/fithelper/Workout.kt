@@ -8,4 +8,5 @@ class Workout(var name: String?,
         return name ?: ""
     }
 
+
 }

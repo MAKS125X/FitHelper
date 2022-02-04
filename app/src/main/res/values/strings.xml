@@ -7,9 +7,11 @@
     <string name="navigation_profile">Профиль</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="workoutname">Название тренировки</string>
+    <string name="workoutName">Название тренировки</string>
     <string name="workoutDate">Дата Тренировки</string>
-    <string name="ExerciseInWorkout">Упражнение1</string>
+    <string name="exerciseInWorkout">Упражнение1</string>
     <string name="countOfOtherExercises">Ещё 5 упражнений</string>
+    <string name="workoutWithoutDate">Без даты</string>
+    <string name="add_new_workout">Добавить новую тренировку</string>
 
 </resources>
