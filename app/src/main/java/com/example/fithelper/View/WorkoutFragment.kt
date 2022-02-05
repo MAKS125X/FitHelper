@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.*
 import com.example.fithelper.databinding.FragmentWorkoutBinding
@@ -18,6 +20,10 @@ class WorkoutFragment : Fragment() {
     private val creatingOfWorkoutFragment = CreatingOfWorkoutFragment()
 
     private lateinit var list: MutableList<Workout>
+
+    private lateinit var adapter: WorkoutAdapter
+
+    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +37,9 @@ class WorkoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+
+
+
     }
 
     private fun init() {
@@ -42,7 +51,7 @@ class WorkoutFragment : Fragment() {
 
         binding.apply {
             workoutRecyclerView.layoutManager = LinearLayoutManager(this@WorkoutFragment.context)
-            workoutRecyclerView.adapter = WorkoutAdapter(list, object : OnWorkoutItemClickListener {
+            adapter = WorkoutAdapter(list, object : OnWorkoutItemClickListener {
                 override fun onClick(position: Int) {
                     Toast.makeText(
                         context,
@@ -51,21 +60,30 @@ class WorkoutFragment : Fragment() {
                     ).show()
                 }
             })
+            workoutRecyclerView.adapter = adapter
             createNewWorkoutFlActButton.setOnClickListener {
                 Toast.makeText(
                     context,
                     "Добавить новую тренировку",
                     Toast.LENGTH_SHORT
                 ).show()
-
-
                 val transaction = requireFragmentManager().beginTransaction()
                 transaction.replace(R.id.fragment_holder, creatingOfWorkoutFragment)
                     .addToBackStack("Check")
                     .commit()
-
             }
+
+            exerciseViewModel.workout.observe(activity as LifecycleOwner) {
+                if (it != null) {
+                    adapter.addWorkout(it)
+                } else {
+                    Toast.makeText(context, "Ошибка при добавлении тренировки", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
+
+
     }
 
     companion object {

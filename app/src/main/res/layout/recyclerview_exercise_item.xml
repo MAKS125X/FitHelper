@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/recyclerviewWorkoutItem"
                 android:orientation="vertical"
+
                 app:layout_constraintEnd_toStartOf="@+id/isCompleteCheckBox"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="0dp">
@@ -35,25 +36,49 @@
                     android:id="@+id/exerciseNameTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Название упражнения" />
+                    android:text="Название упражнения"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="2dp"
+                    />
 
                 <TextView
                     android:id="@+id/exerciseSetsTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Подходов:" />
+                    android:text="Подходов:"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    />
 
                 <TextView
                     android:id="@+id/exerciseRepsTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Повторений:" />
+                    android:text="Повторений:"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    />
 
                 <TextView
                     android:id="@+id/exerciseWeightTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Вес:" />
+                    android:text="Вес:"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="4dp"
+                    />
 
             </LinearLayout>
 
@@ -61,13 +86,15 @@
                 android:id="@+id/isCompleteCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="0dp"
-                android:button="@null"
+                android:layout_marginEnd="4dp"
+                android:layout_gravity="center"
                 android:text=""
-                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

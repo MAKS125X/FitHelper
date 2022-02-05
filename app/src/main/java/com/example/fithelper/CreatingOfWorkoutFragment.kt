@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CreatingOfWorkoutFragment : Fragment() {
 
@@ -43,10 +44,38 @@ class CreatingOfWorkoutFragment : Fragment() {
             if (it != null) {
                 adapter.addExercise(it)
             } else {
-                Toast.makeText(context, "Ошибка при добавлении упражнения", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Ошибка при добавлении упражнения", Toast.LENGTH_SHORT).show()
             }
         }
 
+        binding.confirmWorkoutCreationButton.setOnClickListener {
+            if(adapter.itemCount == 0){
+                Toast.makeText(context, "Добавьте упражнения в тренировку!", Toast.LENGTH_SHORT).show()
+            }
+            else if(binding.workoutNameEditText.text.toString().isEmpty()){
+                Toast.makeText(context, "Добавьте названия тренировке!", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                exerciseViewModel.workout.value = Workout(binding.workoutNameEditText.text.toString(), null, list)
+            }
+
+
+            onDestroy()
+            requireFragmentManager().popBackStack()
+        }
+
+    }
+
+    fun showAlertDialogBuilder(view: View){
+        MaterialAlertDialogBuilder(requireContext()).setTitle("Удалить все выделенные упражнения?")
+            .setPositiveButton("Вернуться обратно"){
+                dialog, which ->
+            }
+            .setNegativeButton("Удалить"){
+                dialog, which ->
+                binding.recyclerView.adapter
+            }
+            .show()
     }
 
     companion object {

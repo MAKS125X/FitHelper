@@ -45,7 +45,7 @@
                 android:textColor="@color/black"
                 android:textSize="22sp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/decreaseSetsButton"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
@@ -56,9 +56,10 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="-"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:background="@drawable/button_background"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/increaseSetsButton"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
@@ -66,7 +67,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
-
+                android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="+"
@@ -90,7 +91,7 @@
                 android:textColor="@color/black"
                 android:textSize="22sp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/decreaseRepsButton"
                 android:layout_width="48dp"
                 android:layout_height="30dp"
@@ -98,14 +99,14 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
-
+                android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="-"
                 android:textSize="12sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/fastDecreaseRepsButton"
                 android:layout_width="48dp"
                 android:layout_height="30dp"
@@ -118,9 +119,10 @@
                 android:insetBottom="0dp"
                 android:text="--"
                 android:textSize="12sp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:background="@drawable/button_background"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/increaseRepsButton"
                 android:layout_width="48dp"
                 android:layout_height="30dp"
@@ -133,9 +135,10 @@
                 android:insetBottom="0dp"
                 android:text="+"
                 android:textSize="12sp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:background="@drawable/button_background"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/fastIncreaseRepsButton"
                 android:layout_width="48dp"
                 android:layout_height="30dp"
@@ -148,7 +151,8 @@
                 android:insetBottom="0dp"
                 android:text="++"
                 android:textSize="12sp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:background="@drawable/button_background"/>
         </LinearLayout>
 
         <LinearLayout
@@ -165,9 +169,10 @@
                 android:layout_weight="1"
                 android:text="Вес: 0"
                 android:textColor="@color/black"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
 
                 android:id="@+id/decreaseWeightButton"
                 android:layout_width="48dp"
@@ -180,9 +185,10 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="-"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:background="@drawable/button_background"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/fastDecreaseWeightButton"
                 android:layout_width="48dp"
                 android:layout_height="30dp"
@@ -194,9 +200,10 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="--"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:background="@drawable/button_background"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/increaseWeightButton"
                 android:layout_width="48dp"
                 android:layout_height="30dp"
@@ -208,9 +215,10 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="+"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:background="@drawable/button_background"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/fastIncreaseWeightButton"
                 android:layout_width="48dp"
                 android:layout_height="30dp"
@@ -221,10 +229,11 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="++"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:background="@drawable/button_background"/>
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/completeAddExerciseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -234,5 +243,6 @@
             android:text="Добавить упражнение"
             android:textColor="@color/black"
             />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

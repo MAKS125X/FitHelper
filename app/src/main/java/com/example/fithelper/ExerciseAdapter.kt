@@ -9,9 +9,9 @@ import com.example.fithelper.databinding.RecyclerviewExerciseItemBinding
 
 class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>(){
 
-
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val binding = RecyclerviewExerciseItemBinding.bind(itemView)
+
+        private val binding = RecyclerviewExerciseItemBinding.bind(itemView)
 
         fun bind(exercise: Exercise) = with(binding){
             exerciseNameTV.text = exercise.name.toString()
@@ -28,8 +28,9 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerVi
                     exerciseNameTV.paintFlags = exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
             }
-
         }
+
+        fun isChecked() = binding.isCompleteCheckBox.isChecked
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
@@ -48,6 +49,11 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerVi
 
     fun addExercise(exercise: Exercise) {
         exercises.add(exercise)
+        notifyDataSetChanged()
+    }
+
+    fun deleteExercises(position: Int){
+        exercises.removeAt(position)
         notifyDataSetChanged()
     }
 
