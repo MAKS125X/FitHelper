@@ -1,7 +1,6 @@
 package com.example.fithelper
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class BottomSheetAddExerciseFragment : BottomSheetDialogFragment() {
 
     lateinit var binding: FragmentBottomSheetAddExerciseBinding
-    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
+    private val workoutViewModel: WorkoutViewModel by activityViewModels()
 
     var numberOfSets = 0
     var numberOfReps = 0
@@ -31,7 +30,6 @@ class BottomSheetAddExerciseFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         binding.decreaseSetsButton.setOnClickListener {
             if (numberOfSets > 0) {
@@ -72,25 +70,25 @@ class BottomSheetAddExerciseFragment : BottomSheetDialogFragment() {
         binding.fastDecreaseWeightButton.setOnClickListener {
             if (weight - 5 >= 0) {
                 weight -= 5
-                binding.weightTV.text = "Вес (в кг): $weight"
+                binding.weightTV.text = "Вес: $weight"
             }
         }
 
         binding.decreaseWeightButton.setOnClickListener {
             if (weight > 0) {
                 weight--
-                binding.weightTV.text = "Вес (в кг): $weight"
+                binding.weightTV.text = "Вес: $weight"
             }
         }
 
         binding.increaseWeightButton.setOnClickListener {
             weight++
-            binding.weightTV.text = "Вес (в кг): $weight"
+            binding.weightTV.text = "Вес: $weight"
         }
 
         binding.fastIncreaseWeightButton.setOnClickListener {
             weight += 5
-            binding.weightTV.text = "Вес (в кг): $weight"
+            binding.weightTV.text = "Вес: $weight"
         }
 
         binding.completeAddExerciseButton.setOnClickListener {
@@ -117,7 +115,7 @@ class BottomSheetAddExerciseFragment : BottomSheetDialogFragment() {
                     ).show()
                 }
                 else -> {
-                    exerciseViewModel.exercise.value = Exercise(
+                    workoutViewModel.exercise.value = Exercise(
                         binding.exerciseNameET.text.toString(),
                         numberOfSets, numberOfReps, weight
                     )
@@ -129,8 +127,6 @@ class BottomSheetAddExerciseFragment : BottomSheetDialogFragment() {
                 }
             }
         }
-
-
     }
 
     companion object {

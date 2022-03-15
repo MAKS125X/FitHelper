@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
@@ -23,7 +22,7 @@ class WorkoutFragment : Fragment() {
 
     private lateinit var adapter: WorkoutAdapter
 
-    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
+    private val workoutViewModel: WorkoutViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +36,6 @@ class WorkoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-
-
-
     }
 
     private fun init() {
@@ -73,17 +69,15 @@ class WorkoutFragment : Fragment() {
                     .commit()
             }
 
-            exerciseViewModel.workout.observe(activity as LifecycleOwner) {
+            workoutViewModel.workout.observe(activity as LifecycleOwner) {
                 if (it != null) {
                     adapter.addWorkout(it)
                 } else {
-                    Toast.makeText(context, "Ошибка при добавлении тренировки", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Ошибка при добавлении тренировки", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
-
         }
-
-
     }
 
     companion object {

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "159044482415",
+    "project_id": "fithelper-1e8fb",
+    "storage_bucket": "fithelper-1e8fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159044482415:android:28108fbfa178fb2136649a",
+        "android_client_info": {
+          "package_name": "com.example.fithelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159044482415-c2o5uigd4vnlphdqk6lgk8ipov5c86jg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fithelper",
+            "certificate_hash": "766bc9191600fe198460682ec09952a01ca50290"
+          }
+        },
+        {
+          "client_id": "159044482415-6r4gnpbeskrn4smcobf1t93so2gjngd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaiojqyB7FtDOp31MgPjir7bcKVpwJ2Xw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159044482415-6r4gnpbeskrn4smcobf1t93so2gjngd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

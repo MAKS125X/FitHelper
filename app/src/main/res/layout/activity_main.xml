@@ -8,7 +8,6 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/toolBarColor"
@@ -29,18 +28,6 @@
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:backgroundTint="#FFEB3B"
-        app:itemIconTint="@drawable/bottom_nav_selector"
-        app:itemTextColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu" />
-
     <FrameLayout
         android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
@@ -51,7 +38,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
     </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/bNavBackgroundColor"
+        app:itemIconTint="@drawable/bottom_nav_selector"
+        app:itemTextColor="@color/bNavCheckedItem"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

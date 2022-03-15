@@ -26,7 +26,7 @@ class WorkoutAdapter(private val workouts: MutableList<Workout>, private val onW
             trainingNameTV.text = workout.name
 
             // Отображение даты тренировки
-            if(workout.dateInMilliseconds != null){
+            if(workout.dateInMilliseconds != null && workout.dateInMilliseconds != 0L){
                 val date = Date(workout.dateInMilliseconds!!)
                 val format = SimpleDateFormat("dd.MM.yyyy")
                 trainingDateTV.text = format.format(date)
