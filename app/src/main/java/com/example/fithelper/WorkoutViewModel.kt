@@ -9,7 +9,11 @@ open class WorkoutViewModel : ViewModel(){
         MutableLiveData<Exercise>()
     }
 
-    val workout: MutableLiveData<Workout> by lazy {
+    val createdWorkout: MutableLiveData<Workout> by lazy {
+        MutableLiveData<Workout>()
+    }
+
+    val changedWorkout: MutableLiveData<Workout> by lazy {
         MutableLiveData<Workout>()
     }
 

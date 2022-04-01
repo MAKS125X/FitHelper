@@ -10,7 +10,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.fithelper.R
 import com.example.fithelper.Repository.LoginViewModel
-import com.example.fithelper.databinding.ActivityRegisterBinding
+import com.example.fithelper.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -20,8 +20,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class RegisterActivity : AppCompatActivity() {
-    lateinit var binding: ActivityRegisterBinding
+class LoginActivity : AppCompatActivity() {
+    lateinit var binding: ActivityLoginBinding
     private val viewModel by viewModels<LoginViewModel>()
 
     lateinit var launcher: ActivityResultLauncher<Intent>
@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -42,13 +42,14 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
             catch(e: ApiException){
-                Toast.makeText(this,"Ошибка при входе", Toast.LENGTH_SHORT)
+                Toast.makeText(this,"Ошибка при входе", Toast.LENGTH_SHORT).show()
             }
         }
         binding.accountButton.setOnClickListener {
             signInWithGoogle()
         }
-        //observeAuthenticationState()
+
+        observeAuthenticationState()
     }
 
     private fun getClient(): GoogleSignInClient{
@@ -69,10 +70,10 @@ class RegisterActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
-                Toast.makeText(this,"Успешный вход", Toast.LENGTH_SHORT)
+                Toast.makeText(this,"Успешный вход", Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(this,"Произошла ошибка при входе", Toast.LENGTH_SHORT)
+                Toast.makeText(this,"Произошла ошибка при входе", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -81,16 +82,16 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.authenticationState.observe(this, Observer { authenticationState ->
             when (authenticationState) {
                 LoginViewModel.AuthenticationState.AUTHENTICATED -> {
-                    binding.accountButton.setOnClickListener {
-                        val i = Intent(this, MainActivity::class.java)
-                        startActivity(i)
-                        //findNavController().navigate(R.id.accountFragment)
-                    }
+//                    binding.accountButton.setOnClickListener {
+//                        val i = Intent(this, MainActivity::class.java)
+//                        startActivity(i)
+//                        //findNavController().navigate(R.id.accountFragment)
+//                    }
+                    val i = Intent(this, MainActivity::class.java)
+                    startActivity(i)
                 }
                 else -> {
-                    binding.accountButton.setOnClickListener {
-                        //findNavController().navigate(R.id.loginFragment)
-                    }
+                    Toast.makeText(this,"Произошла ошибка при входе", Toast.LENGTH_SHORT).show()
                 }
             }
         })

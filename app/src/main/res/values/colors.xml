@@ -8,9 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="toolBarColor">#FFFFFFFF</color>
-    <color name="bNavCheckedItem">#FFF335FF</color>
+    <!-- <color name="bNavCheckedItem">#FFF335FF</color> -->
+    <color name="bNavCheckedItem">#E61546</color>
     <color name="bNavUncheckedItem">#FFFFFFFF</color>
     <color name="recyclerviewWorkoutItem">#D6D7D8</color>
     <color name="buttonBackground">#B581D5</color>
-    <color name="bNavBackgroundColor">#FFEB3B</color>
+    <color name="bNavBackgroundColor">#0277B6</color>
 </resources>

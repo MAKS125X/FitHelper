@@ -117,7 +117,7 @@ class BottomSheetAddExerciseFragment : BottomSheetDialogFragment() {
                 else -> {
                     workoutViewModel.exercise.value = Exercise(
                         binding.exerciseNameET.text.toString(),
-                        numberOfSets, numberOfReps, weight
+                        numberOfSets, numberOfReps, weight, isComplete = false
                     )
                     numberOfSets = 0
                     numberOfReps = 0

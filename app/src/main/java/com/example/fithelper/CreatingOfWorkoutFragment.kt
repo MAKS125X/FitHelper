@@ -2,21 +2,24 @@ package com.example.fithelper
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fithelper.Repository.LoginViewModel
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreatingOfWorkoutFragment : Fragment() {
+open class CreatingOfWorkoutFragment : Fragment() {
 
+    private val loginViewModel by viewModels<LoginViewModel>()
     private lateinit var binding: FragmentCreatingOfWorkoutBinding
     private val workoutViewModel: WorkoutViewModel by activityViewModels()
     private lateinit var adapter: ExerciseAdapter
@@ -32,10 +35,28 @@ class CreatingOfWorkoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = mutableListOf<Exercise>()
+        val newRecyclerViewList: MutableList<Exercise> = mutableListOf<Exercise>()
+
+//        workoutViewModel.changedWorkout.observe(activity as LifecycleOwner) {
+//            newRecyclerViewList.clear()
+//            binding.workoutNameEditText.text.clear()
+//            binding.workoutDateTextView.setText("Дата тренировки")
+//            val tempList = it.exerciseList
+//            if (tempList != null) {
+//                newRecyclerViewList.addAll(tempList)
+//            }
+//            //if(it.name != null){
+//            binding.workoutNameEditText.setText("${it.name}")
+//            binding.workoutNameEditText.setText("hhfgbdvsdDx")
+//            //}
+//            if(it.dateInMilliseconds != null && it.dateInMilliseconds != 0L){
+//                binding.workoutDateTextView.setText("Дата тренировки: ${getDate(it.dateInMilliseconds!!,"dd.MM.yyyy")}")
+//            }
+//        }
+
         binding.recyclerView.layoutManager =
             LinearLayoutManager(this@CreatingOfWorkoutFragment.context)
-        adapter = ExerciseAdapter(list)
+        adapter = ExerciseAdapter(newRecyclerViewList)
         binding.recyclerView.adapter = adapter
 
         binding.addExercisesButton.setOnClickListener {
@@ -43,7 +64,7 @@ class CreatingOfWorkoutFragment : Fragment() {
             BottomSheetAddExerciseFragment().show(requireFragmentManager(), "BottomSheetDialog")
         }
 
-        var c = Calendar.getInstance()
+        val c = Calendar.getInstance()
         var year = c.get(Calendar.YEAR)
         var month = c.get(Calendar.MONTH)
         var day = c.get(Calendar.DAY_OF_MONTH)
@@ -71,6 +92,8 @@ class CreatingOfWorkoutFragment : Fragment() {
         workoutViewModel.exercise.observe(activity as LifecycleOwner) {
             if (it != null) {
                 adapter.addExercise(it)
+                //binding.recyclerView.adapter
+                //newRecyclerViewList.add(it)
             } else {
                 Toast.makeText(context, "Ошибка при добавлении упражнения", Toast.LENGTH_SHORT)
                     .show()
@@ -84,21 +107,37 @@ class CreatingOfWorkoutFragment : Fragment() {
             } else if (binding.workoutNameEditText.text.toString().isEmpty()) {
                 Toast.makeText(context, "Добавьте название тренировке!", Toast.LENGTH_SHORT).show()
             } else {
+                val workout: Workout
                 if (dateString != "") {
-                    workoutViewModel.workout.value =
-                        Workout(
-                            binding.workoutNameEditText.text.toString(),
-                            convertDateToLong(dateString),
-                            list
-                        )
+                    workout = Workout(
+                        binding.workoutNameEditText.text.toString(),
+                        convertDateToLong(dateString),
+                        newRecyclerViewList
+                    )
                 } else {
-                    workoutViewModel.workout.value =
-                        Workout(binding.workoutNameEditText.text.toString(), 0, list)
+                    workout = Workout(
+                        binding.workoutNameEditText.text.toString(),
+                        0,
+                        newRecyclerViewList
+                    )
                 }
+
+                workoutViewModel.createdWorkout.value = workout
+
+                adapter.clear()
+                newRecyclerViewList.clear()
+                binding.workoutDateTextView.text =
+                    ("Дата тренировки: ")
+                binding.workoutNameEditText.text.clear()
                 onDestroy()
                 requireFragmentManager().popBackStack()
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //binding.workoutNameEditText.setText("${workoutViewModel.changedWorkout.value?.name}")
     }
 
     fun convertDateToLong(date: String): Long {
@@ -106,15 +145,23 @@ class CreatingOfWorkoutFragment : Fragment() {
         return df.parse(date).time
     }
 
-    fun showAlertDialogBuilder(view: View) {
-        MaterialAlertDialogBuilder(requireContext()).setTitle("Удалить все выделенные упражнения?")
-            .setPositiveButton("Вернуться обратно") { dialog, which ->
-            }
-            .setNegativeButton("Удалить") { dialog, which ->
-                binding.recyclerView.adapter
-            }
-            .show()
+    open fun getDate(dateInMilliseconds: Long, dateFormat: String?): String? {
+
+        val date = Date(dateInMilliseconds)
+        val format = SimpleDateFormat(dateFormat)
+
+        return format.format(date)
     }
+
+//    fun showAlertDialogBuilder(view: View) {
+//        MaterialAlertDialogBuilder(requireContext()).setTitle("Удалить все выделенные упражнения?")
+//            .setPositiveButton("Вернуться обратно") { dialog, which ->
+//            }
+//            .setNegativeButton("Удалить") { dialog, which ->
+//                binding.recyclerView.adapter
+//            }
+//            .show()
+//    }
 
     companion object {
         @JvmStatic

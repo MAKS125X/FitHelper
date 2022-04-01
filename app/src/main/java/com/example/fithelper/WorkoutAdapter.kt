@@ -84,6 +84,10 @@ class WorkoutAdapter(private val workouts: MutableList<Workout>, private val onW
         return workouts.size
     }
 
+    fun clear(){
+        workouts.clear()
+    }
+
     fun addWorkout(workout: Workout) {
         workouts.add(workout)
         notifyDataSetChanged()

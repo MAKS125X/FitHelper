@@ -19,8 +19,11 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerVi
             exerciseRepsTV.text = "Повторений: ${exercise.numberOfReps}"
             exerciseWeightTV.text = "Вес: ${exercise.weight}"
 
-            isCompleteCheckBox.setOnClickListener{
-                if (isCompleteCheckBox.isChecked){
+            if(exercise.isComplete == null){
+                exerciseNameTV.paintFlags = exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
+            else{
+                if(exercise.isComplete == true){
                     exerciseNameTV.paintFlags =
                         exerciseNameTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
@@ -28,9 +31,20 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerVi
                     exerciseNameTV.paintFlags = exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
             }
+            isCompleteCheckBox.setOnClickListener{
+                if (isCompleteCheckBox.isChecked){
+                    exerciseNameTV.paintFlags =
+                        exerciseNameTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    exercise.isComplete = true
+                }
+                else{
+                    exerciseNameTV.paintFlags = exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                    exercise.isComplete = false
+                }
+            }
         }
 
-        fun isChecked() = binding.isCompleteCheckBox.isChecked
+        //fun isChecked() = binding.isCompleteCheckBox.isChecked
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
@@ -45,6 +59,10 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerVi
 
     override fun getItemCount(): Int {
         return exercises.size
+    }
+
+    fun clear(){
+        exercises.clear()
     }
 
     fun addExercise(exercise: Exercise) {
