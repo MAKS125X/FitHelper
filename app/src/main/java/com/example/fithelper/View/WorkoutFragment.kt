@@ -12,7 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.*
+import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repository.LoginViewModel
+import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment
 import com.example.fithelper.databinding.FragmentWorkoutBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,9 +24,9 @@ class WorkoutFragment : Fragment() {
 
     lateinit var binding: FragmentWorkoutBinding
 
-    private val creatingOfWorkoutFragment = CreatingOfWorkoutFragment()
+    private val creatingOfWorkoutFragment = CreateWorkoutFragment()
 
-    private lateinit var changingOfWorkout: ChangingOfWorkout
+    private lateinit var changingOfWorkout: ChangingOfWorkoutFragment
 
     private var listWorkout: MutableList<Workout> = mutableListOf()
 
@@ -80,7 +82,7 @@ class WorkoutFragment : Fragment() {
 //                    ).show()
                     val transaction = requireFragmentManager().beginTransaction()
                     //workoutViewModel.changedWorkout.value = listWorkout[position]
-                    changingOfWorkout = ChangingOfWorkout(listWorkout[position])
+                    changingOfWorkout = ChangingOfWorkoutFragment(listWorkout[position])
                     transaction.replace(R.id.fragment_holder, changingOfWorkout)
                         .addToBackStack("Check")
                         .commit()
@@ -115,7 +117,7 @@ class WorkoutFragment : Fragment() {
                 //listWorkout = mutableListOf()
                 adapter.clear()
                 for (doc in value!!){
-                    val workout : Workout= doc.toObject(Workout::class.java)
+                    val workout : Workout = doc.toObject(Workout::class.java)
                     adapter.addWorkout(workout)
                     //listWorkout.add(workout)
                 }

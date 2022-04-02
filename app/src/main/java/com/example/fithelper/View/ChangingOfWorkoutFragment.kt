@@ -12,13 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.*
+import com.example.fithelper.Models.Exercise
+import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repository.LoginViewModel
 import com.example.fithelper.databinding.FragmentChangingOfWorkoutBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ChangingOfWorkout(val workout: Workout) : Fragment() {
+class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
 
     private val loginViewModel by viewModels<LoginViewModel>()
     private lateinit var binding: FragmentChangingOfWorkoutBinding
@@ -51,7 +53,7 @@ class ChangingOfWorkout(val workout: Workout) : Fragment() {
         }
 
         binding.recyclerView.layoutManager =
-            LinearLayoutManager(this@ChangingOfWorkout.context)
+            LinearLayoutManager(this@ChangingOfWorkoutFragment.context)
         adapterExercise = ExerciseAdapter(newRecyclerViewList)
         binding.recyclerView.adapter = adapterExercise
 
@@ -100,13 +102,13 @@ class ChangingOfWorkout(val workout: Workout) : Fragment() {
         binding.confirmWorkoutCreationButton.setOnClickListener {
             val chandegWorkout: Workout
             if (dateString != "") {
-                chandegWorkout = Workout(
+                chandegWorkout = Workout("", "",
                     workout.name,
                     convertDateToLong(dateString),
                     newRecyclerViewList
                 )
             } else {
-                chandegWorkout = Workout(
+                chandegWorkout = Workout("", "",
                     binding.workoutNameTextView.text.toString(),
                     0,
                     newRecyclerViewList

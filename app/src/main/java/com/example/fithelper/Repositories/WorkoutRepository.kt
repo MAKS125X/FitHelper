@@ -25,7 +25,8 @@ object WorkoutRepository {
 
     fun createWorkout(workout: Workout) {
         workouts
-            .add(workout)
+            .document(workout.id!!)
+            .set(workout)
             .addOnSuccessListener {
                 Log.i("Database", "Workout created")
             }

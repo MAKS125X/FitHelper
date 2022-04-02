@@ -1,4 +1,4 @@
-package com.example.fithelper
+package com.example.fithelper.Models
 
 data class Exercise(val name: String? = null,
                     var numberOfApproaches: Int? = null,
@@ -8,7 +8,7 @@ data class Exercise(val name: String? = null,
                var isComplete: Boolean? = null) {
 
     override fun toString(): String {
-        return name ?: ""
+        return name ?: "Упражнение"
     }
 
 }

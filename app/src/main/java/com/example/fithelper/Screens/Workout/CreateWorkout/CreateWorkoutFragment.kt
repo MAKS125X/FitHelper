@@ -1,23 +1,32 @@
-package com.example.fithelper
+package com.example.fithelper.Screens.Workout.CreateWorkout
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fithelper.BottomSheetAddExerciseFragment
+import com.example.fithelper.ExerciseAdapter
+import com.example.fithelper.Models.Exercise
+import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repository.LoginViewModel
+import com.example.fithelper.WorkoutViewModel
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 
-open class CreatingOfWorkoutFragment : Fragment() {
+open class CreateWorkoutFragment : Fragment() {
+
+    private lateinit var vm: CreateWorkoutViewModel
 
     private val loginViewModel by viewModels<LoginViewModel>()
     private lateinit var binding: FragmentCreatingOfWorkoutBinding
@@ -34,6 +43,8 @@ open class CreatingOfWorkoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        vm = CreateWorkoutViewModel()
 
         val newRecyclerViewList: MutableList<Exercise> = mutableListOf<Exercise>()
 
@@ -55,7 +66,7 @@ open class CreatingOfWorkoutFragment : Fragment() {
 //        }
 
         binding.recyclerView.layoutManager =
-            LinearLayoutManager(this@CreatingOfWorkoutFragment.context)
+            LinearLayoutManager(this@CreateWorkoutFragment.context)
         adapter = ExerciseAdapter(newRecyclerViewList)
         binding.recyclerView.adapter = adapter
 
@@ -64,34 +75,40 @@ open class CreatingOfWorkoutFragment : Fragment() {
             BottomSheetAddExerciseFragment().show(requireFragmentManager(), "BottomSheetDialog")
         }
 
-        val c = Calendar.getInstance()
-        var year = c.get(Calendar.YEAR)
-        var month = c.get(Calendar.MONTH)
-        var day = c.get(Calendar.DAY_OF_MONTH)
-        var dateString: String = ""
+        val calendar = Calendar.getInstance()
 
         binding.changeWorkoutDateButton.setOnClickListener {
             val dpd = DatePickerDialog(
-                requireContext(), DatePickerDialog.OnDateSetListener
+                requireContext(),
+                DatePickerDialog.OnDateSetListener
                 { _, yearDate, monthOfYear, dayOfMonth ->
                     // Display Selected date in TextView
                     val day1 = if (dayOfMonth / 10 == 0) "0${dayOfMonth}" else "${dayOfMonth}"
                     val month1 =
                         if ((monthOfYear + 1) / 10 == 0) "0${monthOfYear + 1}" else "${monthOfYear + 1}"
-                    binding.workoutDateTextView.text =
-                        ("Дата тренировки: $day1.$month1.$yearDate")
-                    dateString = ("$day1.$month1.$yearDate")
-                    year = yearDate
-                    month = monthOfYear
-                    day = dayOfMonth
-                }, year, month, day
+
+                    val dateString = "$day1.$month1.$yearDate"
+                    val date = convertDateToLong(dateString)
+                    vm.setDate(date)
+
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
             )
             dpd.show()
+        }
+        binding.workoutDateTextView.text = "Дата тренировки: ${vm.dateInMilliseconds.value}"
+
+        vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
+            val dateString = getDate(date, "dd.MM.yyyy")
+            binding.workoutDateTextView.text = "Дата тренировки: $date"
         }
 
         workoutViewModel.exercise.observe(activity as LifecycleOwner) {
             if (it != null) {
                 adapter.addExercise(it)
+                vm.exercises.value?.add(it)
                 //binding.recyclerView.adapter
                 //newRecyclerViewList.add(it)
             } else {
@@ -107,22 +124,7 @@ open class CreatingOfWorkoutFragment : Fragment() {
             } else if (binding.workoutNameEditText.text.toString().isEmpty()) {
                 Toast.makeText(context, "Добавьте название тренировке!", Toast.LENGTH_SHORT).show()
             } else {
-                val workout: Workout
-                if (dateString != "") {
-                    workout = Workout(
-                        binding.workoutNameEditText.text.toString(),
-                        convertDateToLong(dateString),
-                        newRecyclerViewList
-                    )
-                } else {
-                    workout = Workout(
-                        binding.workoutNameEditText.text.toString(),
-                        0,
-                        newRecyclerViewList
-                    )
-                }
-
-                workoutViewModel.createdWorkout.value = workout
+                vm.create()
 
                 adapter.clear()
                 newRecyclerViewList.clear()
@@ -133,7 +135,26 @@ open class CreatingOfWorkoutFragment : Fragment() {
                 requireFragmentManager().popBackStack()
             }
         }
+
+
+        binding.workoutNameEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                vm.setName(p0.toString())
+            }
+        })
+
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -165,6 +186,6 @@ open class CreatingOfWorkoutFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = CreatingOfWorkoutFragment()
+        fun newInstance() = CreateWorkoutFragment()
     }
 }

@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fithelper.databinding.RecyclerviewExerciseItemBinding
+import com.example.fithelper.Models.Exercise
+import com.example.fithelper.databinding.ItemExerciseBinding
 
 class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>(){
 
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        private val binding = RecyclerviewExerciseItemBinding.bind(itemView)
+        private val binding = ItemExerciseBinding.bind(itemView)
 
         fun bind(exercise: Exercise) = with(binding){
             exerciseNameTV.text = exercise.name.toString()
@@ -49,7 +50,7 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recyclerview_exercise_item, parent, false)
+            .inflate(R.layout.item_exercise, parent, false)
         return ExerciseAdapter.ExerciseViewHolder(itemView)
     }
 

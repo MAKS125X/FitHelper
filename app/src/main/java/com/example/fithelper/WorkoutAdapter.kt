@@ -1,12 +1,11 @@
 package com.example.fithelper
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fithelper.databinding.RecyclerviewWorkoutItemBinding
+import com.example.fithelper.Models.Workout
+import com.example.fithelper.databinding.ItemWorkoutBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,7 +17,7 @@ class WorkoutAdapter(private val workouts: MutableList<Workout>, private val onW
 //    }
 
     class WorkoutViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = RecyclerviewWorkoutItemBinding.bind(itemView)
+        val binding = ItemWorkoutBinding.bind(itemView)
 
         fun bind(workout: Workout) = with(binding) {
 
@@ -69,7 +68,7 @@ class WorkoutAdapter(private val workouts: MutableList<Workout>, private val onW
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recyclerview_workout_item, parent, false)
+            .inflate(R.layout.item_workout, parent, false)
         return WorkoutViewHolder(itemView)
     }
 

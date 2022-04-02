@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.example.fithelper.Models.Exercise
 import com.example.fithelper.databinding.FragmentBottomSheetAddExerciseBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

@@ -2,6 +2,8 @@ package com.example.fithelper
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fithelper.Models.Exercise
+import com.example.fithelper.Models.Workout
 
 open class WorkoutViewModel : ViewModel(){
 

@@ -16,10 +16,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.selectedItemId = R.id.navigation_profile
 
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_holder, ProfileFragment.newInstance())
-            .commit()
+            //   supportFragmentManager
+            //.beginTransaction()
+            //.replace(R.id.fragment_holder, ProfileFragment.newInstance())
+            //.commit()
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
