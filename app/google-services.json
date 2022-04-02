@@ -14,11 +14,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "159044482415-5aj6ma0o1rmdht9a0hmf1hub7uj9e817.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fithelper",
+            "certificate_hash": "70e2148331017b1bca25ff711caba84e5444e7cf"
+          }
+        },
+        {
           "client_id": "159044482415-c2o5uigd4vnlphdqk6lgk8ipov5c86jg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.fithelper",
             "certificate_hash": "766bc9191600fe198460682ec09952a01ca50290"
+          }
+        },
+        {
+          "client_id": "159044482415-s78ibj96d07hros4fkbnvpa0m3ju7rbi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fithelper",
+            "certificate_hash": "2f34f7372d4c3f73f009a4706d94f3ce7f36b8a0"
           }
         },
         {
