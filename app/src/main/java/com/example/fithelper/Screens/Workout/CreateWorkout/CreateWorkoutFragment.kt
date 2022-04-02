@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.BottomSheetAddExerciseFragment
 import com.example.fithelper.ExerciseAdapter
@@ -44,7 +45,7 @@ open class CreateWorkoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vm = CreateWorkoutViewModel()
+        vm = ViewModelProvider(this).get(CreateWorkoutViewModel::class.java)
 
         val newRecyclerViewList: MutableList<Exercise> = mutableListOf<Exercise>()
 
@@ -98,11 +99,11 @@ open class CreateWorkoutFragment : Fragment() {
             )
             dpd.show()
         }
-        binding.workoutDateTextView.text = "Дата тренировки: ${vm.dateInMilliseconds.value}"
+        //binding.workoutDateTextView.text = "Дата тренировки: ${vm.dateInMilliseconds.value}"
 
         vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
             val dateString = getDate(date, "dd.MM.yyyy")
-            binding.workoutDateTextView.text = "Дата тренировки: $date"
+            binding.workoutDateTextView.text = "Дата тренировки: $dateString"
         }
 
         workoutViewModel.exercise.observe(activity as LifecycleOwner) {
