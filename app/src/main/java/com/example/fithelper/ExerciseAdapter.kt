@@ -15,8 +15,8 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) : RecyclerVi
 
         fun bind(exercise: Exercise) = with(binding){
             exerciseNameTV.text = exercise.name.toString()
-            exerciseSetsTV.text = "Подходов: ${exercise.numberOfSets}"
-            exerciseRepsTV.text = "Повторений: ${exercise.numberOfReps}"
+            exerciseSetsTV.text = "Подходов: ${exercise.numberOfApproaches}"
+            exerciseRepsTV.text = "Повторений: ${exercise.numberOfRepetitions}"
             exerciseWeightTV.text = "Вес: ${exercise.weight}"
 
             if(exercise.isComplete == null){
