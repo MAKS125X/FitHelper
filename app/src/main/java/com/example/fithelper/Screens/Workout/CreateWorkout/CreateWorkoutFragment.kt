@@ -47,6 +47,9 @@ open class CreateWorkoutFragment : Fragment() {
 
         vm = ViewModelProvider(this).get(CreateWorkoutViewModel::class.java)
 
+        vm.initialiseExerciseList()
+
+
         val newRecyclerViewList: MutableList<Exercise> = mutableListOf<Exercise>()
 
 //        workoutViewModel.changedWorkout.observe(activity as LifecycleOwner) {
@@ -109,7 +112,9 @@ open class CreateWorkoutFragment : Fragment() {
         workoutViewModel.exercise.observe(activity as LifecycleOwner) {
             if (it != null) {
                 adapter.addExercise(it)
-                vm.exercises.value?.add(it)
+                vm.addExercise(it)
+                //Toast.makeText(context, "Добавлено ${vm.exercises.value!!.size}", Toast.LENGTH_SHORT)
+                    //.show()
                 //binding.recyclerView.adapter
                 //newRecyclerViewList.add(it)
             } else {
@@ -148,7 +153,6 @@ open class CreateWorkoutFragment : Fragment() {
             ) {
 
             }
-
             override fun afterTextChanged(p0: Editable?) {
                 vm.setName(p0.toString())
             }
