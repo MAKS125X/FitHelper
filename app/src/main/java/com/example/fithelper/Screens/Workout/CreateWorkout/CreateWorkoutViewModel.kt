@@ -26,11 +26,19 @@ class CreateWorkoutViewModel : ViewModel() {
         WorkoutRepository.createWorkout(workout)
     }
 
+    fun initialiseExerciseList(){
+        exercises.value = mutableListOf()
+    }
+
     fun setName(name: String?) {
         this.name.value = name
     }
 
     fun setDate(date: Long?) {
         this.dateInMilliseconds.value = date
+    }
+
+    fun addExercise(exercise: Exercise){
+        this.exercises.value?.add(exercise)
     }
 }
