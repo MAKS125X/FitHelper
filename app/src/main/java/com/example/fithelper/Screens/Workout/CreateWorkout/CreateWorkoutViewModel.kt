@@ -2,12 +2,15 @@ package com.example.fithelper.Screens.Workout.CreateWorkout
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.fithelper.Models.Exercise
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repositories.WorkoutRepository
+import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
 import com.example.fithelper.Services.UserService
+import java.lang.IllegalArgumentException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.UUID.randomUUID

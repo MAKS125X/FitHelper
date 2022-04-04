@@ -65,21 +65,9 @@ open class CreateWorkoutFragment : Fragment() {
     }
 
     private fun initClicks() {
+
         binding.addExercisesButton.setOnClickListener {
             val dialog = CreateExerciseFragment()
-            dialog.binding.completeAddExerciseButton.setOnClickListener {
-                try{
-                    exerciseViewModel.setExercise(
-                        dialog.vm.name.value!!,
-                        dialog.vm.numberOfApproaches.value!!,
-                        dialog.vm.numberOfRepetitions.value!!,
-                        dialog.vm.weight.value!!
-                    )
-                    dialog.dismiss()
-                } catch (ex: IllegalArgumentException) {
-                    Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
-                }
-            }
             dialog.show(parentFragmentManager, "BottomSheetDialog")
         }
 
@@ -108,9 +96,11 @@ open class CreateWorkoutFragment : Fragment() {
             val dateString = getDate(date, "dd.MM.yyyy")
             binding.workoutDateTextView.text = "Дата тренировки: $dateString"
         }
-        vm.exercises.observe(activity as LifecycleOwner) {
+        // todo: bug при повороте экрана создается еще одно упражнение
+        exerciseViewModel.exercise.observe(viewLifecycleOwner, { exercise ->
+            vm.addExercise(exercise)
             adapter.notifyDataSetChanged()
-        }
+        })
     }
 
     private fun initRecyclerView() {

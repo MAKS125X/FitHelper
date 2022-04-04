@@ -10,12 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import com.example.fithelper.Models.Exercise
 import com.example.fithelper.Screens.Shared.ExerciseViewModel
 import com.example.fithelper.databinding.FragmentBottomSheetCreateExerciseBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.lang.IllegalArgumentException
 
 
-class CreateExerciseFragment : BottomSheetDialogFragment() {
+class CreateExerciseFragment() : BottomSheetDialogFragment() {
 
     lateinit var binding: FragmentBottomSheetCreateExerciseBinding
 
@@ -109,7 +111,17 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
         }
 
         binding.completeAddExerciseButton.setOnClickListener {
-
+            try {
+                exerciseViewModel.setExercise(
+                    vm.name.value!!,
+                    vm.numberOfApproaches.value!!,
+                    vm.numberOfRepetitions.value!!,
+                    vm.weight.value!!
+                )
+                this.dismiss()
+            } catch (ex: IllegalArgumentException) {
+                Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -118,3 +130,4 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
         fun newInstance() = CreateExerciseFragment()
     }
 }
+
