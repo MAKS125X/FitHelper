@@ -66,9 +66,21 @@ open class CreateWorkoutFragment : Fragment() {
 
     private fun initClicks() {
         binding.addExercisesButton.setOnClickListener {
-            CreateExerciseFragment().show(parentFragmentManager, "BottomSheetDialog")
-            // todo: add exercise in list
-            // vm.addExercise(exerciseViewModel.exercise.value!!)
+            val dialog = CreateExerciseFragment()
+            dialog.binding.completeAddExerciseButton.setOnClickListener {
+                try{
+                    exerciseViewModel.setExercise(
+                        dialog.vm.name.value!!,
+                        dialog.vm.numberOfApproaches.value!!,
+                        dialog.vm.numberOfRepetitions.value!!,
+                        dialog.vm.weight.value!!
+                    )
+                    dialog.dismiss()
+                } catch (ex: IllegalArgumentException) {
+                    Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
+                }
+            }
+            dialog.show(parentFragmentManager, "BottomSheetDialog")
         }
 
         binding.changeWorkoutDateButton.setOnClickListener {

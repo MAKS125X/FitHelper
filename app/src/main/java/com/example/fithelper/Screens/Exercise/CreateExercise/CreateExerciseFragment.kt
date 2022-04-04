@@ -19,8 +19,8 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
 
     lateinit var binding: FragmentBottomSheetCreateExerciseBinding
 
-    private val vm: CreateExerciseViewModel by viewModels()
-    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
+    val vm: CreateExerciseViewModel by viewModels()
+    val exerciseViewModel: ExerciseViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,17 +109,7 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
         }
 
         binding.completeAddExerciseButton.setOnClickListener {
-            try{
-                exerciseViewModel.setExercise(
-                    vm.name.value!!,
-                    vm.numberOfApproaches.value!!,
-                    vm.numberOfRepetitions.value!!,
-                    vm.weight.value!!
-                )
-                this.dismiss()
-            } catch (ex: IllegalArgumentException) {
-                Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
-            }
+
         }
     }
 
