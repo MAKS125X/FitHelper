@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.*
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repository.LoginViewModel
+import com.example.fithelper.Screens.Shared.ExerciseViewModel
 import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment
 import com.example.fithelper.databinding.FragmentWorkoutBinding
 import com.google.firebase.auth.ktx.auth
@@ -32,7 +33,7 @@ class WorkoutFragment : Fragment() {
 
     private lateinit var adapter: WorkoutAdapter
 
-    private val workoutViewModel: WorkoutViewModel by activityViewModels()
+    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
 
     private val loginViewModel by viewModels<LoginViewModel>()
 
@@ -123,7 +124,7 @@ class WorkoutFragment : Fragment() {
                 }
             }
 
-            workoutViewModel.changedWorkout.observe(activity as LifecycleOwner){
+            exerciseViewModel.changedWorkout.observe(activity as LifecycleOwner){
                 if (it != null){
                     val firestoreDataBase = FirebaseFirestore.getInstance()
                         .collection("Users")
@@ -134,7 +135,7 @@ class WorkoutFragment : Fragment() {
                 }
             }
 
-            workoutViewModel.createdWorkout.observe(activity as LifecycleOwner) {
+            exerciseViewModel.createdWorkout.observe(activity as LifecycleOwner) {
                 if (it != null) {
                     //adapter.addWorkout(it)
                     val firestoreDataBase = FirebaseFirestore.getInstance()

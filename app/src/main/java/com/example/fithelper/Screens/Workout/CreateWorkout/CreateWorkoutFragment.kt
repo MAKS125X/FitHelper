@@ -8,30 +8,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fithelper.BottomSheetAddExerciseFragment
+import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
 import com.example.fithelper.ExerciseAdapter
 import com.example.fithelper.Models.Exercise
-import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repository.LoginViewModel
-import com.example.fithelper.WorkoutViewModel
+import com.example.fithelper.Screens.Shared.ExerciseViewModel
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
+import java.lang.IllegalArgumentException
 import java.text.SimpleDateFormat
 import java.util.*
 
 open class CreateWorkoutFragment : Fragment() {
 
-    private lateinit var vm: CreateWorkoutViewModel
+    private val vm: CreateWorkoutViewModel by viewModels()
+    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
 
     private val loginViewModel by viewModels<LoginViewModel>()
     private lateinit var binding: FragmentCreatingOfWorkoutBinding
-    private val workoutViewModel: WorkoutViewModel by activityViewModels()
     private lateinit var adapter: ExerciseAdapter
 
     override fun onCreateView(
@@ -44,104 +43,9 @@ open class CreateWorkoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        vm = ViewModelProvider(this).get(CreateWorkoutViewModel::class.java)
-
-        vm.initialiseExerciseList()
-
-
-        val newRecyclerViewList: MutableList<Exercise> = mutableListOf<Exercise>()
-
-//        workoutViewModel.changedWorkout.observe(activity as LifecycleOwner) {
-//            newRecyclerViewList.clear()
-//            binding.workoutNameEditText.text.clear()
-//            binding.workoutDateTextView.setText("Дата тренировки")
-//            val tempList = it.exerciseList
-//            if (tempList != null) {
-//                newRecyclerViewList.addAll(tempList)
-//            }
-//            //if(it.name != null){
-//            binding.workoutNameEditText.setText("${it.name}")
-//            binding.workoutNameEditText.setText("hhfgbdvsdDx")
-//            //}
-//            if(it.dateInMilliseconds != null && it.dateInMilliseconds != 0L){
-//                binding.workoutDateTextView.setText("Дата тренировки: ${getDate(it.dateInMilliseconds!!,"dd.MM.yyyy")}")
-//            }
-//        }
-
-        binding.recyclerView.layoutManager =
-            LinearLayoutManager(this@CreateWorkoutFragment.context)
-        adapter = ExerciseAdapter(newRecyclerViewList)
-        binding.recyclerView.adapter = adapter
-
-        binding.addExercisesButton.setOnClickListener {
-            //BottomSheetAddExerciseFragment().show(parentFragmentManager, "BottomSheetDialog")
-            BottomSheetAddExerciseFragment().show(requireFragmentManager(), "BottomSheetDialog")
-        }
-
-        val calendar = Calendar.getInstance()
-
-        binding.changeWorkoutDateButton.setOnClickListener {
-            val dpd = DatePickerDialog(
-                requireContext(),
-                DatePickerDialog.OnDateSetListener
-                { _, yearDate, monthOfYear, dayOfMonth ->
-                    // Display Selected date in TextView
-                    val day1 = if (dayOfMonth / 10 == 0) "0${dayOfMonth}" else "${dayOfMonth}"
-                    val month1 =
-                        if ((monthOfYear + 1) / 10 == 0) "0${monthOfYear + 1}" else "${monthOfYear + 1}"
-
-                    val dateString = "$day1.$month1.$yearDate"
-                    val date = convertDateToLong(dateString)
-                    vm.setDate(date)
-
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            dpd.show()
-        }
-        //binding.workoutDateTextView.text = "Дата тренировки: ${vm.dateInMilliseconds.value}"
-
-        vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
-            val dateString = getDate(date, "dd.MM.yyyy")
-            binding.workoutDateTextView.text = "Дата тренировки: $dateString"
-        }
-
-        workoutViewModel.exercise.observe(activity as LifecycleOwner) {
-            if (it != null) {
-                adapter.addExercise(it)
-                vm.addExercise(it)
-                //Toast.makeText(context, "Добавлено ${vm.exercises.value!!.size}", Toast.LENGTH_SHORT)
-                    //.show()
-                //binding.recyclerView.adapter
-                //newRecyclerViewList.add(it)
-            } else {
-                Toast.makeText(context, "Ошибка при добавлении упражнения", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-
-        binding.confirmWorkoutCreationButton.setOnClickListener {
-            if (adapter.itemCount == 0) {
-                Toast.makeText(context, "Добавьте упражнения в тренировку!", Toast.LENGTH_SHORT)
-                    .show()
-            } else if (binding.workoutNameEditText.text.toString().isEmpty()) {
-                Toast.makeText(context, "Добавьте название тренировке!", Toast.LENGTH_SHORT).show()
-            } else {
-                vm.create()
-
-                adapter.clear()
-                newRecyclerViewList.clear()
-                binding.workoutDateTextView.text =
-                    ("Дата тренировки: ")
-                binding.workoutNameEditText.text.clear()
-                onDestroy()
-                requireFragmentManager().popBackStack()
-            }
-        }
-
+        initRecyclerView()
+        initObservers()
+        initClicks()
 
         binding.workoutNameEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -160,34 +64,56 @@ open class CreateWorkoutFragment : Fragment() {
 
     }
 
+    private fun initClicks() {
+        binding.addExercisesButton.setOnClickListener {
+            CreateExerciseFragment().show(parentFragmentManager, "BottomSheetDialog")
+            // todo: add exercise in list
+            // vm.addExercise(exerciseViewModel.exercise.value!!)
+        }
 
-    override fun onStart() {
-        super.onStart()
-        //binding.workoutNameEditText.setText("${workoutViewModel.changedWorkout.value?.name}")
+        binding.changeWorkoutDateButton.setOnClickListener {
+            vm.changeDate(requireContext())
+        }
+
+        binding.confirmWorkoutCreationButton.setOnClickListener {
+            try {
+                vm.create()
+
+                adapter.clear()
+                binding.workoutDateTextView.text =
+                    ("Дата тренировки: ")
+                binding.workoutNameEditText.text.clear()
+                onDestroy()
+                requireFragmentManager().popBackStack()
+            } catch (ex: IllegalArgumentException) {
+                Toast.makeText(context, ex.message, Toast.LENGTH_LONG)
+            }
+        }
     }
 
-    fun convertDateToLong(date: String): Long {
-        val df = SimpleDateFormat("dd.MM.yyyy")
-        return df.parse(date).time
+    private fun initObservers() {
+        vm.dateInMilliseconds.observe(activity as LifecycleOwner) { date ->
+            val dateString = getDate(date, "dd.MM.yyyy")
+            binding.workoutDateTextView.text = "Дата тренировки: $dateString"
+        }
+        vm.exercises.observe(activity as LifecycleOwner) {
+            adapter.notifyDataSetChanged()
+        }
     }
 
-    open fun getDate(dateInMilliseconds: Long, dateFormat: String?): String? {
+    private fun initRecyclerView() {
+        adapter = ExerciseAdapter(vm.exercises.value!!)
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = adapter
+    }
 
+    private fun getDate(dateInMilliseconds: Long, dateFormat: String?): String? {
         val date = Date(dateInMilliseconds)
         val format = SimpleDateFormat(dateFormat)
 
         return format.format(date)
     }
 
-//    fun showAlertDialogBuilder(view: View) {
-//        MaterialAlertDialogBuilder(requireContext()).setTitle("Удалить все выделенные упражнения?")
-//            .setPositiveButton("Вернуться обратно") { dialog, which ->
-//            }
-//            .setNegativeButton("Удалить") { dialog, which ->
-//                binding.recyclerView.adapter
-//            }
-//            .show()
-//    }
 
     companion object {
         @JvmStatic

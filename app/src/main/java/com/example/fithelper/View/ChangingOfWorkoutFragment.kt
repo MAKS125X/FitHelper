@@ -15,6 +15,8 @@ import com.example.fithelper.*
 import com.example.fithelper.Models.Exercise
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repository.LoginViewModel
+import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
+import com.example.fithelper.Screens.Shared.ExerciseViewModel
 import com.example.fithelper.databinding.FragmentChangingOfWorkoutBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,7 +26,7 @@ class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
 
     private val loginViewModel by viewModels<LoginViewModel>()
     private lateinit var binding: FragmentChangingOfWorkoutBinding
-    private val workoutViewModel: WorkoutViewModel by activityViewModels()
+    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
     private lateinit var adapterExercise: ExerciseAdapter
 
     override fun onCreateView(
@@ -59,7 +61,7 @@ class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
 
         binding.addExercisesButton.setOnClickListener {
             //BottomSheetAddExerciseFragment().show(parentFragmentManager, "BottomSheetDialog")
-            BottomSheetAddExerciseFragment().show(requireFragmentManager(), "BottomSheetDialog")
+            CreateExerciseFragment().show(requireFragmentManager(), "BottomSheetDialog")
         }
 
         val c = Calendar.getInstance()
@@ -87,7 +89,7 @@ class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
             dpd.show()
         }
 
-        workoutViewModel.exercise.observe(activity as LifecycleOwner) {
+        exerciseViewModel.exercise.observe(activity as LifecycleOwner) {
             if (it != null) {
                 //newRecyclerViewList.add(it)
                 adapterExercise.addExercise(it)
@@ -116,7 +118,7 @@ class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
             }
             Toast.makeText(context, "${adapterExercise.itemCount}", Toast.LENGTH_SHORT)
                 .show()
-            workoutViewModel.changedWorkout.value = chandegWorkout
+            //exerciseViewModel.changedWorkout.value = chandegWorkout
             //adapterExercise.clear()
             //newRecyclerViewList.clear()
             binding.workoutDateTextView.text =
