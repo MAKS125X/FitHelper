@@ -10,8 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import com.example.fithelper.Models.Exercise
-import com.example.fithelper.Screens.Shared.ExerciseViewModel
+import com.example.fithelper.Screens.Shared.ExercisesViewModel
 import com.example.fithelper.databinding.FragmentBottomSheetCreateExerciseBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.IllegalArgumentException
@@ -22,7 +21,7 @@ class CreateExerciseFragment() : BottomSheetDialogFragment() {
     lateinit var binding: FragmentBottomSheetCreateExerciseBinding
 
     val vm: CreateExerciseViewModel by viewModels()
-    val exerciseViewModel: ExerciseViewModel by activityViewModels()
+    val exercisesViewModel: ExercisesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -112,7 +111,7 @@ class CreateExerciseFragment() : BottomSheetDialogFragment() {
 
         binding.completeAddExerciseButton.setOnClickListener {
             try {
-                exerciseViewModel.setExercise(
+                exercisesViewModel.addExercise(
                     vm.name.value!!,
                     vm.numberOfApproaches.value!!,
                     vm.numberOfRepetitions.value!!,

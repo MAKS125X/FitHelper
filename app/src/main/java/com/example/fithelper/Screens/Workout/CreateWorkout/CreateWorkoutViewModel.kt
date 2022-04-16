@@ -2,6 +2,7 @@ package com.example.fithelper.Screens.Workout.CreateWorkout
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,11 +20,9 @@ class CreateWorkoutViewModel : ViewModel() {
 
     val name = MutableLiveData<String>()
     val dateInMilliseconds = MutableLiveData<Long>()
-    val exercises = MutableLiveData<MutableList<Exercise>>()
 
     init {
         name.value = ""
-        exercises.value = mutableListOf()
     }
 
     fun setName(name: String?) {
@@ -34,20 +33,16 @@ class CreateWorkoutViewModel : ViewModel() {
         this.dateInMilliseconds.value = date
     }
 
-    fun addExercise(exercise: Exercise) {
-        this.exercises.value?.add(exercise)
-    }
-
-    fun create() {
+    fun create(exercises: MutableList<Exercise>?) {
         val workout = Workout(
             UserService.getUserId(),
             name.value,
             dateInMilliseconds.value,
-            exercises.value
+            exercises
         )
 
         WorkoutRepository.createWorkout(workout)
-        exercises.value?.clear()
+        this.onCleared()
     }
 
     fun changeDate(context: Context) {
@@ -76,7 +71,5 @@ class CreateWorkoutViewModel : ViewModel() {
         val df = SimpleDateFormat("dd.MM.yyyy")
         return df.parse(date).time
     }
-
-
 }
 

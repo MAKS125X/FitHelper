@@ -1,5 +1,6 @@
 package com.example.fithelper.Screens.Exercise.CreateExercise
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 

@@ -15,6 +15,8 @@ object WorkoutRepository {
                 for (workout in snapshot) {
                     result.add(workout.toObject(Workout::class.java))
                 }
+
+                Log.i("Database", "Workouts get by $userId")
             }
             .addOnFailureListener { ex ->
                 Log.e("Database", ex.message.toString())

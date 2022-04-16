@@ -3,6 +3,7 @@ package com.example.fithelper.View
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.fithelper.R
+import com.example.fithelper.Screens.Workout.Workouts.WorkoutsFragment
 import com.example.fithelper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_workout -> {
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragment_holder, WorkoutFragment.newInstance())
+                        .replace(R.id.fragment_holder, WorkoutsFragment.newInstance())
                         .commit()
                 }
                 R.id.navigation_profile -> {

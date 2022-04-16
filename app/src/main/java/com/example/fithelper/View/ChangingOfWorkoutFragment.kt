@@ -16,7 +16,7 @@ import com.example.fithelper.Models.Exercise
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repository.LoginViewModel
 import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
-import com.example.fithelper.Screens.Shared.ExerciseViewModel
+import com.example.fithelper.Screens.Shared.ExercisesViewModel
 import com.example.fithelper.databinding.FragmentChangingOfWorkoutBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,7 +26,7 @@ class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
 
     private val loginViewModel by viewModels<LoginViewModel>()
     private lateinit var binding: FragmentChangingOfWorkoutBinding
-    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
+    private val exerciseViewModel: ExercisesViewModel by activityViewModels()
     private lateinit var adapterExercise: ExerciseAdapter
 
     override fun onCreateView(
@@ -89,10 +89,10 @@ class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
             dpd.show()
         }
 
-        exerciseViewModel.exercise.observe(activity as LifecycleOwner) {
+        exerciseViewModel.exercises.observe(activity as LifecycleOwner) {
             if (it != null) {
                 //newRecyclerViewList.add(it)
-                adapterExercise.addExercise(it)
+                adapterExercise.addExercise(it[0])
                 Toast.makeText(context, "Добавил", Toast.LENGTH_SHORT)
                     .show()
             } else {
