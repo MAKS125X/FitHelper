@@ -1,27 +1,16 @@
 package com.example.fithelper.Screens.Workout.Workouts
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.*
-import com.example.fithelper.Models.Workout
-import com.example.fithelper.Repository.LoginViewModel
-import com.example.fithelper.Screens.Shared.ExercisesViewModel
+import com.example.fithelper.Screens.Shared.WorkoutsViewModel
 import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment
-import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutViewModel
-import com.example.fithelper.View.ChangingOfWorkoutFragment
 import com.example.fithelper.databinding.FragmentWorkoutBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
 class WorkoutsFragment : Fragment() {
 
@@ -31,8 +20,6 @@ class WorkoutsFragment : Fragment() {
 
     private lateinit var adapter: WorkoutAdapter
 
-
-    // private val creatingOfWorkoutFragment = CreateWorkoutFragment()
     // private lateinit var changingOfWorkout: ChangingOfWorkoutFragment
     // private val exerciseViewModel: ExercisesViewModel by activityViewModels()
 
@@ -54,7 +41,10 @@ class WorkoutsFragment : Fragment() {
 
     private fun initClicks() = with(binding) {
         createNewWorkoutFlActButton.setOnClickListener {
-
+                val transaction = requireFragmentManager().beginTransaction()
+                transaction.replace(R.id.fragment_holder, CreateWorkoutFragment())
+                    .addToBackStack("Check")
+                    .commit()
         }
     }
 
