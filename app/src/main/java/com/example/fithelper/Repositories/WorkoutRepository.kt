@@ -7,43 +7,40 @@ import com.google.firebase.firestore.FirebaseFirestore
 object WorkoutRepository {
     private val workouts = FirebaseFirestore.getInstance().collection("Workouts")
 
-    fun getWorkoutByUserId(userId: String): MutableList<Workout> {
-        val result = mutableListOf<Workout>()
+    fun getWorkoutByUserId(userId: String) =
         workouts.whereEqualTo("userId", userId)
-            .get()
-            .addOnSuccessListener { snapshot ->
-                for (workout in snapshot) {
-                    result.add(workout.toObject(Workout::class.java))
-                }
 
-                Log.i("Database", "Workouts get by $userId")
-            }
-            .addOnFailureListener { ex ->
-                Log.e("Database", ex.message.toString())
-            }
 
-        return result
-    }
-
-    fun createWorkout(workout: Workout) {
+    fun createWorkout(workout: Workout) =
         workouts
             .document(workout.id!!)
             .set(workout)
             .addOnSuccessListener {
-                Log.i("Database", "Workout created")
+                Log.i("Workout", "Workout ${workout.id!!} created")
             }
             .addOnFailureListener { ex ->
                 Log.e("Database", ex.message.toString())
             }
-    }
 
-    fun updateWorkout(workout: Workout) {
+
+    fun updateWorkout(workout: Workout) =
         workouts.document(workout.id!!)
             .set(workout)
-    }
+            .addOnSuccessListener {
+                Log.i("Workout", "Workout ${workout.id!!} updated")
+            }
+            .addOnFailureListener { ex ->
+                Log.e("Database", ex.message.toString())
+            }
 
-    fun deleteWorkoutByUser(workoutId: String) {
-        workouts.document(workoutId).delete()
-    }
 
+    fun deleteWorkoutByUser(workoutId: String) =
+        workouts.document(workoutId)
+            .delete()
+            .addOnSuccessListener {
+                Log.i("Workout", "Workout ${workoutId} deleted")
+            }
+            .addOnFailureListener { ex ->
+                Log.e("Database", ex.message.toString())
+            }
 }

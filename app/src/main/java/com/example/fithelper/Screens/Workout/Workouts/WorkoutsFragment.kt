@@ -50,12 +50,11 @@ class WorkoutsFragment : Fragment() {
         initRecyclerView()
         initObservers()
         initClicks()
-
     }
 
     private fun initClicks() = with(binding) {
         createNewWorkoutFlActButton.setOnClickListener {
-            vm.initializeWorkouts()
+
         }
     }
 
