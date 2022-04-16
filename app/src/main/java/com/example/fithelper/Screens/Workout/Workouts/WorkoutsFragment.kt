@@ -11,8 +11,9 @@ import com.example.fithelper.*
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Screens.Shared.WorkoutsViewModel
 import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment
-import com.example.fithelper.Screens.Workout.WorkoutDetails.WorkoutDetailsFragment
+import com.example.fithelper.Screens.Workout.ChangeWorkout.ChangeWorkoutFragment
 import com.example.fithelper.databinding.FragmentWorkoutBinding
+import java.text.FieldPosition
 
 class WorkoutsFragment : Fragment() {
 
@@ -55,9 +56,9 @@ class WorkoutsFragment : Fragment() {
 
     private fun initRecyclerView() {
         adapter = WorkoutAdapter(workoutsViewModel.workouts.value!!, object : OnWorkoutItemClickListener {
-            override fun getDetails(workout: Workout) {
+            override fun getDetails(position: Int) {
                 val transaction = requireFragmentManager().beginTransaction()
-                transaction.replace(R.id.fragment_holder, WorkoutDetailsFragment(workout))
+                transaction.replace(R.id.fragment_holder, ChangeWorkoutFragment(position))
                     .addToBackStack("Check")
                     .commit()
             }

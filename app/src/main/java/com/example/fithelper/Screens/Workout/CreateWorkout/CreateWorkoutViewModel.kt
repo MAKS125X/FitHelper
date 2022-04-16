@@ -2,24 +2,19 @@ package com.example.fithelper.Screens.Workout.CreateWorkout
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fithelper.Extensions.*
 import com.example.fithelper.Models.Exercise
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repositories.WorkoutRepository
-import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
 import com.example.fithelper.Services.UserService
-import java.lang.IllegalArgumentException
-import java.text.SimpleDateFormat
 import java.util.*
-import java.util.UUID.randomUUID
 
 class CreateWorkoutViewModel : ViewModel() {
 
     val name = MutableLiveData<String>()
-    val dateInMilliseconds = MutableLiveData<Long>()
+    val dateInMilliseconds = MutableLiveData<Long?>()
 
     init {
         name.value = ""
@@ -30,7 +25,7 @@ class CreateWorkoutViewModel : ViewModel() {
     }
 
     fun setDate(date: Long?) {
-        this.dateInMilliseconds.value = date
+        this.dateInMilliseconds.value = null
     }
 
     fun create(exercises: MutableList<Exercise>?) {
@@ -57,7 +52,7 @@ class CreateWorkoutViewModel : ViewModel() {
                     if ((monthOfYear + 1) / 10 == 0) "0${monthOfYear + 1}" else "${monthOfYear + 1}"
 
                 val dateString = "$day1.$month1.$yearDate"
-                val date = convertDateToLong(dateString)
+                val date = convertDateToLong(dateString, "dd.MM.yyyy")
                 this.setDate(date)
             },
             calendar.get(Calendar.YEAR),
@@ -65,11 +60,6 @@ class CreateWorkoutViewModel : ViewModel() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         dpd.show()
-    }
-    //todo: пересмотреть логику по касту
-    private fun convertDateToLong(date: String): Long {
-        val df = SimpleDateFormat("dd.MM.yyyy")
-        return df.parse(date).time
     }
 }
 

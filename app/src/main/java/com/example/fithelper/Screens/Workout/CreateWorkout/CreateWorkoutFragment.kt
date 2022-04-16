@@ -3,7 +3,6 @@ package com.example.fithelper.Screens.Workout.CreateWorkout
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
 import com.example.fithelper.ExerciseAdapter
-import com.example.fithelper.Repository.LoginViewModel
+import com.example.fithelper.Extensions.getStringDateFromLong
 import com.example.fithelper.Screens.Shared.ExercisesViewModel
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
 import java.lang.IllegalArgumentException
@@ -88,7 +87,7 @@ open class CreateWorkoutFragment : Fragment() {
 
     private fun initObservers() {
         vm.dateInMilliseconds.observe(activity as LifecycleOwner) { date ->
-            val dateString = getDate(date, "dd.MM.yyyy")
+            val dateString = getStringDateFromLong(date, "dd.MM.yyyy")
             binding.workoutDateTextView.text = "Дата тренировки: $dateString"
         }
 
@@ -103,12 +102,7 @@ open class CreateWorkoutFragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
-    private fun getDate(dateInMilliseconds: Long, dateFormat: String?): String? {
-        val date = Date(dateInMilliseconds)
-        val format = SimpleDateFormat(dateFormat)
 
-        return format.format(date)
-    }
 
 
     companion object {

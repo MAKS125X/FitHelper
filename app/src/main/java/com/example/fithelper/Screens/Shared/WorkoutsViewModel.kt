@@ -3,6 +3,7 @@ package com.example.fithelper.Screens.Shared
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fithelper.Extensions.*
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repositories.WorkoutRepository
 import com.example.fithelper.Services.UserService

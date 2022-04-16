@@ -1,8 +1,8 @@
 package com.example.fithelper.Screens.Exercise.CreateExercise
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fithelper.Extensions.*
 
 class CreateExerciseViewModel : ViewModel() {
     val name = MutableLiveData<String>()
@@ -55,24 +55,4 @@ class CreateExerciseViewModel : ViewModel() {
     }
 }
 
-fun MutableLiveData<Int>.inc() {
-    this.value = this.value?.inc()
-}
 
-fun MutableLiveData<Int>.dec(lowerBound: Int = 0) {
-    this.value = this.value?.dec()
-
-    if (this.value!! < lowerBound)
-        this.value = lowerBound
-}
-
-fun MutableLiveData<Int>.minus(value: Int, lowerBound: Int) {
-    this.value = this.value?.minus(value)
-
-    if (this.value!! < lowerBound)
-        this.value = lowerBound
-}
-
-fun MutableLiveData<Int>.plus(value: Int) {
-    this.value = this.value?.plus(value)
-}

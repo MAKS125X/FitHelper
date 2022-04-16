@@ -2,6 +2,7 @@ package com.example.fithelper.Screens.Shared
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fithelper.Extensions.notifyObserver
 import com.example.fithelper.Models.Exercise
 import com.example.fithelper.Models.Workout
 
@@ -29,8 +30,8 @@ class ExercisesViewModel : ViewModel() {
         exercises.notifyObserver()
     }
 
-    fun setExercises(exercises: MutableList<Exercise>) {
-        this.exercises.value = exercises
+    fun setExercises(exercises: MutableList<Exercise>?) {
+        this.exercises.value = exercises ?: mutableListOf()
     }
 
     // todo: DELETE
@@ -44,6 +45,4 @@ class ExercisesViewModel : ViewModel() {
     }
 }
 
-fun <T> MutableLiveData<T>.notifyObserver() {
-    this.value = this.value
-}
+

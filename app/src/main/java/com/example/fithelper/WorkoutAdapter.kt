@@ -26,20 +26,11 @@ class WorkoutAdapter(
             onWorkoutItemClickListener.deleteById(workouts[position].id!!)
         }
         holder.binding.cardView.setOnClickListener {
-            onWorkoutItemClickListener.getDetails(workouts[position])
+            onWorkoutItemClickListener.getDetails(position)
         }
     }
     override fun getItemCount(): Int {
         return workouts.size
-    }
-
-    fun clear() {
-        workouts.clear()
-    }
-
-    fun addWorkout(workout: Workout) {
-        workouts.add(workout)
-        notifyDataSetChanged()
     }
 
     class WorkoutViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
