@@ -19,6 +19,10 @@ class WorkoutsViewModel : ViewModel() {
         addSnapshotListener()
     }
 
+    fun deleteWorkout(workoutId: String) {
+        WorkoutRepository.deleteWorkoutByUser(workoutId)
+    }
+
     private fun addSnapshotListener() =
         WorkoutRepository.getWorkoutByUserId(userId)
             .addSnapshotListener { snapshots, e ->
@@ -47,6 +51,5 @@ class WorkoutsViewModel : ViewModel() {
 
                 workouts.notifyObserver()
             }
-
     private fun removeSnapshotListener() = addSnapshotListener().remove()
 }

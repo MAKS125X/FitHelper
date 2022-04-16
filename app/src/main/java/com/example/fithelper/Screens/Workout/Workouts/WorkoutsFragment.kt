@@ -8,20 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.*
+import com.example.fithelper.Models.Workout
 import com.example.fithelper.Screens.Shared.WorkoutsViewModel
 import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment
+import com.example.fithelper.Screens.Workout.WorkoutDetails.WorkoutDetailsFragment
 import com.example.fithelper.databinding.FragmentWorkoutBinding
 
 class WorkoutsFragment : Fragment() {
 
     lateinit var binding: FragmentWorkoutBinding
 
-    private val vm: WorkoutsViewModel by activityViewModels()
+    private val workoutsViewModel: WorkoutsViewModel by activityViewModels()
 
     private lateinit var adapter: WorkoutAdapter
-
-    // private lateinit var changingOfWorkout: ChangingOfWorkoutFragment
-    // private val exerciseViewModel: ExercisesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,135 +40,35 @@ class WorkoutsFragment : Fragment() {
 
     private fun initClicks() = with(binding) {
         createNewWorkoutFlActButton.setOnClickListener {
-                val transaction = requireFragmentManager().beginTransaction()
-                transaction.replace(R.id.fragment_holder, CreateWorkoutFragment())
-                    .addToBackStack("Check")
-                    .commit()
+            val transaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.fragment_holder, CreateWorkoutFragment())
+                .addToBackStack("Check")
+                .commit()
         }
     }
 
     private fun initObservers() {
-        vm.workouts.observe(viewLifecycleOwner) {
+        workoutsViewModel.workouts.observe(viewLifecycleOwner) {
             adapter.notifyDataSetChanged()
         }
     }
 
     private fun initRecyclerView() {
-        adapter = WorkoutAdapter(vm.workouts.value!!, object : OnWorkoutItemClickListener {
-            override fun onClick(position: Int) {
-                // todo: ask maxim
-                // val transaction = requireFragmentManager().beginTransaction()
-                // changingOfWorkout = ChangingOfWorkoutFragment(listWorkout[position])
-                // transaction.replace(R.id.fragment_holder, changingOfWorkout)
-                //     .addToBackStack("Check")
-                //     .commit()
+        adapter = WorkoutAdapter(workoutsViewModel.workouts.value!!, object : OnWorkoutItemClickListener {
+            override fun getDetails(workout: Workout) {
+                val transaction = requireFragmentManager().beginTransaction()
+                transaction.replace(R.id.fragment_holder, WorkoutDetailsFragment(workout))
+                    .addToBackStack("Check")
+                    .commit()
+            }
+
+            override fun deleteById(workoutId: String) {
+                // todo: dialog "rly delete?"
+                workoutsViewModel.deleteWorkout(workoutId)
             }
         })
         binding.workoutRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.workoutRecyclerView.adapter = adapter
-    }
-
-    private fun init() {
-
-        //val firebaseUserId = loginViewModel.userId
-        //     val firestoreDataBase =
-        //         FirebaseFirestore.getInstance()
-        //             .collection("Users")
-        //             .document(Firebase.auth.currentUser!!.uid)
-        //             .collection("Workouts")
-
-//        firestoreDataBase.get().addOnSuccessListener { result ->
-//                adapter.clear()
-//                for (workoutItem in result) {
-//                    val workout = workoutItem.toObject(Workout::class.java)
-//                    Log.i("TAG", "${workout.name}")
-//                    adapter.addWorkout(workout)
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.i("TAG", "Давай по новой: ", exception)
-//            }
-
-//        binding.apply {
-//            createNewWorkoutFlActButton.setOnClickListener {
-//                  Toast.makeText(
-//                      context,
-//                      "Добавить новую тренировку",
-//                      Toast.LENGTH_SHORT
-//                  ).show()
-//                val transaction = requireFragmentManager().beginTransaction()
-//                //workoutViewModel.changedWorkout.value = Workout()
-//                transaction.replace(R.id.fragment_holder, creatingOfWorkoutFragment)
-//                    .addToBackStack("Check")
-//                    .commit()
-//            }
-//            firestoreDataBase.addSnapshotListener { value, e ->
-//                if (e != null) {
-//                    Log.w("TAG", "Listen failed.", e)
-//                    Log.e("TAG", "Listen failed.", e)
-//                    return@addSnapshotListener
-//                }
-//                Log.w("TAG", "Listen NOT failed.", e)
-//                Log.e("TAG", "Listen NOT failed.", e)
-//                Toast.makeText(context, "Ошибки нет", Toast.LENGTH_SHORT).show()
-//                //listWorkout = mutableListOf()
-//                adapter.clear()
-//                for (doc in value!!) {
-//                    val workout: Workout = doc.toObject(Workout::class.java)
-//                    adapter.addWorkout(workout)
-//                    //listWorkout.add(workout)
-//                }
-//            }
-//            exerciseViewModel.changedWorkout.observe(activity as LifecycleOwner) {
-//                if (it != null) {
-//                    val firestoreDataBase = FirebaseFirestore.getInstance()
-//                        .collection("Users")
-//                        .document(Firebase.auth.currentUser!!.uid)
-//                        .collection("Workouts")
-//                        .document(it.toString())
-//                    firestoreDataBase.set(it)
-//                }
-//            }
-//            exerciseViewModel.createdWorkout.observe(activity as LifecycleOwner) {
-//                if (it != null) {
-//                    //adapter.addWorkout(it)
-//                    val firestoreDataBase = FirebaseFirestore.getInstance()
-//                        .collection("Users")
-//                        .document(Firebase.auth.currentUser!!.uid)
-//                        .collection("Workouts")
-//                        .document(it.toString())
-//                      val checker = firestoreDataBase.get().getResult()?.exists()
-//   //                      if(checker != null){
-//                          if(checker){
-//                              firestoreDataBase.update(it)
-//                          }
-//                      }
-//                    firestoreDataBase.set(it)
-//                } else {
-//                    Toast.makeText(context, "Ошибка при добавлении тренировки", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            }
-//        }
-
-//        firestoreDataBase.addSnapshotListener{value, e ->
-//            if (e != null) {
-//                Log.w(TAG, "Listen failed.", e)
-//                Log.e(TAG, "Listen failed.", e)
-//                return@addSnapshotListener
-//            }
-//            Log.w(TAG, "Listen NOT failed.", e)
-//            Log.e(TAG, "Listen NOT failed.", e)
-//            //listWorkout = mutableListOf()
-//            for (doc in value!!){
-//                val workout : Workout= doc.toObject<Workout>(Workout::class.java)
-//                adapter.addWorkout(workout)
-//            }
-//        }
-
-//        val listExercise: MutableList<Exercise> = mutableListOf()
-//        (0..2).forEach { i -> listExercise.add(Exercise("$i exercise", 4, 12, 20)) }
-//        (0..5).forEach { i -> listWorkout.add(Workout("$i workout", null, listExercise)) }
     }
 
     companion object {

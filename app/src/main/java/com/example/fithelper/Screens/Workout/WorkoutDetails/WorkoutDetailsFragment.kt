@@ -1,4 +1,4 @@
-package com.example.fithelper.View
+package com.example.fithelper.Screens.Workout.WorkoutDetails
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -22,10 +22,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
-
-    private val loginViewModel by viewModels<LoginViewModel>()
+class WorkoutDetailsFragment(val workout: Workout) : Fragment() {
     private lateinit var binding: FragmentChangingOfWorkoutBinding
+
+    // private val vm: WorkoutDetailsViewModel by viewModels()
+
     private val exerciseViewModel: ExercisesViewModel by activityViewModels()
     private lateinit var adapterExercise: ExerciseAdapter
 
@@ -55,7 +56,7 @@ class ChangingOfWorkoutFragment(val workout: Workout) : Fragment() {
         }
 
         binding.recyclerView.layoutManager =
-            LinearLayoutManager(this@ChangingOfWorkoutFragment.context)
+            LinearLayoutManager(this@WorkoutDetailsFragment.context)
         adapterExercise = ExerciseAdapter(newRecyclerViewList)
         binding.recyclerView.adapter = adapterExercise
 

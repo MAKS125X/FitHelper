@@ -1,7 +1,8 @@
 package com.example.fithelper
 
-interface OnWorkoutItemClickListener {
-    fun onClick(position: Int){
+import com.example.fithelper.Models.Workout
 
-    }
+interface OnWorkoutItemClickListener {
+    fun getDetails(workout: Workout)
+    fun deleteById(workoutId: String)
 }

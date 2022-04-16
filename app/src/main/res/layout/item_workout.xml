@@ -19,7 +19,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="224dp"
             android:background="@color/recyclerviewWorkoutItem"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="0dp"
@@ -78,6 +78,12 @@
                 android:text="@string/countOfOtherExercises"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/deleteWorkoutButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Удалить тренировку" />
 
         </LinearLayout>
 

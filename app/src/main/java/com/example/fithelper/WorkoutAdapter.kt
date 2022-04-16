@@ -22,8 +22,11 @@ class WorkoutAdapter(
     }
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
         holder.bind(workouts[position])
+        holder.binding.deleteWorkoutButton.setOnClickListener {
+            onWorkoutItemClickListener.deleteById(workouts[position].id!!)
+        }
         holder.binding.cardView.setOnClickListener {
-            onWorkoutItemClickListener.onClick(position)
+            onWorkoutItemClickListener.getDetails(workouts[position])
         }
     }
     override fun getItemCount(): Int {
