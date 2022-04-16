@@ -16,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.IllegalArgumentException
 
 
-class CreateExerciseFragment() : BottomSheetDialogFragment() {
+class CreateExerciseFragment : BottomSheetDialogFragment() {
 
     lateinit var binding: FragmentBottomSheetCreateExerciseBinding
 

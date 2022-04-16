@@ -1,4 +1,4 @@
-package com.example.fithelper
+package com.example.fithelper.Screens.Workout.Adapter
 
 import com.example.fithelper.Models.Workout
 

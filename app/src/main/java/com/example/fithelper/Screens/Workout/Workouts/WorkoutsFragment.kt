@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.Models.Workout
-import com.example.fithelper.OnWorkoutItemClickListener
+import com.example.fithelper.Screens.Workout.Adapter.OnWorkoutItemClickListener
 import com.example.fithelper.R
-import com.example.fithelper.Screens.Shared.Workout.WorkoutViewModel
+import com.example.fithelper.Screens.Shared.WorkoutViewModel
 import com.example.fithelper.Screens.Shared.WorkoutsViewModel
 import com.example.fithelper.Screens.Workout.ChangeWorkout.ChangeWorkoutFragment
 import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment
-import com.example.fithelper.WorkoutAdapter
+import com.example.fithelper.Screens.Workout.Adapter.WorkoutAdapter
 import com.example.fithelper.databinding.FragmentWorkoutBinding
 
 class WorkoutsFragment : Fragment() {
@@ -58,7 +58,8 @@ class WorkoutsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = WorkoutAdapter(workoutsViewModel.workouts.value!!, object : OnWorkoutItemClickListener {
+        adapter = WorkoutAdapter(workoutsViewModel.workouts.value!!, object :
+            OnWorkoutItemClickListener {
             override fun getDetails(workout: Workout) {
                 workoutForChangeViewModel.setWorkout(workout)
 

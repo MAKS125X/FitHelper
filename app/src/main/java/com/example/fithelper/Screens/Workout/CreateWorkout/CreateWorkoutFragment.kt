@@ -12,14 +12,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
-import com.example.fithelper.ExerciseAdapter
+import com.example.fithelper.Screens.Exercise.Adapter.ExerciseAdapter
 import com.example.fithelper.Extensions.getStringDateFromLong
+import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
 import com.example.fithelper.Screens.Shared.ExercisesViewModel
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
-import java.lang.IllegalArgumentException
-import java.text.SimpleDateFormat
-import java.util.*
 
 open class CreateWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentCreatingOfWorkoutBinding
@@ -76,7 +73,7 @@ open class CreateWorkoutFragment : Fragment() {
             try {
                 vm.create(exercisesViewModel.exercises.value)
                 exercisesViewModel.setExercises(mutableListOf())
-                // todo: what is it
+                // todo: can refactor?
                 onDestroy()
                 requireFragmentManager().popBackStack()
             } catch (ex: IllegalArgumentException) {

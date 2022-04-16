@@ -1,4 +1,4 @@
-package com.example.fithelper.Screens.Shared.Workout
+package com.example.fithelper.Screens.Shared
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

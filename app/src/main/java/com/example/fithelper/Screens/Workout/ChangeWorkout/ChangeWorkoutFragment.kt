@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fithelper.ExerciseAdapter
+import com.example.fithelper.Screens.Exercise.Adapter.ExerciseAdapter
 import com.example.fithelper.Extensions.getStringDateFromLong
-import com.example.fithelper.Screens.Shared.Workout.WorkoutViewModel
+import com.example.fithelper.Screens.Shared.WorkoutViewModel
 import com.example.fithelper.databinding.FragmentChangingOfWorkoutBinding
 
 

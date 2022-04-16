@@ -1,4 +1,4 @@
-package com.example.fithelper
+package com.example.fithelper.Screens.Exercise.Adapter
 
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fithelper.Models.Exercise
+import com.example.fithelper.R
 import com.example.fithelper.databinding.ItemExerciseBinding
 
 class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
@@ -24,11 +25,6 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
 
     override fun getItemCount(): Int {
         return exercises.size
-    }
-    // todo: delete
-    fun addExercise(exercise: Exercise) {
-        exercises.add(exercise)
-        notifyDataSetChanged()
     }
 
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

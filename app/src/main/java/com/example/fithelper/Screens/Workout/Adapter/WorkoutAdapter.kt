@@ -1,10 +1,11 @@
-package com.example.fithelper
+package com.example.fithelper.Screens.Workout.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fithelper.Models.Workout
+import com.example.fithelper.R
 import com.example.fithelper.databinding.ItemWorkoutBinding
 import java.text.SimpleDateFormat
 import java.util.*
