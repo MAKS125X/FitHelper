@@ -1,12 +1,13 @@
-package com.example.fithelper.Screens.Workout.ChangeWorkout
+package com.example.fithelper.Screens.Shared.Workout
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.fithelper.Models.Exercise
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Repositories.WorkoutRepository
 
-class ChangeWorkoutViewModel(workout: Workout) : ViewModel() {
+class WorkoutViewModel : ViewModel() {
 
     val id = MutableLiveData<String?>()
     val userId = MutableLiveData<String?>()
@@ -15,6 +16,10 @@ class ChangeWorkoutViewModel(workout: Workout) : ViewModel() {
     val exerciseList = MutableLiveData<MutableList<Exercise>>()
 
     init {
+        exerciseList.value = mutableListOf()
+    }
+
+    fun setWorkout(workout: Workout) {
         id.value = workout.id
         userId.value = workout.userId
         name.value = workout.name
@@ -31,6 +36,10 @@ class ChangeWorkoutViewModel(workout: Workout) : ViewModel() {
                 dateInMilliseconds.value,
                 exerciseList.value
             )
-        )
+        ).addOnSuccessListener {
+            Log.i("Workout", "Workout $id updated")
+        }.addOnFailureListener { e ->
+            Log.e("Database", "Workout $id cannot updated")
+        }
     }
 }

@@ -1,31 +1,23 @@
 package com.example.fithelper.Screens.Workout.ChangeWorkout
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fithelper.*
+import com.example.fithelper.ExerciseAdapter
 import com.example.fithelper.Extensions.getStringDateFromLong
-import com.example.fithelper.Models.Exercise
-import com.example.fithelper.Models.Workout
-import com.example.fithelper.Repositories.WorkoutRepository
-import com.example.fithelper.Screens.Shared.ExercisesViewModel
-import com.example.fithelper.Screens.Shared.WorkoutsViewModel
+import com.example.fithelper.Screens.Shared.Workout.WorkoutViewModel
 import com.example.fithelper.databinding.FragmentChangingOfWorkoutBinding
-import java.util.*
 
 
-class ChangeWorkoutFragment(position: Int) : Fragment() {
+class ChangeWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentChangingOfWorkoutBinding
 
-    private val vm: ChangeWorkoutViewModel by viewModels { ChangeWorkoutFactory(workoutsViewModel.workouts.value?.get(position) ?: Workout()) }
-    private val workoutsViewModel: WorkoutsViewModel by activityViewModels()
+    private val workoutForChangeViewModel: WorkoutViewModel by activityViewModels()
 
     private lateinit var adapter: ExerciseAdapter
 
@@ -45,17 +37,23 @@ class ChangeWorkoutFragment(position: Int) : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        vm.updateWorkout()
-        super.onDestroy()
+    override fun onDestroyView() {
+        workoutForChangeViewModel.updateWorkout()
+        super.onDestroyView()
     }
 
     private fun initObservers() {
+        workoutForChangeViewModel.name.observe(activity as LifecycleOwner) { name ->
+            binding.workoutNameTextView.text = name
+        }
 
+        workoutForChangeViewModel.dateInMilliseconds.observe(activity as LifecycleOwner) { date ->
+            binding.workoutDateTextView.text = "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy")}"
+        }
     }
 
     private fun initRecyclerView() {
-        adapter = ExerciseAdapter(vm.exerciseList.value!!)
+        adapter = ExerciseAdapter(workoutForChangeViewModel.exerciseList.value!!)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
     }

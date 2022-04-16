@@ -7,18 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fithelper.*
 import com.example.fithelper.Models.Workout
+import com.example.fithelper.OnWorkoutItemClickListener
+import com.example.fithelper.R
+import com.example.fithelper.Screens.Shared.Workout.WorkoutViewModel
 import com.example.fithelper.Screens.Shared.WorkoutsViewModel
-import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment
 import com.example.fithelper.Screens.Workout.ChangeWorkout.ChangeWorkoutFragment
+import com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment
+import com.example.fithelper.WorkoutAdapter
 import com.example.fithelper.databinding.FragmentWorkoutBinding
-import java.text.FieldPosition
 
 class WorkoutsFragment : Fragment() {
 
     lateinit var binding: FragmentWorkoutBinding
 
+    private val workoutForChangeViewModel: WorkoutViewModel by activityViewModels()
     private val workoutsViewModel: WorkoutsViewModel by activityViewModels()
 
     private lateinit var adapter: WorkoutAdapter
@@ -56,9 +59,11 @@ class WorkoutsFragment : Fragment() {
 
     private fun initRecyclerView() {
         adapter = WorkoutAdapter(workoutsViewModel.workouts.value!!, object : OnWorkoutItemClickListener {
-            override fun getDetails(position: Int) {
+            override fun getDetails(workout: Workout) {
+                workoutForChangeViewModel.setWorkout(workout)
+
                 val transaction = requireFragmentManager().beginTransaction()
-                transaction.replace(R.id.fragment_holder, ChangeWorkoutFragment(position))
+                transaction.replace(R.id.fragment_holder, ChangeWorkoutFragment())
                     .addToBackStack("Check")
                     .commit()
             }

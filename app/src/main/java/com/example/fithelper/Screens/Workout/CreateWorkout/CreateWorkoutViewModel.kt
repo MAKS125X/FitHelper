@@ -25,7 +25,7 @@ class CreateWorkoutViewModel : ViewModel() {
     }
 
     fun setDate(date: Long?) {
-        this.dateInMilliseconds.value = null
+        this.dateInMilliseconds.value = date
     }
 
     fun create(exercises: MutableList<Exercise>?) {
