@@ -49,8 +49,14 @@ class WorkoutsFragment : Fragment() {
 
         initRecyclerView()
         initObservers()
+        initClicks()
 
-        vm.initializeWorkouts()
+    }
+
+    private fun initClicks() = with(binding) {
+        createNewWorkoutFlActButton.setOnClickListener {
+            vm.initializeWorkouts()
+        }
     }
 
     private fun initObservers() {
@@ -77,11 +83,11 @@ class WorkoutsFragment : Fragment() {
     private fun init() {
 
         //val firebaseUserId = loginViewModel.userId
-   //     val firestoreDataBase =
-   //         FirebaseFirestore.getInstance()
-   //             .collection("Users")
-   //             .document(Firebase.auth.currentUser!!.uid)
-   //             .collection("Workouts")
+        //     val firestoreDataBase =
+        //         FirebaseFirestore.getInstance()
+        //             .collection("Users")
+        //             .document(Firebase.auth.currentUser!!.uid)
+        //             .collection("Workouts")
 
 //        firestoreDataBase.get().addOnSuccessListener { result ->
 //                adapter.clear()
