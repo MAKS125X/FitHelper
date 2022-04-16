@@ -40,45 +40,13 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
             exerciseSetsTV.text = "Подходов: ${exercise.numberOfApproaches}"
             exerciseRepsTV.text = "Повторений: ${exercise.numberOfRepetitions}"
             exerciseWeightTV.text = "Вес: ${exercise.weight}"
-
-            //  if(exercise.isComplete == null){
-            //      exerciseNameTV.paintFlags = exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-            //  }
-            //  else{
-            //      if(exercise.isComplete == true){
-            //          exerciseNameTV.paintFlags =
-            //              exerciseNameTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            //      }
-            //      else{
-            //          exerciseNameTV.paintFlags = exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-            //      }
-            //  }
+            isCompleteCheckBox.isChecked = exercise.isComplete ?: false
 
             setTextStyle(exercise.isComplete == true)
             isCompleteCheckBox.setOnCheckedChangeListener { compoundButton, b ->
                 setTextStyle(b)
                 exercise.isComplete = b
             }
-
-            //  if (isCompleted) {
-            //      exerciseNameTV.paintFlags =
-            //          exerciseNameTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            //  } else {
-            //      exerciseNameTV.paintFlags =
-            //          exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-            //  }
-//
-            //  isCompleteCheckBox.setOnClickListener {
-            //      if (isCompleteCheckBox.isChecked) {
-            //          exerciseNameTV.paintFlags =
-            //              exerciseNameTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            //          exercise.isComplete = true
-            //      } else {
-            //          exerciseNameTV.paintFlags =
-            //              exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-            //          exercise.isComplete = false
-            //      }
-            //  }
         }
 
         private fun ItemExerciseBinding.setTextStyle(b: Boolean) {
