@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.fithelper.Features.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/guideFragment"
+        android:name="com.example.fithelper.Features.GuideFragment"
+        android:label="fragment_guide"
+        tools:layout="@layout/fragment_guide" />
+
+    <fragment
+        android:id="@+id/workoutsFragment"
+        android:name="com.example.fithelper.Screens.Workout.Workouts.WorkoutsFragment"
+        android:label="fragment_workout"
+        tools:layout="@layout/fragment_workout" >
+        <action
+            android:id="@+id/action_workoutsFragment_to_changeWorkoutFragment"
+            app:destination="@id/changeWorkoutFragment" />
+        <action
+            android:id="@+id/action_workoutsFragment_to_createWorkoutFragment"
+            app:destination="@id/createWorkoutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.fithelper.Features.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/createWorkoutFragment"
+        android:name="com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment"
+        android:label="fragment_creating_of_workout"
+        tools:layout="@layout/fragment_creating_of_workout" />
+    <fragment
+        android:id="@+id/changeWorkoutFragment"
+        android:name="com.example.fithelper.Screens.Workout.ChangeWorkout.ChangeWorkoutFragment"
+        android:label="fragment_changing_of_workout"
+        tools:layout="@layout/fragment_changing_of_workout" />
+
+</navigation>

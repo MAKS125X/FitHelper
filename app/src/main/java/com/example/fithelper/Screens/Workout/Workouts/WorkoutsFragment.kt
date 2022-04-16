@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fithelper.Features.MainActivity
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.Screens.Workout.Adapter.OnWorkoutItemClickListener
 import com.example.fithelper.R
@@ -44,10 +45,8 @@ class WorkoutsFragment : Fragment() {
 
     private fun initClicks() = with(binding) {
         createNewWorkoutFlActButton.setOnClickListener {
-            val transaction = requireFragmentManager().beginTransaction()
-            transaction.replace(R.id.fragment_holder, CreateWorkoutFragment())
-                .addToBackStack("Check")
-                .commit()
+            (activity as MainActivity).navController.navigate(R.id.action_workoutsFragment_to_createWorkoutFragment)
+
         }
     }
 
@@ -62,11 +61,11 @@ class WorkoutsFragment : Fragment() {
             OnWorkoutItemClickListener {
             override fun getDetails(workout: Workout) {
                 workoutForChangeViewModel.setWorkout(workout)
-
-                val transaction = requireFragmentManager().beginTransaction()
-                transaction.replace(R.id.fragment_holder, ChangeWorkoutFragment())
-                    .addToBackStack("Check")
-                    .commit()
+                (activity as MainActivity).navController.navigate(R.id.action_workoutsFragment_to_changeWorkoutFragment)
+//                val transaction = requireFragmentManager().beginTransaction()
+//                transaction.replace(R.id.fragment_holder, ChangeWorkoutFragment())
+//                    .addToBackStack("Check")
+//                    .commit()
             }
 
             override fun deleteById(workoutId: String) {

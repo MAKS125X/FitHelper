@@ -1,4 +1,4 @@
-package com.example.fithelper.View
+package com.example.fithelper.Features
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.example.fithelper.R
-import com.example.fithelper.Repository.LoginViewModel
 import com.example.fithelper.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,17 +19,14 @@ import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
-    private val viewModel by viewModels<LoginViewModel>()
-
     lateinit var launcher: ActivityResultLauncher<Intent>
-    lateinit var auth: FirebaseAuth
+    val auth: FirebaseAuth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        auth = Firebase.auth
+
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             try{
@@ -49,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
             signInWithGoogle()
         }
 
-        observeAuthenticationState()
+        checkAuthState()
     }
 
     private fun getClient(): GoogleSignInClient{
@@ -71,6 +65,8 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
                 Toast.makeText(this,"Успешный вход", Toast.LENGTH_SHORT).show()
+                val i = Intent(this, MainActivity::class.java)
+                startActivity(i)
             }
             else{
                 Toast.makeText(this,"Произошла ошибка при входе", Toast.LENGTH_SHORT).show()
@@ -78,22 +74,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeAuthenticationState() {
-        viewModel.authenticationState.observe(this, Observer { authenticationState ->
-            when (authenticationState) {
-                LoginViewModel.AuthenticationState.AUTHENTICATED -> {
-//                    binding.accountButton.setOnClickListener {
-//                        val i = Intent(this, MainActivity::class.java)
-//                        startActivity(i)
-//                        //findNavController().navigate(R.id.accountFragment)
-//                    }
-                    val i = Intent(this, MainActivity::class.java)
-                    startActivity(i)
-                }
-                else -> {
-                    Toast.makeText(this,"Произошла ошибка при входе", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
+    private fun checkAuthState(){
+        if(auth.currentUser != null){
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
+        }
     }
 }

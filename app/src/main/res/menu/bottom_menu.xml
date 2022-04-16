@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/navigation_home"
+    <item android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
         android:title="@string/navigation_home"
         android:orderInCategory="1"/>
-    <item android:id="@+id/navigation_guide"
+    <item android:id="@+id/guideFragment"
         android:icon="@drawable/ic_guide"
         android:title="@string/navigation_guide"
         android:orderInCategory="2"/>
-    <item android:id="@+id/navigation_workout"
+    <item android:id="@+id/workoutsFragment"
         android:icon="@drawable/ic_workout"
         android:title="@string/navigation_workout"
         android:orderInCategory="3"/>
-    <item android:id="@+id/navigation_profile"
+    <item android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
         android:title="@string/navigation_profile"
         android:orderInCategory="4"/>
