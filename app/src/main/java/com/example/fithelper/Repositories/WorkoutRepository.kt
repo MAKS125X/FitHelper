@@ -8,7 +8,7 @@ object WorkoutRepository {
     private val workouts = FirebaseFirestore.getInstance().collection("Workouts")
 
     fun getWorkoutByUserId(userId: String) =
-        workouts.whereEqualTo("userId", userId).orderBy("dateInMilliseconds")
+        workouts.whereEqualTo("userId", userId)
 
 
     fun createWorkout(workout: Workout) =

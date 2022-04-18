@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.Screens.Exercise.Adapter.ExerciseAdapter
 import com.example.fithelper.Extensions.getStringDateFromLong
+import com.example.fithelper.Features.MainActivity
+import com.example.fithelper.R
 import com.example.fithelper.Screens.Shared.WorkoutViewModel
 import com.example.fithelper.databinding.FragmentChangingOfWorkoutBinding
 
@@ -20,6 +24,14 @@ class ChangeWorkoutFragment : Fragment() {
     private val workoutForChangeViewModel: WorkoutViewModel by activityViewModels()
 
     private lateinit var adapter: ExerciseAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            (activity as MainActivity).navController.navigate(R.id.action_changeWorkoutFragment_to_workoutsFragment)
+        }
+        callback.isEnabled
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +60,14 @@ class ChangeWorkoutFragment : Fragment() {
         }
 
         workoutForChangeViewModel.dateInMilliseconds.observe(activity as LifecycleOwner) { date ->
-            binding.workoutDateTextView.text = "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy") }"
+// ToDO: Наверное, так делать не надо: если потом будем менять дату, он присвоит её удалённому TV
+            if(date == null || date == 0L){
+                binding.linearLayout.removeView(binding.workoutDateTextView)
+            }
+            else{
+                binding.workoutDateTextView.text = "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy")}"
+            }
+
         }
     }
 

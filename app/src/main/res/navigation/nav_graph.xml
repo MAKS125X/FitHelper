@@ -39,11 +39,19 @@
         android:id="@+id/createWorkoutFragment"
         android:name="com.example.fithelper.Screens.Workout.CreateWorkout.CreateWorkoutFragment"
         android:label="fragment_creating_of_workout"
-        tools:layout="@layout/fragment_creating_of_workout" />
+        tools:layout="@layout/fragment_creating_of_workout" >
+        <action
+            android:id="@+id/action_createWorkoutFragment_to_workoutsFragment"
+            app:destination="@id/workoutsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changeWorkoutFragment"
         android:name="com.example.fithelper.Screens.Workout.ChangeWorkout.ChangeWorkoutFragment"
         android:label="fragment_changing_of_workout"
-        tools:layout="@layout/fragment_changing_of_workout" />
+        tools:layout="@layout/fragment_changing_of_workout" >
+        <action
+            android:id="@+id/action_changeWorkoutFragment_to_workoutsFragment"
+            app:destination="@id/workoutsFragment" />
+    </fragment>
 
 </navigation>

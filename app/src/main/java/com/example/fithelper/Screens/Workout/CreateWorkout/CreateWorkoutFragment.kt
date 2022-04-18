@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,6 +15,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.Screens.Exercise.Adapter.ExerciseAdapter
 import com.example.fithelper.Extensions.getStringDateFromLong
+import com.example.fithelper.Features.MainActivity
+import com.example.fithelper.R
 import com.example.fithelper.Screens.Exercise.CreateExercise.CreateExerciseFragment
 import com.example.fithelper.Screens.Shared.ExercisesViewModel
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
@@ -25,6 +28,14 @@ open class CreateWorkoutFragment : Fragment() {
     private val exercisesViewModel: ExercisesViewModel by activityViewModels()
 
     private lateinit var adapter: ExerciseAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
+        }
+        callback.isEnabled
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

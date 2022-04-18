@@ -58,9 +58,7 @@ class WorkoutAdapter(
                     var exercisesString = ""
                     for (i in 0 until min(workout.exerciseList!!.count(), 3))
                         exercisesString += "${workout.exerciseList!![i]}\n"
-                    exercisesNameTV.text = exercisesString.dropLastWhile{
-                        it == '\n'
-                    }
+                    exercisesNameTV.text = exercisesString.dropLastWhile { it=='\n' }
                 } else {
                     exercisesNameTV.text = "Упражнений нет"
                 }
