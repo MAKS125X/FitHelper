@@ -48,7 +48,7 @@ class ChangeWorkoutFragment : Fragment() {
         }
 
         workoutForChangeViewModel.dateInMilliseconds.observe(activity as LifecycleOwner) { date ->
-            binding.workoutDateTextView.text = "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy")}"
+            binding.workoutDateTextView.text = "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy") }"
         }
     }
 

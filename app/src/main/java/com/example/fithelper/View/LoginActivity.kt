@@ -75,9 +75,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkAuthState(){
-        if(auth.currentUser != null){
+        if(Firebase.auth != null){
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
     }
+
+
 }

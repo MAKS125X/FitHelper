@@ -19,7 +19,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="224dp"
+            android:layout_height="wrap_content"
             android:background="@color/recyclerviewWorkoutItem"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="0dp"
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
                 android:text="@string/exerciseInWorkout"
@@ -74,7 +74,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/countOfOtherExercises"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -82,8 +82,13 @@
             <Button
                 android:id="@+id/deleteWorkoutButton"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Удалить тренировку" />
+                android:layout_height="wrap_content"
+                android:text="Удалить тренировку"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                />
 
         </LinearLayout>
 
