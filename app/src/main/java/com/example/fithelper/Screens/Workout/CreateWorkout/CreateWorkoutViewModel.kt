@@ -37,7 +37,7 @@ class CreateWorkoutViewModel : ViewModel() {
         )
 
         WorkoutRepository.createWorkout(workout)
-        this.onCleared()
+        //this.onCleared()
     }
 
     fun changeDate(context: Context) {

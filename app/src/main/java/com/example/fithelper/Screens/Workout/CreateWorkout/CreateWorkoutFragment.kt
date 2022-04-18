@@ -85,8 +85,9 @@ open class CreateWorkoutFragment : Fragment() {
                 vm.create(exercisesViewModel.exercises.value)
                 exercisesViewModel.setExercises(mutableListOf())
                 // todo: can refactor?
-                onDestroy()
-                requireFragmentManager().popBackStack()
+                //onDestroy()
+                (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
+                //requireFragmentManager().popBackStack()
             } catch (ex: IllegalArgumentException) {
                 Toast.makeText(context, ex.message, Toast.LENGTH_LONG)
             }
