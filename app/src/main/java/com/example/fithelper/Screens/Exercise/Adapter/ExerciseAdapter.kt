@@ -12,7 +12,6 @@ import com.example.fithelper.databinding.ItemExerciseBinding
 class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
     RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_exercise, parent, false)
@@ -28,7 +27,6 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
     }
 
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         private val binding = ItemExerciseBinding.bind(itemView)
 
         fun bind(exercise: Exercise) = with(binding) {
@@ -37,9 +35,9 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
             exerciseRepsTV.text = "Повторений: ${exercise.numberOfRepetitions}"
             exerciseWeightTV.text = "Вес: ${exercise.weight}"
             isCompleteCheckBox.isChecked = exercise.isComplete ?: false
-
             setTextStyle(exercise.isComplete == true)
-            isCompleteCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+
+            isCompleteCheckBox.setOnCheckedChangeListener { _, b ->
                 setTextStyle(b)
                 exercise.isComplete = b
             }

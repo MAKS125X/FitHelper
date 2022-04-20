@@ -22,6 +22,7 @@ class WorkoutsFragment : Fragment() {
 
     lateinit var binding: FragmentWorkoutBinding
 
+    // todo: Переписать логику с workoutForChange на передачу через граф
     private val workoutForChangeViewModel: WorkoutViewModel by activityViewModels()
     private val workoutsViewModel: WorkoutsViewModel by activityViewModels()
 
@@ -30,7 +31,7 @@ class WorkoutsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWorkoutBinding.inflate(inflater)
         return binding.root
     }
@@ -46,7 +47,6 @@ class WorkoutsFragment : Fragment() {
     private fun initClicks() = with(binding) {
         createNewWorkoutFlActButton.setOnClickListener {
             (activity as MainActivity).navController.navigate(R.id.action_workoutsFragment_to_createWorkoutFragment)
-
         }
     }
 
@@ -57,15 +57,11 @@ class WorkoutsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = WorkoutAdapter(workoutsViewModel.workouts.value!!, object :
+        adapter = WorkoutAdapter(workoutsViewModel.workouts.value ?: mutableListOf(), object :
             OnWorkoutItemClickListener {
             override fun getDetails(workout: Workout) {
                 workoutForChangeViewModel.setWorkout(workout)
                 (activity as MainActivity).navController.navigate(R.id.action_workoutsFragment_to_changeWorkoutFragment)
-//                val transaction = requireFragmentManager().beginTransaction()
-//                transaction.replace(R.id.fragment_holder, ChangeWorkoutFragment())
-//                    .addToBackStack("Check")
-//                    .commit()
             }
 
             override fun deleteById(workoutId: String) {

@@ -32,7 +32,10 @@ class WorkoutsViewModel : ViewModel() {
                     return@addSnapshotListener
                 }
 
-                for (dc in snapshots!!.documentChanges) {
+                if (snapshots == null)
+                    return@addSnapshotListener
+
+                for (dc in snapshots.documentChanges) {
                     when (dc.type) {
                         DocumentChange.Type.ADDED -> {
                             val workout = dc.document.toObject(Workout::class.java)
@@ -50,7 +53,7 @@ class WorkoutsViewModel : ViewModel() {
                     }
                 }
 
+                workouts.value?.sortBy { w -> w.dateInMilliseconds }
                 workouts.notifyObserver()
             }
-    private fun removeSnapshotListener() = addSnapshotListener().remove()
 }

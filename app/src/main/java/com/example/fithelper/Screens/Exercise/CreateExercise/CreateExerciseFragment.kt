@@ -26,7 +26,7 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentBottomSheetCreateExerciseBinding.inflate(inflater)
         return binding.root
     }
@@ -38,15 +38,8 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
         initClicks()
 
         binding.exerciseNameET.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) { }
 
             override fun afterTextChanged(p0: Editable?) {
                 vm.setName(p0.toString())
@@ -117,6 +110,7 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
                     vm.numberOfRepetitions.value!!,
                     vm.weight.value!!
                 )
+                // todo: переписать на граф
                 this.dismiss()
             } catch (ex: IllegalArgumentException) {
                 Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()

@@ -3,7 +3,9 @@ package com.example.fithelper.Screens.Workout.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fithelper.Extensions.getStringDateFromLong
 import com.example.fithelper.Models.Workout
 import com.example.fithelper.R
 import com.example.fithelper.databinding.ItemWorkoutBinding
@@ -21,6 +23,7 @@ class WorkoutAdapter(
             .inflate(R.layout.item_workout, parent, false)
         return WorkoutViewHolder(itemView)
     }
+
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
         holder.bind(workouts[position])
         holder.binding.deleteWorkoutButton.setOnClickListener {
@@ -30,6 +33,7 @@ class WorkoutAdapter(
             onWorkoutItemClickListener.getDetails(workouts[position])
         }
     }
+
     override fun getItemCount(): Int {
         return workouts.size
     }
@@ -43,37 +47,35 @@ class WorkoutAdapter(
             trainingNameTV.text = workout.name ?: "Тренировка"
 
             // Отображение даты тренировки
-            if (workout.dateInMilliseconds != null && workout.dateInMilliseconds != 0L) {
-                val date = Date(workout.dateInMilliseconds!!)
-                val format = SimpleDateFormat("dd.MM.yyyy")
-                trainingDateTV.text = format.format(date)
-            } else {
+            if (workout.dateInMilliseconds == null)
                 linearLayout.removeView(trainingDateTV)
-            }
+            else
+                trainingDateTV.text =
+                    getStringDateFromLong(workout.dateInMilliseconds, "dd.MM.yyyy")
 
             // Отображение упражнений
-            if (workout.exerciseList != null) {
-                // Вывод первых трех при наличии
-                if (workout.exerciseList!!.count() > 0) {
-                    var exercisesString = ""
-                    for (i in 0 until min(workout.exerciseList!!.count(), 3))
-                        exercisesString += "${workout.exerciseList!![i]}\n"
-                    exercisesNameTV.text = exercisesString.dropLastWhile { it=='\n' }
-                } else {
-                    exercisesNameTV.text = "Упражнений нет"
-                }
+            if (workout.exerciseList == null || workout.exerciseList!!.count() == 0) {
+                exercisesNameTV.text = "Упражнений нет"
+                linearLayout.removeView(dividingLine)
+                linearLayout.removeView(anotherExercisesCountTV)
+            } else {
+                // Вывод первых трех
+                val countExercises = workout.exerciseList!!.count()
+                var exercisesString = ""
+                for (i in 0 until min(countExercises, 3))
+                    exercisesString += "${workout.exerciseList!![i]}\n"
+                exercisesNameTV.text = exercisesString.dropLast(1)
+
+                // todo: bug при добавлении тренировки с > 3 упражнениями изначально отображается не корректно (скорее всего ошибка не тут)
                 // Информация об оставшихся упражнениях
-                val remainingExercisesCount = workout.exerciseList!!.count() - 3
+                val remainingExercisesCount = countExercises - 3
                 if (remainingExercisesCount > 0) {
-                    when (remainingExercisesCount % 10) {
-                        1 -> anotherExercisesCountTV.text =
-                            "И ещё $remainingExercisesCount упражнение"
-                        in 2..4 -> anotherExercisesCountTV.text =
-                            "И ещё $remainingExercisesCount упражнения"
-                        in 5..9 -> anotherExercisesCountTV.text =
-                            "И ещё $remainingExercisesCount упражнений"
-                        0 -> anotherExercisesCountTV.text =
-                            "И ещё $remainingExercisesCount упражнений"
+                    anotherExercisesCountTV.text = when (remainingExercisesCount % 10) {
+                        1 -> "И ещё $remainingExercisesCount упражнение"
+                        in 2..4 -> "И ещё $remainingExercisesCount упражнения"
+                        in 5..9 -> "И ещё $remainingExercisesCount упражнений"
+                        0 -> "И ещё $remainingExercisesCount упражнений"
+                        else -> ""
                     }
                 } else {
                     linearLayout.removeView(dividingLine)

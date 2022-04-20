@@ -18,6 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
+    // todo: перенести логику в UserService
     lateinit var binding: ActivityLoginBinding
     lateinit var launcher: ActivityResultLauncher<Intent>
     val auth: FirebaseAuth = Firebase.auth
