@@ -64,7 +64,7 @@ class ChangeWorkoutFragment : Fragment() {
             } else {
                 binding.workoutDateTextView.isVisible = true
                 val dateString = getStringDateFromLong(date, "dd.MM.yyyy")
-                binding.workoutDateTextView.text = "Дата тренировки: $dateString}"
+                binding.workoutDateTextView.text = "Дата тренировки: $dateString"
             }
 
         }

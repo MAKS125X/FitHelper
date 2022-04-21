@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentBottomSheetCreateExerciseBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
@@ -112,7 +113,10 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
                     vm.numberOfRepetitions.value!!,
                     vm.weight.value!!
                 )
-                (activity as MainActivity).navController.navigate(R.id.action_createExerciseFragment_to_createWorkoutFragment)
+                //(activity as MainActivity).navController.navigateUp()
+                val action = CreateExerciseFragmentDirections.actionCreateExerciseFragmentToCreateWorkoutFragment()
+                findNavController().navigate(action)
+                //(activity as MainActivity).navController.navigate(R.id.action_createExerciseFragment_to_createWorkoutFragment)
             } catch (ex: IllegalArgumentException) {
                 Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
             }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.models.Workout
@@ -59,6 +60,10 @@ class WorkoutsFragment : Fragment() {
             OnWorkoutItemClickListener {
             override fun getDetails(workout: Workout) {
                 workoutForChangeViewModel.setWorkout(workout)
+                //val action = WorkoutsFragmentDirections.
+                //actionWorkoutsFragmentToChangeWorkoutFragment()
+                //findNavController().navigate(action)
+                //findNavController().navigateUp()
                 (activity as MainActivity).navController.navigate(R.id.action_workoutsFragment_to_changeWorkoutFragment)
             }
 
