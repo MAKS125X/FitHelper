@@ -10,8 +10,8 @@ import com.example.fithelper.services.UserService
 import com.example.fithelper.databinding.FragmentProfileBinding
 import com.example.fithelper.screens.authActivity.AuthActivity
 
+// todo: сделать vm
 class ProfileFragment : Fragment() {
-    // todo: перенести логику в UserService
     private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
