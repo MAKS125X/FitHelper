@@ -1,4 +1,4 @@
-package com.example.fithelper.Features
+package com.example.fithelper.features
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fithelper.R
-import com.example.fithelper.Services.UserService
+import com.example.fithelper.services.UserService
 import com.example.fithelper.databinding.ActivityLoginBinding
+import com.example.fithelper.screens.mainActivity.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
