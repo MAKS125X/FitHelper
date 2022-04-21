@@ -1,29 +1,39 @@
-package com.example.fithelper.features
+package com.example.fithelper.screens.authActivity.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.fithelper.R
-import com.example.fithelper.services.UserService
-import com.example.fithelper.databinding.ActivityLoginBinding
+import com.example.fithelper.databinding.FragmentLoginBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
+import com.example.fithelper.screens.mainActivity.profile.profile.ProfileFragment
+import com.example.fithelper.services.UserService
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 
-class LoginActivity : AppCompatActivity() {
-    // todo: перенести логику в UserService
-    lateinit var binding: ActivityLoginBinding
+class LoginFragment : Fragment() {
+
+    private lateinit var binding: FragmentLoginBinding
     lateinit var launcher: ActivityResultLauncher<Intent>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentLoginBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         launcher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -34,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                         firebaseAuthWithGoogle(account.idToken!!)
                     }
                 } catch (e: ApiException) {
-                    Toast.makeText(this, "Ошибка при входе", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Ошибка при входе", Toast.LENGTH_SHORT).show()
                 }
             }
         binding.accountButton.setOnClickListener {
@@ -50,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        return GoogleSignIn.getClient(this, gso)
+        return GoogleSignIn.getClient(requireActivity(), gso)
     }
 
     private fun signInWithGoogle() {
@@ -62,20 +72,24 @@ class LoginActivity : AppCompatActivity() {
         UserService.signInWithGoogle(idToken)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Toast.makeText(this, "Успешный вход", Toast.LENGTH_SHORT).show()
-                    val i = Intent(this, MainActivity::class.java)
+                    Toast.makeText(requireContext(), "Успешный вход", Toast.LENGTH_SHORT).show()
+                    val i = Intent(requireContext(), MainActivity::class.java)
                     startActivity(i)
                 } else {
-                    Toast.makeText(this, "Произошла ошибка при входе", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Произошла ошибка при входе", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     private fun checkAuthState() {
         if (UserService.userIsAuthorized()) {
-            val i = Intent(this, MainActivity::class.java)
+            val i = Intent(requireContext(), MainActivity::class.java)
             startActivity(i)
-            finish()
         }
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = ProfileFragment()
     }
 }
