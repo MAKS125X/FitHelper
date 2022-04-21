@@ -7,7 +7,7 @@
     tools:context=".screens.authActivity.AuthActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/auth_fragment_holder"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="409dp"
         android:layout_height="729dp"

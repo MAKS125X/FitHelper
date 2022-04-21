@@ -19,7 +19,6 @@ import com.example.fithelper.extensions.getStringDateFromLong
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.R
 import com.example.fithelper.screens.mainActivity.workouts.adapters.exerciseAdapter.ExerciseAdapter
-import com.example.fithelper.screens.mainActivity.workouts.createExercise.CreateExerciseFragment
 import com.example.fithelper.screens.shared.ExercisesViewModel
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
 import java.util.*
@@ -70,9 +69,8 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
 
     private fun initClicks() {
         binding.addExercisesButton.setOnClickListener {
-            // todo: переделать через граф: Передавать exercise как результат, отказаться от exercisesViewModel (по возможности)
-            val dialog = CreateExerciseFragment()
-            dialog.show(parentFragmentManager, "BottomSheetDialog")
+            // todo: Передавать exercise как результат, отказаться от exercisesViewModel
+            (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_createExerciseFragment)
         }
 
         binding.changeWorkoutDateButton.setOnClickListener {

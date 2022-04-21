@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentBottomSheetCreateExerciseBinding
+import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.screens.shared.ExercisesViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.IllegalArgumentException
@@ -110,8 +112,7 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
                     vm.numberOfRepetitions.value!!,
                     vm.weight.value!!
                 )
-                // todo: переписать на граф
-                this.dismiss()
+                (activity as MainActivity).navController.navigate(R.id.action_createExerciseFragment_to_createWorkoutFragment)
             } catch (ex: IllegalArgumentException) {
                 Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
             }
