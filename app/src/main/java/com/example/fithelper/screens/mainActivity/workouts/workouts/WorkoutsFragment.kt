@@ -60,10 +60,6 @@ class WorkoutsFragment : Fragment() {
             OnWorkoutItemClickListener {
             override fun getDetails(workout: Workout) {
                 workoutForChangeViewModel.setWorkout(workout)
-                //val action = WorkoutsFragmentDirections.
-                //actionWorkoutsFragmentToChangeWorkoutFragment()
-                //findNavController().navigate(action)
-                //findNavController().navigateUp()
                 (activity as MainActivity).navController.navigate(R.id.action_workoutsFragment_to_changeWorkoutFragment)
             }
 

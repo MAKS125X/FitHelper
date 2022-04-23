@@ -51,16 +51,16 @@ class WorkoutAdapter(
                     getStringDateFromLong(workout.dateInMilliseconds, "dd.MM.yyyy")
 
             // Отображение упражнений
-            if (workout.exerciseList == null || workout.exerciseList!!.count() == 0) {
+            if (workout.exerciseList.count() == 0) {
                 exercisesNameTV.text = "Упражнений нет"
                 linearLayout.removeView(dividingLine)
                 linearLayout.removeView(anotherExercisesCountTV)
             } else {
                 // Вывод первых трех
-                val countExercises = workout.exerciseList!!.count()
+                val countExercises = workout.exerciseList.count()
                 var exercisesString = ""
                 for (i in 0 until min(countExercises, 3))
-                    exercisesString += "${workout.exerciseList!![i]}\n"
+                    exercisesString += "${workout.exerciseList[i]}\n"
                 exercisesNameTV.text = exercisesString.dropLast(1)
 
                 // todo: bug при добавлении тренировки с > 3 упражнениями изначально отображается не корректно (скорее всего ошибка не тут)

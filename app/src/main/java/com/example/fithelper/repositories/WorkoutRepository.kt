@@ -13,10 +13,10 @@ object WorkoutRepository {
 
     fun createWorkout(workout: Workout) =
         workouts
-            .document(workout.id!!)
+            .document(workout.id)
             .set(workout)
             .addOnSuccessListener {
-                Log.i("Workout", "Workout ${workout.id!!} created")
+                Log.i("Workout", "Workout ${workout.id} created")
             }
             .addOnFailureListener { ex ->
                 Log.e("Database", ex.message.toString())
@@ -24,10 +24,10 @@ object WorkoutRepository {
 
 
     fun updateWorkout(workout: Workout) =
-        workouts.document(workout.id!!)
+        workouts.document(workout.id)
             .set(workout)
             .addOnSuccessListener {
-                Log.i("Workout", "Workout ${workout.id!!} updated")
+                Log.i("Workout", "Workout ${workout.id} updated")
             }
             .addOnFailureListener { ex ->
                 Log.e("Database", ex.message.toString())

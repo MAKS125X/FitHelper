@@ -34,8 +34,8 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
             exerciseSetsTV.text = "Подходов: ${exercise.numberOfApproaches}"
             exerciseRepsTV.text = "Повторений: ${exercise.numberOfRepetitions}"
             exerciseWeightTV.text = "Вес: ${exercise.weight}"
-            isCompleteCheckBox.isChecked = exercise.isComplete ?: false
-            setTextStyle(exercise.isComplete == true)
+            isCompleteCheckBox.isChecked = exercise.isComplete
+            setTextStyle(exercise.isComplete)
 
             isCompleteCheckBox.setOnCheckedChangeListener { _, b ->
                 setTextStyle(b)

@@ -3,21 +3,14 @@ package com.example.fithelper.models
 import java.util.*
 
 data class Workout(
-    var id: String? = null,
-    var userId: String? = null,
+    var id: String = "",
+    var userId: String = "",
     var name: String? = null,
     var dateInMilliseconds: Long? = null,
-    var exerciseList: MutableList<Exercise>? = null
+    var exerciseList: MutableList<Exercise> = mutableListOf()
 ) {
-    constructor(
-        userId: String? = null,
-        name: String? = null,
-        dateInMilliseconds: Long? = null,
-        exerciseList: MutableList<Exercise>? = null
-    ) : this(UUID.randomUUID().toString(), userId, name, dateInMilliseconds, exerciseList) {
-        if (name.isNullOrEmpty())
-            throw IllegalArgumentException("Тренировка должна содержать название.")
-    }
+    constructor(userId: String, name: String?, dateInMilliseconds: Long? = null, exerciseList: MutableList<Exercise> = mutableListOf()
+    ) : this(UUID.randomUUID().toString(), userId, name, dateInMilliseconds, exerciseList)
 
     override fun toString(): String {
         return name ?: "Тренировка"

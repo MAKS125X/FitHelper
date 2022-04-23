@@ -27,7 +27,7 @@ class CreateWorkoutViewModel(datePickerDialog: DatePickerDialog) : ViewModel() {
         this.dateInMilliseconds.value = date
     }
 
-    fun create(exercises: MutableList<Exercise>?) {
+    fun create(exercises: MutableList<Exercise>) {
         val workout = Workout(
             UserService.getUserId(),
             name.value,

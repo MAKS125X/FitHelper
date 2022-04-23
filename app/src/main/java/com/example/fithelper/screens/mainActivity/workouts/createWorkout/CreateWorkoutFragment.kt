@@ -79,7 +79,7 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
 
         binding.confirmWorkoutCreationButton.setOnClickListener {
             try {
-                vm.create(exercisesViewModel.exercises.value)
+                vm.create(exercisesViewModel.exercises.value ?: mutableListOf())
                 exercisesViewModel.setExercises(mutableListOf())
                 (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
             } catch (ex: IllegalArgumentException) {

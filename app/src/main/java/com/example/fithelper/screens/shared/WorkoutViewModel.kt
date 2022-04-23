@@ -24,17 +24,18 @@ class WorkoutViewModel : ViewModel() {
         userId.value = workout.userId
         name.value = workout.name
         dateInMilliseconds.value = workout.dateInMilliseconds
-        exerciseList.value = workout.exerciseList ?: mutableListOf()
+        exerciseList.value = workout.exerciseList
     }
 
     fun updateWorkout() {
         WorkoutRepository.updateWorkout(
             Workout(
-                id.value,
-                userId.value,
+                // todo: проверка на null
+                id.value ?: "Не найден",
+                userId.value ?: "Не найден",
                 name.value,
                 dateInMilliseconds.value,
-                exerciseList.value
+                exerciseList.value ?: mutableListOf()
             )
         ).addOnSuccessListener {
             Log.i("Workout", "Workout $id updated")

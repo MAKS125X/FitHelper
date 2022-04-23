@@ -29,8 +29,8 @@ class ExercisesViewModel : ViewModel() {
         exercises.notifyObserver()
     }
 
-    fun setExercises(exercises: MutableList<Exercise>?) {
-        this.exercises.value = exercises ?: mutableListOf()
+    fun setExercises(exercises: MutableList<Exercise>) {
+        this.exercises.value = exercises
     }
 }
 
