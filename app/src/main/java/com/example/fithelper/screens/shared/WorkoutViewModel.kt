@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.fithelper.models.Exercise
 import com.example.fithelper.models.Workout
 import com.example.fithelper.repositories.WorkoutRepository
+import java.lang.NullPointerException
 
 class WorkoutViewModel : ViewModel() {
 
@@ -30,9 +31,8 @@ class WorkoutViewModel : ViewModel() {
     fun updateWorkout() {
         WorkoutRepository.updateWorkout(
             Workout(
-                // todo: проверка на null
-                id.value ?: "Не найден",
-                userId.value ?: "Не найден",
+                id.value ?: throw NullPointerException("id can not be null"),
+                userId.value ?: throw NullPointerException("userId can not be null"),
                 name.value,
                 dateInMilliseconds.value,
                 exerciseList.value ?: mutableListOf()
