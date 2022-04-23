@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.models.Workout
 import com.example.fithelper.screens.mainActivity.workouts.adapters.workoutAdapter.OnWorkoutItemClickListener
 import com.example.fithelper.R
-import com.example.fithelper.screens.shared.WorkoutViewModel
+import com.example.fithelper.screens.mainActivity.workouts.changeWorkout.ChangeWorkoutViewModel
 import com.example.fithelper.screens.shared.WorkoutsViewModel
 import com.example.fithelper.screens.mainActivity.workouts.adapters.workoutAdapter.WorkoutAdapter
 import com.example.fithelper.databinding.FragmentWorkoutBinding
@@ -22,7 +21,7 @@ class WorkoutsFragment : Fragment() {
     lateinit var binding: FragmentWorkoutBinding
 
     // todo: Переписать логику с workoutForChange на передачу через граф
-    private val workoutForChangeViewModel: WorkoutViewModel by activityViewModels()
+    private val workoutForChangeViewModel: ChangeWorkoutViewModel by activityViewModels()
     private val workoutsViewModel: WorkoutsViewModel by activityViewModels()
 
     private lateinit var adapter: WorkoutAdapter
@@ -59,8 +58,8 @@ class WorkoutsFragment : Fragment() {
         adapter = WorkoutAdapter(workoutsViewModel.workouts.value ?: mutableListOf(), object :
             OnWorkoutItemClickListener {
             override fun getDetails(workout: Workout) {
-                workoutForChangeViewModel.setWorkout(workout)
-                (activity as MainActivity).navController.navigate(R.id.action_workoutsFragment_to_changeWorkoutFragment)
+                val action = WorkoutsFragmentDirections.actionWorkoutsFragmentToChangeWorkoutFragment(workout)
+                (activity as MainActivity).navController.navigate(action)
             }
 
             override fun deleteById(workoutId: String) {

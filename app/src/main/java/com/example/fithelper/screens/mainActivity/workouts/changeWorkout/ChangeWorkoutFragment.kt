@@ -8,21 +8,22 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.screens.mainActivity.workouts.adapters.exerciseAdapter.ExerciseAdapter
 import com.example.fithelper.extensions.getStringDateFromLong
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentChangingOfWorkoutBinding
-import com.example.fithelper.screens.shared.WorkoutViewModel
 
 
 class ChangeWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentChangingOfWorkoutBinding
+    private val args by navArgs<ChangeWorkoutFragmentArgs>()
 
-    // todo: передавать workout через граф, обновлять по Id, избавиться ViewModel
-    private val workoutForChangeViewModel: WorkoutViewModel by activityViewModels()
+    private val workoutForChangeViewModel: ChangeWorkoutViewModel by viewModels { ChangeWorkoutFactory(args.workoutForChange) }
 
     private lateinit var adapter: ExerciseAdapter
 

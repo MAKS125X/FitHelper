@@ -4,7 +4,7 @@ plugins {
     // Firebase
     id 'com.google.gms.google-services'
 
-    id("androidx.navigation.safeargs.kotlin")
+    id("androidx.navigation.safeargs")
 }
 
 android {

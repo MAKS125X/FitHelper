@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_changeWorkoutFragment_to_workoutsFragment"
             app:destination="@id/workoutsFragment" />
+        <argument
+            android:name="WorkoutForChange"
+            app:argType="com.example.fithelper.models.Workout" />
     </fragment>
     <dialog
         android:id="@+id/createExerciseDialog"
