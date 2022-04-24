@@ -113,9 +113,9 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
                     vm.numberOfRepetitions.value!!,
                     vm.weight.value!!
                 )
-                //(activity as MainActivity).navController.navigateUp()
-                val action = CreateExerciseFragmentDirections.actionCreateExerciseFragmentToCreateWorkoutFragment()
-                findNavController().navigate(action)
+                (activity as MainActivity).navController.navigateUp()
+                //val action = CreateExerciseFragmentDirections.actionCreateExerciseFragmentToCreateWorkoutFragment()
+                //findNavController().navigate(action)
                 //(activity as MainActivity).navController.navigate(R.id.action_createExerciseFragment_to_createWorkoutFragment)
             } catch (ex: IllegalArgumentException) {
                 Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
