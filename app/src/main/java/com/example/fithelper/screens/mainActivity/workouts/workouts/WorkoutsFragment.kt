@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.core.os.bundleOf
+import androidx.fragment.app.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fithelper.DeleteWorkoutDialog
+import com.example.fithelper.DeleteWorkoutDialogListener
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.models.Workout
 import com.example.fithelper.screens.mainActivity.workouts.adapters.workoutAdapter.OnWorkoutItemClickListener
@@ -16,12 +18,11 @@ import com.example.fithelper.screens.shared.WorkoutsViewModel
 import com.example.fithelper.screens.mainActivity.workouts.adapters.workoutAdapter.WorkoutAdapter
 import com.example.fithelper.databinding.FragmentWorkoutBinding
 
-class WorkoutsFragment : Fragment() {
+class WorkoutsFragment : Fragment(), DeleteWorkoutDialogListener {
 
     lateinit var binding: FragmentWorkoutBinding
 
     // todo: Переписать логику с workoutForChange на передачу через граф
-    private val workoutForChangeViewModel: ChangeWorkoutViewModel by activityViewModels()
     private val workoutsViewModel: WorkoutsViewModel by activityViewModels()
 
     private lateinit var adapter: WorkoutAdapter
@@ -63,12 +64,28 @@ class WorkoutsFragment : Fragment() {
             }
 
             override fun deleteById(workoutId: String) {
-                // todo: dialog "rly delete?"
-                workoutsViewModel.deleteWorkout(workoutId)
+                val bundle = Bundle()
+                bundle.putString("workoutId", workoutId)
+
+
+                //setFragmentResult("requestKey", bundleOf("bundleKey" to workoutId ))
+                val dialog = DeleteWorkoutDialog()
+                dialog.arguments = bundle
+                //dialog.setTargetFragment(this@WorkoutsFragment, 0)
+                dialog.show(childFragmentManager,"DeleteWorkoutDialog")
+
+
             }
         })
         binding.workoutRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.workoutRecyclerView.adapter = adapter
+    }
+
+    override fun onDialogPositiveClick(dialog: DialogFragment, workoutId: String) {
+        workoutsViewModel.deleteWorkout(workoutId)
+    }
+
+    override fun onDialogNegativeClick(dialog: DialogFragment) {
     }
 
     companion object {
