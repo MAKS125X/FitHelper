@@ -18,13 +18,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         if (!UserService.userIsAuthorized()) {
             val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
             finish()
         }
+
+        super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
