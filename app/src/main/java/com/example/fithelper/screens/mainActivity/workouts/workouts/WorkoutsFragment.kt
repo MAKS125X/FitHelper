@@ -59,12 +59,11 @@ class WorkoutsFragment : Fragment() {
 
             override fun deleteById(workoutId: String) {
                 AlertDialog.Builder(requireContext())
-                    .setMessage("Вы действительно хотите удалить данную тренировку?")
-                    .setPositiveButton("Да") { _, _ ->
+                    .setMessage(getString(R.string.confirmation_delete_workout))
+                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
                         vm.deleteWorkout(workoutId)
                     }
-                    .setNegativeButton("Нет") { _, _ ->
-
+                    .setNegativeButton(getString(R.string.no)) { _, _ ->
                     }
                     .create().show()
             }

@@ -35,7 +35,7 @@ class WorkoutAdapter(
     override fun getItemCount(): Int {
         return workouts.size
     }
-    // todo: не работает root.resources
+
     class WorkoutViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemWorkoutBinding.bind(itemView)
 
@@ -65,12 +65,12 @@ class WorkoutAdapter(
             }
 
             if (countExercises == 0) {
-                exercisesNameTV.text = root.context.resources.getText(R.string.no_exercises)
+                exercisesNameTV.text = root.context.resources.getString(R.string.no_exercises)
             } else {
                 // Вывод первых трех
                 var exercisesString = ""
                 for (i in 0 until min(countExercises, 3))
-                    exercisesString += "${workout.exerciseList[i].name ?: root.context.resources.getText(R.string.exercise_name)}\n"
+                    exercisesString += "${workout.exerciseList[i].name ?: root.context.resources.getString(R.string.exercise_name)}\n"
                 exercisesNameTV.text = exercisesString.dropLast(1)
 
                 // Информация об оставшихся упражнениях

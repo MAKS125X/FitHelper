@@ -9,13 +9,7 @@ class ChangeWorkoutFactory(private val workout: Workout?) : ViewModelProvider.Fa
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (workout == null)
             throw NullPointerException("Can not found this value")
-        // todo: реализация через рефлексию
-        return ChangeWorkoutViewModel(
-            workout.id,
-            workout.userId,
-            workout.name,
-            workout.dateInMilliseconds,
-            workout.exerciseList
-        ) as T
+
+        return modelClass.getConstructor(Workout::class.java).newInstance(workout)
     }
 }

@@ -7,22 +7,18 @@ import com.example.fithelper.models.Exercise
 import com.example.fithelper.models.Workout
 import com.example.fithelper.repositories.WorkoutRepository
 
-class ChangeWorkoutViewModel(
-    private var id: String,
-    private var userId: String,
-    name: String?,
-    dateInMilliseconds: Long?,
-    exerciseList: MutableList<Exercise>
-) : ViewModel() {
+class ChangeWorkoutViewModel(workout: Workout) : ViewModel() {
 
+    private val id = workout.id
+    private val userId = workout.userId
     val name = MutableLiveData<String?>()
     val dateInMilliseconds = MutableLiveData<Long?>()
     val exerciseList = MutableLiveData<MutableList<Exercise>>()
 
     init {
-        this.name.value = name
-        this.dateInMilliseconds.value = dateInMilliseconds
-        this.exerciseList.value = exerciseList
+        this.name.value = workout.name
+        this.dateInMilliseconds.value = workout.dateInMilliseconds
+        this.exerciseList.value = workout.exerciseList
     }
 
     fun updateWorkout() {
