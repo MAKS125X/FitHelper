@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentWorkoutBinding
@@ -39,7 +40,7 @@ class WorkoutsFragment : Fragment() {
 
     private fun initClicks() = with(binding) {
         createNewWorkoutFlActButton.setOnClickListener {
-            (activity as MainActivity).navController.navigate(R.id.action_workoutsFragment_to_createWorkoutFragment)
+            findNavController().navigate(R.id.action_workoutsFragment_to_createWorkoutFragment)
         }
     }
 
@@ -54,7 +55,7 @@ class WorkoutsFragment : Fragment() {
             override fun getDetails(workout: Workout) {
                 val action =
                     WorkoutsFragmentDirections.actionWorkoutsFragmentToChangeWorkoutFragment(workout)
-                (activity as MainActivity).navController.navigate(action)
+                findNavController().navigate(action)
             }
 
             override fun deleteById(workoutId: String) {
@@ -71,10 +72,5 @@ class WorkoutsFragment : Fragment() {
         })
         binding.workoutRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.workoutRecyclerView.adapter = adapter
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = WorkoutsFragment()
     }
 }

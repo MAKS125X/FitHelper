@@ -15,9 +15,4 @@ class GuideFragment : Fragment() {
         val binding = FragmentGuideBinding.inflate(inflater)
         return binding.root
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = GuideFragment()
-    }
 }

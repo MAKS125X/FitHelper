@@ -4,12 +4,13 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fithelper.models.Exercise
 import com.example.fithelper.R
 import com.example.fithelper.databinding.ItemExerciseBinding
+import com.example.fithelper.models.Exercise
 
-class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
+class ExerciseAdapter(private val exercises: MutableList<Exercise>, private val isChangeable: Boolean = true) :
     RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
@@ -19,7 +20,7 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
     }
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
-        holder.bind(exercises[position])
+        holder.bind(exercises[position], isChangeable)
     }
 
     override fun getItemCount(): Int {
@@ -29,17 +30,23 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>) :
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemExerciseBinding.bind(itemView)
 
-        fun bind(exercise: Exercise) = with(binding) {
+        fun bind(exercise: Exercise, isChangeable: Boolean) = with(binding) {
             exerciseNameTV.text = exercise.name.toString()
             exerciseSetsTV.text = "Подходов: ${exercise.numberOfApproaches}"
             exerciseRepsTV.text = "Повторений: ${exercise.numberOfRepetitions}"
             exerciseWeightTV.text = "Вес: ${exercise.weight}"
+
+            if (!isChangeable) {
+                isCompleteCheckBox.isVisible = false
+                return@with
+            }
+
             isCompleteCheckBox.isChecked = exercise.isComplete
             setTextStyle(exercise.isComplete)
 
-            isCompleteCheckBox.setOnCheckedChangeListener { _, b ->
-                setTextStyle(b)
-                exercise.isComplete = b
+            isCompleteCheckBox.setOnCheckedChangeListener { _, bool ->
+                setTextStyle(bool)
+                exercise.isComplete = bool
             }
         }
 

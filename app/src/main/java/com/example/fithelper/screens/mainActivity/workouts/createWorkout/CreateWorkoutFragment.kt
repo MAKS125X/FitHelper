@@ -11,6 +11,7 @@ import android.widget.DatePicker
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.screens.common.CreateExerciseDialog
 import com.example.fithelper.extensions.getStringDateFromLong
@@ -33,7 +34,7 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
         super.onCreate(savedInstanceState)
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
+            findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
         }
     }
 
@@ -82,7 +83,7 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
 
         binding.confirmWorkoutCreationButton.setOnClickListener {
             vm.create()
-            (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
+            findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
         }
     }
 
@@ -103,14 +104,9 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
     }
 
     private fun initRecyclerView() {
-        adapter = ExerciseAdapter(vm.exercises.value ?: mutableListOf())
+        adapter = ExerciseAdapter(vm.exercises.value ?: mutableListOf(), isChangeable = false)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = CreateWorkoutFragment()
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {

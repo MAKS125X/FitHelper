@@ -16,9 +16,4 @@ class HomeFragment : Fragment() {
         val binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = HomeFragment()
-    }
 }

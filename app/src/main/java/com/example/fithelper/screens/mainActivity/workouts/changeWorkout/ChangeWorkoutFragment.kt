@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
@@ -29,7 +30,7 @@ class ChangeWorkoutFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            (activity as MainActivity).navController.navigate(R.id.action_changeWorkoutFragment_to_workoutsFragment)
+            findNavController().navigate(R.id.action_changeWorkoutFragment_to_workoutsFragment)
         }
     }
 
@@ -54,11 +55,11 @@ class ChangeWorkoutFragment : Fragment() {
     }
 
     private fun initObservers() {
-        workoutForChangeViewModel.name.observe(activity as LifecycleOwner) { name ->
+        workoutForChangeViewModel.name.observe(viewLifecycleOwner) { name ->
             binding.workoutNameTextView.text = name ?: "Тренировка"
         }
 
-        workoutForChangeViewModel.dateInMilliseconds.observe(activity as LifecycleOwner) { date ->
+        workoutForChangeViewModel.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
             if (date == null || date == 0L) {
                 binding.workoutDateTextView.isVisible = false
             } else {

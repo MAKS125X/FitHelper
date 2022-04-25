@@ -10,7 +10,6 @@ import com.example.fithelper.services.UserService
 import com.example.fithelper.databinding.FragmentProfileBinding
 import com.example.fithelper.screens.authActivity.AuthActivity
 
-// todo: сделать vm
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 
@@ -31,10 +30,5 @@ class ProfileFragment : Fragment() {
             startActivity(i)
             requireActivity().finish()
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = ProfileFragment()
     }
 }

@@ -89,9 +89,4 @@ class LoginFragment : Fragment() {
             Toast.makeText(requireContext(), "Пожалуйста, авторизируйтесь", Toast.LENGTH_SHORT).show()
         }
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = ProfileFragment()
-    }
 }
