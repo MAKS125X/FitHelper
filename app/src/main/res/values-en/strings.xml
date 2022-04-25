@@ -23,6 +23,6 @@
     <string name="hello_user">Hello user!</string>
     <string name="specify_workout_date">Specify workout date</string>
     <string name="no_exercises">No exercises</string>
-    <string name="placeholder_exercise_total_count">Total %d exercises</string>
+    <string name="placeholder_exercise_total_count">Total exercises: %d</string>
     <string name="home">Home</string>
 </resources>

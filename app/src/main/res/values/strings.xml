@@ -49,6 +49,6 @@
     <!-- Messages -->
     <string name="hello_user">Привет, пользователь!</string>
     <string name="no_exercises">Упражнений нет</string>
-    <string name="placeholder_exercise_total_count">Всего %s упражнений</string>
+    <string name="placeholder_exercise_total_count">Всего упражнений: %d</string>
 
 </resources>

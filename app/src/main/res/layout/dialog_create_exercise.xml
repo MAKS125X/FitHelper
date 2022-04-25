@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bottom_sheet_background"
     android:orientation="vertical"
-    >
+    android:theme="@style/Theme.FitHelper">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +24,7 @@
             android:layout_margin="10dp"
             android:hint="@string/exercise_name"
             android:inputType="text"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:ignore="TouchTargetSizeCheck"
             android:importantForAutofill="no" />
 
@@ -37,40 +36,22 @@
 
             <TextView
                 android:id="@+id/setsTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_weight="1"
-                android:text="@string/count_approaches"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
+                style="@style/BottomSheetTextViewStyle"
+                android:text="@string/count_approaches" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/decreaseSetsButton"
+                style="@style/ChangeButtonsStyle"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/button_background"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
                 android:text="@string/minus"
                 tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/increaseSetsButton"
+                style="@style/ChangeButtonsStyle"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/button_background"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
                 android:text="@string/plus"
                 tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
@@ -83,76 +64,32 @@
 
             <TextView
                 android:id="@+id/repsTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:text="@string/count_repeats"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
+                style="@style/BottomSheetTextViewStyle"
+                android:text="@string/count_repeats" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/decreaseRepsButton"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/button_background"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="@string/minus"
-                android:textSize="12sp"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/fastDecreaseRepsButton"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-
-                android:background="@drawable/button_background"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
+                style="@style/ChangeButtonsStyle"
                 android:text="@string/minus_minus"
-                android:textSize="12sp"
                 tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/increaseRepsButton"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
+            <Button
+                android:id="@+id/decreaseRepsButton"
+                style="@style/ChangeButtonsStyle"
+                android:text="@string/minus"
+                tools:ignore="TouchTargetSizeCheck" />
 
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
+            <Button
+                android:id="@+id/increaseRepsButton"
+                style="@style/ChangeButtonsStyle"
                 android:text="@string/plus"
-                android:textSize="12sp"
                 tools:ignore="TouchTargetSizeCheck"
                 android:background="@drawable/button_background"/>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/fastIncreaseRepsButton"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-
-                android:background="@drawable/button_background"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
+                style="@style/ChangeButtonsStyle"
                 android:text="@string/plus_plus"
-                android:textSize="12sp"
                 tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
         </LinearLayout>
 
@@ -163,87 +100,41 @@
 
             <TextView
                 android:id="@+id/weightTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:text="@string/weight"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                />
-
-            <androidx.appcompat.widget.AppCompatButton
-
-                android:id="@+id/decreaseWeightButton"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="@string/minus"
-                tools:ignore="TouchTargetSizeCheck"
-                android:background="@drawable/button_background"/>
-
-            <androidx.appcompat.widget.AppCompatButton
+                style="@style/BottomSheetTextViewStyle"
+                android:text="@string/weight" />
+            <Button
                 android:id="@+id/fastDecreaseWeightButton"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
+                style="@style/ChangeButtonsStyle"
                 android:text="@string/minus_minus"
-                tools:ignore="TouchTargetSizeCheck"
-                android:background="@drawable/button_background"/>
+                tools:ignore="TouchTargetSizeCheck" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
+                android:id="@+id/decreaseWeightButton"
+                style="@style/ChangeButtonsStyle"
+                android:text="@string/minus"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
                 android:id="@+id/increaseWeightButton"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
+                style="@style/ChangeButtonsStyle"
                 android:text="@string/plus"
-                tools:ignore="TouchTargetSizeCheck"
-                android:background="@drawable/button_background"/>
+                tools:ignore="TouchTargetSizeCheck" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/fastIncreaseWeightButton"
-                android:layout_width="48dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
+                style="@style/ChangeButtonsStyle"
                 android:text="@string/plus_plus"
-                tools:ignore="TouchTargetSizeCheck"
-                android:background="@drawable/button_background"/>
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/completeAddExerciseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="4dp"
-            android:background="@drawable/button_background"
             android:text="@string/add_exercise"
-            android:textColor="@color/black"
-            />
+            app:cornerRadius="20dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

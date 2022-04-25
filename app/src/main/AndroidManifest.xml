@@ -12,7 +12,8 @@
         <activity android:name=".screens.authActivity.AuthActivity" />
         <activity
             android:name=".screens.mainActivity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.FitHelper">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

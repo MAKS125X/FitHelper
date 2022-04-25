@@ -39,6 +39,10 @@ class CreateExerciseDialog(context: Context, listener: OnExerciseCreatedListener
             this.dismiss()
         }
 
+        binding.setsTV.text = binding.root.resources.getString(R.string.placeholder_count_approaches, numberOfApproaches)
+        binding.repsTV.text = binding.root.resources.getString(R.string.placeholder_count_repeats, numberOfRepetitions)
+        binding.weightTV.text = binding.root.resources.getString(R.string.placeholder_weigh, weight)
+
         val lowChangeValue = 1
         val fastChangeValue = 5
         binding.decreaseSetsButton.setOnClickListener {

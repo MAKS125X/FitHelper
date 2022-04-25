@@ -16,12 +16,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/recyclerviewWorkoutItem"
             android:orientation="vertical"
+            android:background="?attr/colorBackgroundFloating"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp">
 
@@ -33,7 +33,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:text="@string/workout_name"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:text="@string/workout_date"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="15sp" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="15dp"
                 android:text="@string/exercise_name"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="20sp" />
 
             <View
@@ -76,7 +76,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/exercise_total_count"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="15sp" />
 
             <Button
@@ -84,12 +84,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/remove_workout"
+                android:background="@drawable/button_background"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 />
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
 

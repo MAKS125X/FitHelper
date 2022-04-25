@@ -48,7 +48,7 @@ class WorkoutAdapter(
             if (workout.dateInMilliseconds == null)
                 linearLayout.removeView(trainingDateTV)
             else
-                trainingDateTV.text = root.context.resources.getText(
+                trainingDateTV.text = root.context.resources.getString(
                     R.string.placeholder_workout_date,
                     getStringDateFromLong(workout.dateInMilliseconds, "dd.MM.yyyy")
                 )
@@ -74,7 +74,9 @@ class WorkoutAdapter(
                 exercisesNameTV.text = exercisesString.dropLast(1)
 
                 // Информация об оставшихся упражнениях
-               anotherExercisesCountTV.text = root.context.resources.getText(R.string.placeholder_exercise_total_count, countExercises.toString())
+               anotherExercisesCountTV.text = root.context.resources.getString(R.string.placeholder_exercise_total_count,
+                   countExercises
+               )
             }
         }
     }

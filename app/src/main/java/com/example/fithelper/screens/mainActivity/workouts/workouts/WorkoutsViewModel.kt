@@ -43,7 +43,7 @@ class WorkoutsViewModel : ViewModel() {
                         }
                         DocumentChange.Type.MODIFIED -> {
                             val workout = dc.document.toObject(Workout::class.java)
-                            workouts.value?.removeAll { w -> w.id == workout.id }
+                            workouts.value?.removeIf { w -> w.id == workout.id }
                             workouts.value?.add(workout)
                         }
                         DocumentChange.Type.REMOVED -> {

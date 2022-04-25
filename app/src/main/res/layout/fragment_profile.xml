@@ -12,8 +12,8 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextViewStyle"
+            android:gravity="center_horizontal"
             android:text="@string/hello_user"
             app:layout_constraintBottom_toTopOf="@+id/logoutButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_out"
+            android:textColor="?android:attr/textColorPrimaryInverse"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

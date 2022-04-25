@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Theme.FitHelper"
     tools:context=".screens.mainActivity.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/toolBarColor"
+        android:background="?attr/colorOnPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,8 +25,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/ethna_demo"
+        android:textColor="?android:attr/textColorPrimary"
+        android:text="@string/app_name"
         android:textSize="24dp"
-        android:text="FitHelper"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +47,6 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/bNavBackgroundColor"
         app:itemIconTint="@drawable/bottom_nav_selector"
         app:itemTextColor="@color/bNavCheckedItem"
         app:layout_constraintBottom_toBottomOf="parent"
