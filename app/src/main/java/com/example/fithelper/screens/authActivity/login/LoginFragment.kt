@@ -75,6 +75,7 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireContext(), "Успешный вход", Toast.LENGTH_SHORT).show()
                     val i = Intent(requireContext(), MainActivity::class.java)
                     startActivity(i)
+                    requireActivity().finish()
                 } else {
                     Toast.makeText(requireContext(), "Произошла ошибка при входе", Toast.LENGTH_SHORT).show()
                 }

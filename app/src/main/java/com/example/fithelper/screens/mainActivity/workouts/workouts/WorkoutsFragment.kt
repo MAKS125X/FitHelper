@@ -12,7 +12,6 @@ import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentWorkoutBinding
 import com.example.fithelper.models.Workout
 import com.example.fithelper.screens.mainActivity.MainActivity
-import com.example.fithelper.screens.mainActivity.workouts.adapters.workoutAdapter.OnWorkoutItemClickListener
 import com.example.fithelper.screens.mainActivity.workouts.adapters.WorkoutAdapter
 
 class WorkoutsFragment : Fragment() {
@@ -51,10 +50,10 @@ class WorkoutsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = WorkoutAdapter(vm.workouts.value ?: mutableListOf(), object :
-            OnWorkoutItemClickListener {
+        adapter = WorkoutAdapter(vm.workouts.value ?: mutableListOf(), object : WorkoutAdapter.OnWorkoutItemClickListener {
             override fun getDetails(workout: Workout) {
-                val action = WorkoutsFragmentDirections.actionWorkoutsFragmentToChangeWorkoutFragment(workout)
+                val action =
+                    WorkoutsFragmentDirections.actionWorkoutsFragmentToChangeWorkoutFragment(workout)
                 (activity as MainActivity).navController.navigate(action)
             }
 

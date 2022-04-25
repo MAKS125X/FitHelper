@@ -39,7 +39,6 @@ class CreateExerciseDialog(context: Context, listener: OnExerciseCreatedListener
 
         val lowChangeValue = 1
         val fastChangeValue = 5
-        // todo: пересмотреть реализацию
         binding.decreaseSetsButton.setOnClickListener {
             numberOfApproaches = numberOfApproaches.change(-lowChangeValue, lowerBound = 1)
             binding.setsTV.text = "Подходов: $numberOfApproaches"
@@ -101,7 +100,6 @@ class CreateExerciseDialog(context: Context, listener: OnExerciseCreatedListener
         return if (result < lowerBound) lowerBound else result
     }
 
-    // todo: как верно расположить?
     interface OnExerciseCreatedListener {
         fun onExerciseCreated(exercise: Exercise)
     }
