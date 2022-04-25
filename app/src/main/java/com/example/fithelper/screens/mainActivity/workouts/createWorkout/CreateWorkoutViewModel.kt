@@ -8,9 +8,7 @@ import com.example.fithelper.models.Workout
 import com.example.fithelper.repositories.WorkoutRepository
 import com.example.fithelper.services.UserService
 
-class CreateWorkoutViewModel(datePickerDialog: DatePickerDialog) : ViewModel() {
-    private val dpd: DatePickerDialog = datePickerDialog
-
+class CreateWorkoutViewModel : ViewModel() {
     val name = MutableLiveData<String>()
     val dateInMilliseconds = MutableLiveData<Long?>()
 
@@ -36,10 +34,6 @@ class CreateWorkoutViewModel(datePickerDialog: DatePickerDialog) : ViewModel() {
         )
 
         WorkoutRepository.createWorkout(workout)
-    }
-
-    fun changeDate() {
-        dpd.show()
     }
 }
 

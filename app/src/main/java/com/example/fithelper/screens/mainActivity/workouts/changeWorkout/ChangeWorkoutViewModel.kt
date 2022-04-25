@@ -15,9 +15,9 @@ class ChangeWorkoutViewModel(
     dateInMilliseconds: Long?,
     exerciseList: MutableList<Exercise>
 ) : ViewModel() {
-
-    val id = MutableLiveData<String>()
-    val userId = MutableLiveData<String>()
+    // todo: а что если сделать id и UserId просто string?
+    private val id = MutableLiveData<String>()
+    private val userId = MutableLiveData<String>()
     val name = MutableLiveData<String?>()
     val dateInMilliseconds = MutableLiveData<Long?>()
     val exerciseList = MutableLiveData<MutableList<Exercise>>()

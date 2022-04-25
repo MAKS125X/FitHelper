@@ -12,8 +12,8 @@ class CreateExerciseViewModel : ViewModel() {
 
     init {
         name.value = ""
-        numberOfApproaches.value = 0
-        numberOfRepetitions.value = 0
+        numberOfApproaches.value = 1
+        numberOfRepetitions.value = 1
         weight.value = 0
     }
 
@@ -21,37 +21,16 @@ class CreateExerciseViewModel : ViewModel() {
         this.name.value = name
     }
 
-    fun decreaseNumberOfApproaches() {
-        numberOfApproaches.dec()
-    }
-    fun increaseNumberOfApproaches() {
-        numberOfApproaches.inc()
+    fun changeNumberOfApproaches(value: Int) {
+        numberOfApproaches.change(value, lowerBound = 1)
     }
 
-    fun decreaseNumberOfRepetitions() {
-        numberOfRepetitions.dec()
-    }
-    fun increaseNumberOfRepetitions() {
-        numberOfRepetitions.inc()
-    }
-    fun fastDecreaseNumberOfRepetitions() {
-        numberOfRepetitions.minus(5, 0)
-    }
-    fun fastIncreaseNumberOfRepetitions() {
-        numberOfRepetitions.plus(5)
+    fun changeNumberOfRepetitions(value: Int) {
+        numberOfRepetitions.change(value, lowerBound = 1)
     }
 
-    fun decreaseWeight() {
-        weight.dec()
-    }
-    fun increaseWeight() {
-        weight.inc()
-    }
-    fun fastDecreaseWeight() {
-        weight.minus(5, 0)
-    }
-    fun fastIncreaseWeight() {
-        weight.plus(5)
+    fun changeWeight(value: Int) {
+        numberOfRepetitions.change(value, lowerBound = 0)
     }
 }
 

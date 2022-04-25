@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.extensions.getStringDateFromLong
 import com.example.fithelper.screens.mainActivity.MainActivity
@@ -26,7 +27,7 @@ import java.util.*
 open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: FragmentCreatingOfWorkoutBinding
 
-    private val vm: CreateWorkoutViewModel by viewModels { CreateWorkoutFactory(requireContext(), this) }
+    private val vm: CreateWorkoutViewModel by viewModels ()
     private val exercisesViewModel: ExercisesViewModel by activityViewModels()
 
     private lateinit var adapter: ExerciseAdapter
@@ -57,8 +58,8 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
         initClicks()
 
         binding.workoutNameEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) { }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(p0: Editable?) {
                 vm.setName(p0.toString())
@@ -74,7 +75,13 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
         }
 
         binding.changeWorkoutDateButton.setOnClickListener {
-            vm.changeDate()
+            DatePickerDialog(
+                requireContext(),
+                this,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         binding.confirmWorkoutCreationButton.setOnClickListener {
@@ -95,8 +102,7 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
                 return@observe
             }
 
-            val dateString = getStringDateFromLong(date, "dd.MM.yyyy")
-            binding.workoutDateTextView.text = "Дата тренировки: $dateString"
+            binding.workoutDateTextView.text = "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy")}"
         }
 
         exercisesViewModel.exercises.observe(viewLifecycleOwner) {
@@ -109,7 +115,6 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
     }
-
 
     companion object {
         @JvmStatic

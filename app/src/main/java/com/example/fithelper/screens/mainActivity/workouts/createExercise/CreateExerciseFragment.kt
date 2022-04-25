@@ -15,6 +15,7 @@ import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentBottomSheetCreateExerciseBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.screens.shared.ExercisesViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.IllegalArgumentException
 
@@ -65,44 +66,47 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
     }
 
     private fun initClicks() {
+        val lowChangeValue = 1
+        val fastChangeValue = 5
+
         binding.decreaseSetsButton.setOnClickListener {
-            vm.decreaseNumberOfApproaches()
+            vm.changeNumberOfApproaches(-lowChangeValue)
         }
 
         binding.increaseSetsButton.setOnClickListener {
-            vm.increaseNumberOfApproaches()
-        }
-
-        binding.fastDecreaseRepsButton.setOnClickListener {
-            vm.fastDecreaseNumberOfRepetitions()
+            vm.changeNumberOfApproaches(lowChangeValue)
         }
 
         binding.decreaseRepsButton.setOnClickListener {
-            vm.decreaseNumberOfRepetitions()
+            vm.changeNumberOfRepetitions(-lowChangeValue)
         }
 
         binding.increaseRepsButton.setOnClickListener {
-            vm.increaseNumberOfRepetitions()
+            vm.changeNumberOfRepetitions(lowChangeValue)
+        }
+
+        binding.fastDecreaseRepsButton.setOnClickListener {
+            vm.changeNumberOfRepetitions(-fastChangeValue)
         }
 
         binding.fastIncreaseRepsButton.setOnClickListener {
-            vm.fastIncreaseNumberOfRepetitions()
-        }
-
-        binding.fastDecreaseWeightButton.setOnClickListener {
-            vm.fastDecreaseWeight()
+            vm.changeNumberOfRepetitions(fastChangeValue)
         }
 
         binding.decreaseWeightButton.setOnClickListener {
-            vm.decreaseWeight()
+            vm.changeWeight(-lowChangeValue)
         }
 
         binding.increaseWeightButton.setOnClickListener {
-            vm.increaseWeight()
+            vm.changeWeight(lowChangeValue)
+        }
+
+        binding.fastDecreaseWeightButton.setOnClickListener {
+            vm.changeWeight(-fastChangeValue)
         }
 
         binding.fastIncreaseWeightButton.setOnClickListener {
-            vm.fastIncreaseWeight()
+            vm.changeWeight(fastChangeValue)
         }
 
         binding.completeAddExerciseButton.setOnClickListener {
@@ -114,9 +118,6 @@ class CreateExerciseFragment : BottomSheetDialogFragment() {
                     vm.weight.value!!
                 )
                 (activity as MainActivity).navController.navigateUp()
-                //val action = CreateExerciseFragmentDirections.actionCreateExerciseFragmentToCreateWorkoutFragment()
-                //findNavController().navigate(action)
-                //(activity as MainActivity).navController.navigate(R.id.action_createExerciseFragment_to_createWorkoutFragment)
             } catch (ex: IllegalArgumentException) {
                 Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
             }

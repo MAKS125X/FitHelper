@@ -32,7 +32,6 @@ class DeleteWorkoutDialog : DialogFragment(){
         return activity?.let {
             // Build the dialog and set up the button click handlers
             val builder = AlertDialog.Builder(it)
-
             val arg = arguments?.getString("workoutId")
 
             builder.setMessage("Вы действительно хотите удалить данную тренировку?")
@@ -48,6 +47,8 @@ class DeleteWorkoutDialog : DialogFragment(){
                     // Send the negative button event back to the host activity
                     listener.onDialogNegativeClick(this)
                 }
+
+
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

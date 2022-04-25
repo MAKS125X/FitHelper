@@ -15,6 +15,7 @@ data class Exercise(
         when {
             numberOfApproaches <= 0 -> throw IllegalArgumentException("Число подходов должно быть положительным!")
             numberOfRepetitions <= 0 -> throw IllegalArgumentException("Число повторений должно быть положительным!")
+            weight != null && weight!! < 0 -> throw IllegalArgumentException("Вес должен быть не отрицательным!")
         }
     }
 
