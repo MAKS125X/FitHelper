@@ -13,7 +13,7 @@ import com.example.fithelper.databinding.FragmentWorkoutBinding
 import com.example.fithelper.models.Workout
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.screens.mainActivity.workouts.adapters.workoutAdapter.OnWorkoutItemClickListener
-import com.example.fithelper.screens.mainActivity.workouts.adapters.workoutAdapter.WorkoutAdapter
+import com.example.fithelper.screens.mainActivity.workouts.adapters.WorkoutAdapter
 
 class WorkoutsFragment : Fragment() {
     lateinit var binding: FragmentWorkoutBinding

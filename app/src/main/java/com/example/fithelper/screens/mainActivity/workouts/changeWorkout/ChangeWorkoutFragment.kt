@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fithelper.screens.mainActivity.workouts.adapters.exerciseAdapter.ExerciseAdapter
+import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
 import com.example.fithelper.extensions.getStringDateFromLong
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.R

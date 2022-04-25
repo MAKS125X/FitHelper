@@ -5,7 +5,7 @@ import com.example.fithelper.databinding.DialogCreateExerciseBinding
 import com.example.fithelper.models.Exercise
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class CreateExerciseDialog(context: Context, listener: onExerciseCreatedListener)
+class CreateExerciseDialog(context: Context, listener: OnExerciseCreatedListener)
     : BottomSheetDialog(context) {
     private val binding: DialogCreateExerciseBinding =
         DialogCreateExerciseBinding.inflate(layoutInflater)
@@ -15,7 +15,7 @@ class CreateExerciseDialog(context: Context, listener: onExerciseCreatedListener
     private var weight = 0
 
     constructor(context: Context, listener: (Exercise) -> Unit)
-            : this(context, object : onExerciseCreatedListener {
+            : this(context, object : OnExerciseCreatedListener {
         override fun onExerciseCreated(exercise: Exercise) {
             listener(exercise)
         }
@@ -102,7 +102,7 @@ class CreateExerciseDialog(context: Context, listener: onExerciseCreatedListener
     }
 
     // todo: как верно расположить?
-    interface onExerciseCreatedListener {
+    interface OnExerciseCreatedListener {
         fun onExerciseCreated(exercise: Exercise)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.fithelper.screens.mainActivity.workouts.adapters.exerciseAdapter
+package com.example.fithelper.screens.mainActivity.workouts.adapters
 
 import android.graphics.Paint
 import android.view.LayoutInflater

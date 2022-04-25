@@ -16,7 +16,7 @@ import com.example.fithelper.screens.common.CreateExerciseDialog
 import com.example.fithelper.extensions.getStringDateFromLong
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.R
-import com.example.fithelper.screens.mainActivity.workouts.adapters.exerciseAdapter.ExerciseAdapter
+import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
 import java.util.*
 

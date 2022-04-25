@@ -1,4 +1,4 @@
-package com.example.fithelper.screens.mainActivity.workouts.adapters.workoutAdapter
+package com.example.fithelper.screens.mainActivity.workouts.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -84,5 +84,10 @@ class WorkoutAdapter(
                 }
             }
         }
+    }
+
+    interface OnWorkoutItemClickListener {
+        fun getDetails(workout: Workout)
+        fun deleteById(workoutId: String)
     }
 }
