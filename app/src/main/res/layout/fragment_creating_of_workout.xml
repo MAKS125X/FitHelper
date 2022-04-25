@@ -79,7 +79,7 @@
                 android:id="@+id/addExercisesButton"
                 android:textSize="11sp"
                 android:textColor="?android:attr/textColorPrimary"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_exercise" />
@@ -89,13 +89,11 @@
                 android:layout_gravity="end"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="11sp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_workout" />
 
-
         </GridLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>
