@@ -28,8 +28,6 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        checkAuthState()
-
         binding = FragmentLoginBinding.inflate(inflater)
         return binding.root
     }
