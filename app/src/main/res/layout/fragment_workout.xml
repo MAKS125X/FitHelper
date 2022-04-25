@@ -18,8 +18,8 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/bNavBackgroundColor"
             android:clickable="true"
-
-            android:contentDescription="@string/add_new_workout"
+            android:contentDescription="@string/add_workout"
+            android:focusable="true"
             android:src="@android:drawable/ic_input_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -31,11 +31,11 @@
 
             android:scrollbars="horizontal"
 
-            tools:listitem="@layout/item_workout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_workout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

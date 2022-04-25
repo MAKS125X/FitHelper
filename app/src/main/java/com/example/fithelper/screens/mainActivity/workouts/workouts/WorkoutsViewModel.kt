@@ -1,10 +1,9 @@
 package com.example.fithelper.screens.mainActivity.workouts.workouts
 
-import android.app.AlertDialog
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.fithelper.extensions.*
+import com.example.fithelper.extensions.notifyObserver
 import com.example.fithelper.models.Workout
 import com.example.fithelper.repositories.WorkoutRepository
 import com.example.fithelper.services.UserService

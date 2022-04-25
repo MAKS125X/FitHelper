@@ -1,6 +1,7 @@
 package com.example.fithelper.screens.common
 
 import android.content.Context
+import com.example.fithelper.R
 import com.example.fithelper.databinding.DialogCreateExerciseBinding
 import com.example.fithelper.extensions.add
 import com.example.fithelper.models.Exercise
@@ -42,52 +43,52 @@ class CreateExerciseDialog(context: Context, listener: OnExerciseCreatedListener
         val fastChangeValue = 5
         binding.decreaseSetsButton.setOnClickListener {
             numberOfApproaches = numberOfApproaches.add(-lowChangeValue, lowerBound = 1)
-            binding.setsTV.text = "Подходов: $numberOfApproaches"
+            binding.setsTV.text = binding.root.resources.getString(R.string.placeholder_count_approaches, numberOfApproaches)
         }
 
         binding.increaseSetsButton.setOnClickListener {
             numberOfApproaches = numberOfApproaches.add(lowChangeValue, lowerBound = 1)
-            binding.setsTV.text = "Подходов: $numberOfApproaches"
+            binding.setsTV.text = binding.root.resources.getString(R.string.placeholder_count_approaches, numberOfApproaches)
         }
 
         binding.decreaseRepsButton.setOnClickListener {
             numberOfRepetitions = numberOfRepetitions.add(-lowChangeValue, lowerBound = 1)
-            binding.repsTV.text = "Повторений: $numberOfRepetitions"
+            binding.repsTV.text = binding.root.resources.getString(R.string.placeholder_count_repeats, numberOfRepetitions)
         }
 
         binding.increaseRepsButton.setOnClickListener {
             numberOfRepetitions = numberOfRepetitions.add(lowChangeValue, lowerBound = 1)
-            binding.repsTV.text = "Повторений: $numberOfRepetitions"
+            binding.repsTV.text = binding.root.resources.getString(R.string.placeholder_count_repeats, numberOfRepetitions)
         }
 
         binding.fastDecreaseRepsButton.setOnClickListener {
             numberOfRepetitions = numberOfRepetitions.add(-fastChangeValue, lowerBound = 1)
-            binding.repsTV.text = "Повторений: $numberOfRepetitions"
+            binding.repsTV.text = binding.root.resources.getString(R.string.placeholder_count_repeats, numberOfRepetitions)
         }
 
         binding.fastIncreaseRepsButton.setOnClickListener {
             numberOfRepetitions = numberOfRepetitions.add(fastChangeValue, lowerBound = 1)
-            binding.repsTV.text = "Повторений: $numberOfRepetitions"
+            binding.repsTV.text = binding.root.resources.getString(R.string.placeholder_count_repeats, numberOfRepetitions)
         }
 
         binding.decreaseWeightButton.setOnClickListener {
             weight = weight.add(-lowChangeValue, lowerBound = 0)
-            binding.weightTV.text = "Вес: $weight"
+            binding.weightTV.text = binding.root.resources.getString(R.string.placeholder_weigh, weight)
         }
 
         binding.increaseWeightButton.setOnClickListener {
             weight = weight.add(lowChangeValue, lowerBound = 0)
-            binding.weightTV.text = "Вес: $weight"
+            binding.weightTV.text = binding.root.resources.getString(R.string.placeholder_weigh, weight)
         }
 
         binding.fastDecreaseWeightButton.setOnClickListener {
             weight = weight.add(-fastChangeValue, lowerBound = 0)
-            binding.weightTV.text = "Вес: $weight"
+            binding.weightTV.text = binding.root.resources.getString(R.string.placeholder_weigh, weight)
         }
 
         binding.fastIncreaseWeightButton.setOnClickListener {
             weight = weight.add(fastChangeValue, lowerBound = 0)
-            binding.weightTV.text = "Вес: $weight"
+            binding.weightTV.text = binding.root.resources.getString(R.string.placeholder_weigh, weight)
         }
     }
 

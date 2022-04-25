@@ -20,6 +20,6 @@ data class Exercise(
     }
 
     override fun toString(): String {
-        return name ?: "Упражнение"
+        return name ?: ""
     }
 }

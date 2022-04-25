@@ -1,17 +1,54 @@
-<resources>
-    <string name="app_name">FitHelper</string>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <string name="navigation_home">Дом</string>
-    <string name="navigation_guide">Руководство</string>
-    <string name="navigation_workout">Тренировки</string>
-    <string name="navigation_profile">Профиль</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="workoutName">Название тренировки</string>
-    <string name="workoutDate">Дата Тренировки</string>
-    <string name="exerciseInWorkout">Упражнение1</string>
-    <string name="countOfOtherExercises">Ещё 5 упражнений</string>
-    <string name="workoutWithoutDate">Без даты</string>
-    <string name="add_new_workout">Добавить новую тренировку</string>
+<resources>
+    <!-- App name -->
+    <string name="app_name" translatable="false">FitHelper</string>
+
+    <!-- Fragments name -->
+    <string name="fragment_guide" translatable="false">GuideFragment</string>
+    <string name="fragment_home" translatable="false">HomeFragment</string>
+
+    <!-- Menu -->
+    <string name="home">Домой</string>
+    <string name="guide">Руководство</string>
+    <string name="workouts">Тренировки</string>
+    <string name="profile">Профиль</string>
+
+    <!-- Workout -->
+    <string name="workout_name">Название тренировки</string>
+    <string name="count_approaches">Количество подходов</string>
+    <string name="workout_date">Дата тренировки</string>
+    <string name="placeholder_workout_date">Дата тренировки: %s</string>
+    <string name="specify_workout_date">Укажите дату тренировки</string>
+
+    <!-- Exercise -->
+    <string name="exercise_name">Название упражнения</string>
+    <string name="count_repeats">Количество повторений</string>
+    <string name="exercise_total_count">Всего упражнений</string>
+    <string name="weight">Вес</string>
+
+    <string name="placeholder_count_approaches">Подходов: %d</string>
+    <string name="placeholder_count_repeats">Повторений: %d</string>
+    <string name="placeholder_weigh">Вес: %d</string>
+
+
+    <!-- Symbols -->
+    <string name="minus" translatable="false">-</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="minus_minus" translatable="false">--</string>
+    <string name="plus_plus" translatable="false">++</string>
+
+    <!-- Actions -->
+    <string name="sign_in">Вход</string>
+    <string name="sign_out">Выход</string>
+    <string name="change">Изменить</string>
+    <string name="add_exercise">Добавить упражнение</string>
+    <string name="add_workout">Добавить тренировку</string>
+    <string name="remove_workout">Удалить тренировку</string>
+
+    <!-- Messages -->
+    <string name="hello_user">Привет, пользователь!</string>
+    <string name="no_exercises">Упражнений нет</string>
+    <string name="placeholder_exercise_total_count">Всего %s упражнений</string>
 
 </resources>

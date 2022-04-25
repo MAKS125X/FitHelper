@@ -15,10 +15,12 @@
             android:id="@+id/workoutNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Название тренировки"
             android:layout_margin="4dp"
+            android:ems="10"
+            android:hint="@string/workout_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,11 +38,11 @@
 
             <TextView
                 android:id="@+id/workoutDateTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:text="Дата тренировки: "
+                android:text="@string/workout_date"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -48,8 +50,8 @@
                 android:id="@+id/changeWorkoutDateButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="Изменить" />
+                android:layout_gravity="end"
+                android:text="@string/change" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -74,20 +76,20 @@
 
             <Button
                 android:id="@+id/addExercisesButton"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 android:layout_marginStart="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Добавить упражнение" />
+                android:text="@string/add_exercise" />
 
             <Button
                 android:id="@+id/confirmWorkoutCreationButton"
-                android:layout_gravity="right"
-                android:textSize="10sp"
+                android:layout_gravity="end"
+                android:textSize="11sp"
                 android:layout_marginEnd="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Создать тренировку" />
+                android:text="@string/add_workout" />
 
 
         </GridLayout>

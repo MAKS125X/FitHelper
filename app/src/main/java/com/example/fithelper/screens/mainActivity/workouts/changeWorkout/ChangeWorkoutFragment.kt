@@ -8,22 +8,24 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
-import com.example.fithelper.extensions.getStringDateFromLong
-import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentChangingOfWorkoutBinding
+import com.example.fithelper.extensions.getStringDateFromLong
+import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
 
 
 class ChangeWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentChangingOfWorkoutBinding
     private val args by navArgs<ChangeWorkoutFragmentArgs>()
 
-    private val workoutForChangeViewModel: ChangeWorkoutViewModel by viewModels { ChangeWorkoutFactory(args.workoutForChange) }
+    private val workoutForChangeViewModel: ChangeWorkoutViewModel by viewModels {
+        ChangeWorkoutFactory(
+            args.workoutForChange
+        )
+    }
 
     private lateinit var adapter: ExerciseAdapter
 
@@ -56,7 +58,7 @@ class ChangeWorkoutFragment : Fragment() {
 
     private fun initObservers() {
         workoutForChangeViewModel.name.observe(viewLifecycleOwner) { name ->
-            binding.workoutNameTextView.text = name ?: "Тренировка"
+            binding.workoutNameTextView.text = name ?: binding.root.resources.getText(R.string.workout_name)
         }
 
         workoutForChangeViewModel.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
@@ -64,9 +66,11 @@ class ChangeWorkoutFragment : Fragment() {
                 binding.workoutDateTextView.isVisible = false
             } else {
                 binding.workoutDateTextView.isVisible = true
-                binding.workoutDateTextView.text = "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy")}"
+                binding.workoutDateTextView.text = getString(
+                    R.string.placeholder_workout_date,
+                    getStringDateFromLong(date, "dd.MM.yyyy")
+                )
             }
-
         }
     }
 

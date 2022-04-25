@@ -31,10 +31,11 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>, private val 
         private val binding = ItemExerciseBinding.bind(itemView)
 
         fun bind(exercise: Exercise, isChangeable: Boolean) = with(binding) {
-            exerciseNameTV.text = exercise.name.toString()
-            exerciseSetsTV.text = "Подходов: ${exercise.numberOfApproaches}"
-            exerciseRepsTV.text = "Повторений: ${exercise.numberOfRepetitions}"
-            exerciseWeightTV.text = "Вес: ${exercise.weight}"
+
+            exerciseNameTV.text = exercise.name ?: root.context.resources.getText(R.string.exercise_name)
+            exerciseSetsTV.text = root.context.resources.getString(R.string.placeholder_count_approaches, exercise.numberOfApproaches)
+            exerciseRepsTV.text = root.context.resources.getString(R.string.placeholder_count_repeats, exercise.numberOfRepetitions)
+            exerciseWeightTV.text = root.context.resources.getString(R.string.placeholder_weigh, exercise.weight)
 
             if (!isChangeable) {
                 isCompleteCheckBox.isVisible = false

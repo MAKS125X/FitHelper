@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentWorkoutBinding
 import com.example.fithelper.models.Workout
-import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.screens.mainActivity.workouts.adapters.WorkoutAdapter
 
 class WorkoutsFragment : Fragment() {

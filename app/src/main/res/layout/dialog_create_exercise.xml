@@ -23,10 +23,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:hint="Название упражнения"
+            android:hint="@string/exercise_name"
             android:inputType="text"
             android:textColor="@color/black"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:importantForAutofill="no" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,10 +39,10 @@
                 android:id="@+id/setsTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
-                android:text="Подходов: 1"
+                android:text="@string/count_approaches"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
 
@@ -53,11 +54,11 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
+                android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="-"
-                tools:ignore="TouchTargetSizeCheck"
-                android:background="@drawable/button_background"/>
+                android:text="@string/minus"
+                tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/increaseSetsButton"
@@ -70,8 +71,8 @@
                 android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="+"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:text="@string/plus"
+                tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
         </LinearLayout>
 
@@ -85,9 +86,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:text="Повторений: 1"
+                android:text="@string/count_repeats"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
 
@@ -102,7 +103,7 @@
                 android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="-"
+                android:text="@string/minus"
                 android:textSize="12sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
@@ -115,12 +116,12 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
 
+                android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="--"
+                android:text="@string/minus_minus"
                 android:textSize="12sp"
-                tools:ignore="TouchTargetSizeCheck"
-                android:background="@drawable/button_background"/>
+                tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/increaseRepsButton"
@@ -133,7 +134,7 @@
 
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="+"
+                android:text="@string/plus"
                 android:textSize="12sp"
                 tools:ignore="TouchTargetSizeCheck"
                 android:background="@drawable/button_background"/>
@@ -147,12 +148,12 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
 
+                android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="++"
+                android:text="@string/plus_plus"
                 android:textSize="12sp"
-                tools:ignore="TouchTargetSizeCheck"
-                android:background="@drawable/button_background"/>
+                tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -165,9 +166,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:text="Вес: 0"
+                android:text="@string/weight"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 />
@@ -184,7 +185,7 @@
 
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="-"
+                android:text="@string/minus"
                 tools:ignore="TouchTargetSizeCheck"
                 android:background="@drawable/button_background"/>
 
@@ -199,7 +200,7 @@
 
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="--"
+                android:text="@string/minus_minus"
                 tools:ignore="TouchTargetSizeCheck"
                 android:background="@drawable/button_background"/>
 
@@ -214,7 +215,7 @@
 
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="+"
+                android:text="@string/plus"
                 tools:ignore="TouchTargetSizeCheck"
                 android:background="@drawable/button_background"/>
 
@@ -228,7 +229,7 @@
                 android:layout_marginBottom="4dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="++"
+                android:text="@string/plus_plus"
                 tools:ignore="TouchTargetSizeCheck"
                 android:background="@drawable/button_background"/>
         </LinearLayout>
@@ -240,7 +241,7 @@
             android:layout_gravity="center"
             android:layout_margin="4dp"
             android:background="@drawable/button_background"
-            android:text="Добавить упражнение"
+            android:text="@string/add_exercise"
             android:textColor="@color/black"
             />
 

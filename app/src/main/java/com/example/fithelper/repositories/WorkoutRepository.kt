@@ -38,7 +38,7 @@ object WorkoutRepository {
         workouts.document(workoutId)
             .delete()
             .addOnSuccessListener {
-                Log.i("Workout", "Workout ${workoutId} deleted")
+                Log.i("Workout", "Workout $workoutId deleted")
             }
             .addOnFailureListener { ex ->
                 Log.e("Database", ex.message.toString())

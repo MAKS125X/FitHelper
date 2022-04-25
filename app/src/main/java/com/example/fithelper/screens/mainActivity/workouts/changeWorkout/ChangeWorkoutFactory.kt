@@ -8,8 +8,8 @@ import java.lang.NullPointerException
 class ChangeWorkoutFactory(private val workout: Workout?) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (workout == null)
-            throw NullPointerException("can not found this value")
-
+            throw NullPointerException("Can not found this value")
+        // todo: реализация через рефлексию
         return ChangeWorkoutViewModel(
             workout.id,
             workout.userId,

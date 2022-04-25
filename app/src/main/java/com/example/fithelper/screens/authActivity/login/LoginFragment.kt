@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentLoginBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
-import com.example.fithelper.screens.mainActivity.profile.profile.ProfileFragment
 import com.example.fithelper.services.UserService
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,7 +21,7 @@ import com.google.android.gms.common.api.ApiException
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    lateinit var launcher: ActivityResultLauncher<Intent>
+    private lateinit var launcher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +43,7 @@ class LoginFragment : Fragment() {
                         firebaseAuthWithGoogle(account.idToken!!)
                     }
                 } catch (e: ApiException) {
-                    Toast.makeText(requireContext(), "Ошибка при входе", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), e.localizedMessage?.toString() ?: "Some error", Toast.LENGTH_SHORT).show()
                 }
             }
         binding.accountButton.setOnClickListener {
@@ -72,7 +71,7 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener { task ->
                 when {
                     task.isSuccessful -> checkAuthState()
-                    task.isCanceled -> Toast.makeText(requireContext(), "Аутентификация отменена", Toast.LENGTH_SHORT).show()
+                    task.isCanceled -> Toast.makeText(requireContext(), "Auth canceled", Toast.LENGTH_SHORT).show()
                     else -> Toast.makeText(requireContext(), task.exception?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -83,8 +82,6 @@ class LoginFragment : Fragment() {
             val i = Intent(requireContext(), MainActivity::class.java)
             startActivity(i)
             requireActivity().finish()
-        } else {
-            Toast.makeText(requireContext(), "Пожалуйста, авторизируйтесь", Toast.LENGTH_SHORT).show()
         }
     }
 }

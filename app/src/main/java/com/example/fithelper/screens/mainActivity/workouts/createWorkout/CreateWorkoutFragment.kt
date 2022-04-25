@@ -13,12 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fithelper.screens.common.CreateExerciseDialog
-import com.example.fithelper.extensions.getStringDateFromLong
-import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.R
-import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
+import com.example.fithelper.extensions.getStringDateFromLong
+import com.example.fithelper.screens.common.CreateExerciseDialog
+import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
 import java.util.*
 
 open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListener {
@@ -90,12 +89,15 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
     private fun initObservers() {
         vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
             if (date == null) {
-                binding.workoutDateTextView.text = "Укажите дату тренировки"
+                binding.workoutDateTextView.text = binding.root.resources.getText(R.string.specify_workout_date)
                 return@observe
             }
 
             binding.workoutDateTextView.text =
-                "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy")}"
+                resources.getString(
+                    R.string.placeholder_workout_date,
+                    getStringDateFromLong(date, "dd.MM.yyyy")
+                )
         }
 
         vm.exercises.observe(viewLifecycleOwner) {

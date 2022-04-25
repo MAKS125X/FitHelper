@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.fithelper.models.Exercise
 import com.example.fithelper.models.Workout
 import com.example.fithelper.repositories.WorkoutRepository
-import java.lang.NullPointerException
 
 class ChangeWorkoutViewModel(
     private var id: String,
@@ -38,7 +37,7 @@ class ChangeWorkoutViewModel(
         ).addOnSuccessListener {
             Log.i("Workout", "Workout $id updated")
         }.addOnFailureListener { e ->
-            Log.e("Database", "Workout $id cannot updated")
+            Log.e("Database", e.message.toString())
         }
     }
 }

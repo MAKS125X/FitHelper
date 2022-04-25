@@ -25,7 +25,7 @@ class WorkoutAdapter(
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
         holder.bind(workouts[position])
         holder.binding.deleteWorkoutButton.setOnClickListener {
-            onWorkoutItemClickListener.deleteById(workouts[position].id!!)
+            onWorkoutItemClickListener.deleteById(workouts[position].id)
         }
         holder.binding.cardView.setOnClickListener {
             onWorkoutItemClickListener.getDetails(workouts[position])
@@ -35,21 +35,23 @@ class WorkoutAdapter(
     override fun getItemCount(): Int {
         return workouts.size
     }
-
+    // todo: не работает root.resources
     class WorkoutViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemWorkoutBinding.bind(itemView)
 
         fun bind(workout: Workout) = with(binding) {
 
             // Отображение названия тренировки
-            trainingNameTV.text = workout.name ?: "Тренировка"
+            trainingNameTV.text = workout.name ?: root.context.resources.getText(R.string.workout_name)
 
             // Отображение даты тренировки
             if (workout.dateInMilliseconds == null)
                 linearLayout.removeView(trainingDateTV)
             else
-                trainingDateTV.text =
+                trainingDateTV.text = root.context.resources.getText(
+                    R.string.placeholder_workout_date,
                     getStringDateFromLong(workout.dateInMilliseconds, "dd.MM.yyyy")
+                )
 
 
             // Отображение упражнений
@@ -62,26 +64,17 @@ class WorkoutAdapter(
                 anotherExercisesCountTV.isVisible = true
             }
 
-            if (workout.exerciseList.count() == 0) {
-                exercisesNameTV.text = "Упражнений нет"
+            if (countExercises == 0) {
+                exercisesNameTV.text = root.context.resources.getText(R.string.no_exercises)
             } else {
                 // Вывод первых трех
                 var exercisesString = ""
                 for (i in 0 until min(countExercises, 3))
-                    exercisesString += "${workout.exerciseList[i]}\n"
+                    exercisesString += "${workout.exerciseList[i].name ?: root.context.resources.getText(R.string.exercise_name)}\n"
                 exercisesNameTV.text = exercisesString.dropLast(1)
 
                 // Информация об оставшихся упражнениях
-                val remainingExercisesCount = countExercises - 3
-                if (remainingExercisesCount > 0) {
-                    anotherExercisesCountTV.text = when (remainingExercisesCount % 10) {
-                        1 -> "И ещё $remainingExercisesCount упражнение"
-                        in 2..4 -> "И ещё $remainingExercisesCount упражнения"
-                        in 5..9 -> "И ещё $remainingExercisesCount упражнений"
-                        0 -> "И ещё $remainingExercisesCount упражнений"
-                        else -> ""
-                    }
-                }
+               anotherExercisesCountTV.text = root.context.resources.getText(R.string.placeholder_exercise_total_count, countExercises.toString())
             }
         }
     }

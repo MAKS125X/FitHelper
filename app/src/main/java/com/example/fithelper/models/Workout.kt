@@ -25,7 +25,7 @@ data class Workout(
     ) : this(UUID.randomUUID().toString(), userId, name, dateInMilliseconds, exerciseList)
 
     override fun toString(): String {
-        return name ?: "Тренировка"
+        return name ?: ""
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

@@ -17,7 +17,7 @@ object UserService {
         auth.signOut()
 
     fun getUserId(): String =
-        auth.currentUser?.uid ?: "";
+        auth.currentUser?.uid ?: ""
 
     fun userIsAuthorized(): Boolean =
         auth.currentUser != null
