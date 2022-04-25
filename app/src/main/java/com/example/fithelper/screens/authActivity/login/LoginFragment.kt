@@ -72,10 +72,10 @@ class LoginFragment : Fragment() {
     private fun firebaseAuthWithGoogle(idToken: String) {
         UserService.signInWithGoogle(idToken)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    checkAuthState()
-                } else {
-                    Toast.makeText(requireContext(), task.exception?.message.toString(), Toast.LENGTH_LONG).show()
+                when {
+                    task.isSuccessful -> checkAuthState()
+                    task.isCanceled -> Toast.makeText(requireContext(), "Аутентификация отменена", Toast.LENGTH_SHORT).show()
+                    else -> Toast.makeText(requireContext(), task.exception?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -85,6 +85,8 @@ class LoginFragment : Fragment() {
             val i = Intent(requireContext(), MainActivity::class.java)
             startActivity(i)
             requireActivity().finish()
+        } else {
+            Toast.makeText(requireContext(), "Пожалуйста, авторизируйтесь", Toast.LENGTH_SHORT).show()
         }
     }
 
