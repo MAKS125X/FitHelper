@@ -8,27 +8,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fithelper.screens.common.CreateExerciseDialog
 import com.example.fithelper.extensions.getStringDateFromLong
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.R
 import com.example.fithelper.screens.mainActivity.workouts.adapters.exerciseAdapter.ExerciseAdapter
-import com.example.fithelper.screens.shared.ExercisesViewModel
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
 import java.util.*
 
 open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: FragmentCreatingOfWorkoutBinding
 
-    private val vm: CreateWorkoutViewModel by viewModels ()
-    private val exercisesViewModel: ExercisesViewModel by activityViewModels()
+    private val vm: CreateWorkoutViewModel by viewModels()
 
     private lateinit var adapter: ExerciseAdapter
 
@@ -70,8 +65,9 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
 
     private fun initClicks() {
         binding.addExercisesButton.setOnClickListener {
-            // todo: Передавать exercise как результат, отказаться от exercisesViewModel
-            (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_createExerciseFragment)
+            CreateExerciseDialog(requireContext()) { exercise ->
+                vm.addExercise(exercise)
+            }.show()
         }
 
         binding.changeWorkoutDateButton.setOnClickListener {
@@ -85,33 +81,29 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
         }
 
         binding.confirmWorkoutCreationButton.setOnClickListener {
-            try {
-                vm.create(exercisesViewModel.exercises.value ?: mutableListOf())
-                exercisesViewModel.setExercises(mutableListOf())
-                (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
-            } catch (ex: IllegalArgumentException) {
-                Toast.makeText(context, ex.message, Toast.LENGTH_SHORT).show()
-            }
+            vm.create()
+            (activity as MainActivity).navController.navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
         }
     }
 
     private fun initObservers() {
-        vm.dateInMilliseconds.observe(activity as LifecycleOwner) { date ->
+        vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
             if (date == null) {
                 binding.workoutDateTextView.text = "Укажите дату тренировки"
                 return@observe
             }
 
-            binding.workoutDateTextView.text = "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy")}"
+            binding.workoutDateTextView.text =
+                "Дата тренировки: ${getStringDateFromLong(date, "dd.MM.yyyy")}"
         }
 
-        exercisesViewModel.exercises.observe(viewLifecycleOwner) {
+        vm.exercises.observe(viewLifecycleOwner) {
             adapter.notifyDataSetChanged()
         }
     }
 
     private fun initRecyclerView() {
-        adapter = ExerciseAdapter(exercisesViewModel.exercises.value ?: mutableListOf())
+        adapter = ExerciseAdapter(vm.exercises.value ?: mutableListOf())
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
     }

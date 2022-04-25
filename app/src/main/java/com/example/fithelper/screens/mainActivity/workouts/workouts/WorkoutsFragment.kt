@@ -64,6 +64,9 @@ class WorkoutsFragment : Fragment() {
                     .setPositiveButton("Да") { _, _ ->
                         vm.deleteWorkout(workoutId)
                     }
+                    .setNegativeButton("Нет") { _, _ ->
+
+                    }
                     .create().show()
             }
         })

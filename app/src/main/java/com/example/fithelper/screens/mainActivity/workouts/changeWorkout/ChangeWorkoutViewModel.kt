@@ -9,22 +9,18 @@ import com.example.fithelper.repositories.WorkoutRepository
 import java.lang.NullPointerException
 
 class ChangeWorkoutViewModel(
-    id: String,
-    userId: String,
+    private var id: String,
+    private var userId: String,
     name: String?,
     dateInMilliseconds: Long?,
     exerciseList: MutableList<Exercise>
 ) : ViewModel() {
-    // todo: а что если сделать id и UserId просто string?
-    private val id = MutableLiveData<String>()
-    private val userId = MutableLiveData<String>()
+
     val name = MutableLiveData<String?>()
     val dateInMilliseconds = MutableLiveData<Long?>()
     val exerciseList = MutableLiveData<MutableList<Exercise>>()
 
     init {
-        this.id.value = id
-        this.userId.value = userId
         this.name.value = name
         this.dateInMilliseconds.value = dateInMilliseconds
         this.exerciseList.value = exerciseList
@@ -33,8 +29,8 @@ class ChangeWorkoutViewModel(
     fun updateWorkout() {
         WorkoutRepository.updateWorkout(
             Workout(
-                id.value ?: throw NullPointerException("Id can not be null"),
-                userId.value ?: throw NullPointerException("User id can not be null"),
+                id,
+                userId ,
                 name.value,
                 dateInMilliseconds.value,
                 exerciseList.value ?: mutableListOf()
