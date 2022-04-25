@@ -28,6 +28,8 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        checkAuthState()
+
         binding = FragmentLoginBinding.inflate(inflater)
         return binding.root
     }
@@ -51,7 +53,6 @@ class LoginFragment : Fragment() {
             signInWithGoogle()
         }
 
-        checkAuthState()
     }
 
     private fun getClient(): GoogleSignInClient {
@@ -70,14 +71,11 @@ class LoginFragment : Fragment() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         UserService.signInWithGoogle(idToken)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(requireContext(), "Успешный вход", Toast.LENGTH_SHORT).show()
-                    val i = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(i)
-                    requireActivity().finish()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    checkAuthState()
                 } else {
-                    Toast.makeText(requireContext(), "Произошла ошибка при входе", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), task.exception?.message.toString(), Toast.LENGTH_LONG).show()
                 }
             }
     }
@@ -86,6 +84,7 @@ class LoginFragment : Fragment() {
         if (UserService.userIsAuthorized()) {
             val i = Intent(requireContext(), MainActivity::class.java)
             startActivity(i)
+            requireActivity().finish()
         }
     }
 
