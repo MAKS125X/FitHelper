@@ -16,18 +16,67 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
 import com.example.fithelper.extensions.getStringDateFromLong
-import com.example.fithelper.screens.common.CreateExerciseDialog
+import com.example.fithelper.models.Exercise
+import com.example.fithelper.screens.common.createExerciseDialog.CreateExerciseDialogFragment
 import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
 import java.util.*
 
-open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListener {
+open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListener,
+    CreateExerciseDialogFragment.OnExerciseCreatedListener {
     private lateinit var binding: FragmentCreatingOfWorkoutBinding
-
-    private val vm: CreateWorkoutViewModel by viewModels()
-
     private lateinit var adapter: ExerciseAdapter
 
-    private val calendar = Calendar.getInstance()
+    private val vm: CreateWorkoutViewModel by viewModels()
+    private val calendar by lazy { Calendar.getInstance() }
+
+    private fun initClicks() = with(binding) {
+        addExercisesButton.setOnClickListener {
+            val action = CreateWorkoutFragmentDirections.actionCreateWorkoutFragmentToCreateExerciseDialogFragment(object : CreateExerciseDialogFragment.OnExerciseCreatedListener {
+                override fun onExerciseCreated(exercise: Exercise) {
+                    vm.addExercise(exercise)
+                }
+            })
+            findNavController().navigate(action)
+        }
+
+        changeWorkoutDateButton.setOnClickListener {
+            DatePickerDialog(
+                requireContext(),
+                this@CreateWorkoutFragment,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+
+        binding.confirmWorkoutCreationButton.setOnClickListener {
+            vm.create()
+            findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
+        }
+    }
+    private fun initObservers() = with(binding) {
+        vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
+            val text =
+                if (date == null)
+                    resources.getText(R.string.specify_workout_date)
+                else
+                    resources.getString(
+                        R.string.placeholder_workout_date,
+                        getStringDateFromLong(date, "dd.MM.yyyy")
+                    )
+
+            workoutDateTextView.text = text
+        }
+
+        vm.exercises.observe(viewLifecycleOwner) {
+            adapter.notifyDataSetChanged()
+        }
+    }
+    private fun initRecyclerView() = with(binding) {
+        adapter = ExerciseAdapter(vm.exercises.value ?: mutableListOf(), isChangeable = false)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +85,6 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
             findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +92,6 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
         binding = FragmentCreatingOfWorkoutBinding.inflate(inflater)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,56 +110,12 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
 
     }
 
-    private fun initClicks() {
-        binding.addExercisesButton.setOnClickListener {
-            CreateExerciseDialog(requireContext()) { exercise ->
-                vm.addExercise(exercise)
-            }.show()
-        }
-
-        binding.changeWorkoutDateButton.setOnClickListener {
-            DatePickerDialog(
-                requireContext(),
-                this,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            ).show()
-        }
-
-        binding.confirmWorkoutCreationButton.setOnClickListener {
-            vm.create()
-            findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
-        }
-    }
-
-    private fun initObservers() {
-        vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
-            if (date == null) {
-                binding.workoutDateTextView.text = binding.root.resources.getText(R.string.specify_workout_date)
-                return@observe
-            }
-
-            binding.workoutDateTextView.text =
-                resources.getString(
-                    R.string.placeholder_workout_date,
-                    getStringDateFromLong(date, "dd.MM.yyyy")
-                )
-        }
-
-        vm.exercises.observe(viewLifecycleOwner) {
-            adapter.notifyDataSetChanged()
-        }
-    }
-
-    private fun initRecyclerView() {
-        adapter = ExerciseAdapter(vm.exercises.value ?: mutableListOf(), isChangeable = false)
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = adapter
-    }
-
     override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         calendar.set(year, monthOfYear, dayOfMonth)
         vm.setDate(calendar.timeInMillis)
+    }
+
+    override fun onExerciseCreated(exercise: Exercise) {
+        vm.addExercise(exercise)
     }
 }

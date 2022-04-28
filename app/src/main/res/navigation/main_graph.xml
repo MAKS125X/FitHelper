@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_createWorkoutFragment_to_workoutsFragment"
             app:destination="@id/workoutsFragment" />
+        <action
+            android:id="@+id/action_createWorkoutFragment_to_createExerciseDialogFragment"
+            app:destination="@id/createExerciseDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeWorkoutFragment"
@@ -56,5 +59,16 @@
             android:name="WorkoutForChange"
             app:argType="com.example.fithelper.models.Workout" />
     </fragment>
+    <dialog
+        android:id="@+id/createExerciseDialogFragment"
+        android:name="com.example.fithelper.screens.common.createExerciseDialog.CreateExerciseDialogFragment"
+        android:label="CreateExerciseDialogFragment" >
+        <argument
+            android:name="listener"
+            app:argType="com.example.fithelper.screens.common.createExerciseDialog.CreateExerciseDialogFragment$OnExerciseCreatedListener" />
+        <action
+            android:id="@+id/action_createExerciseDialogFragment_to_createWorkoutFragment"
+            app:destination="@id/createWorkoutFragment" />
+    </dialog>
 
 </navigation>
