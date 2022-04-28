@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.fithelper.services.UserService
 import com.example.fithelper.databinding.FragmentProfileBinding
 import com.example.fithelper.screens.authActivity.AuthActivity
+import com.example.fithelper.services.AuthenticationService
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -25,7 +26,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.logoutButton.setOnClickListener {
-            UserService.singOut()
+            AuthenticationService.signOut(requireContext())
             val i = Intent(context, AuthActivity::class.java)
             startActivity(i)
             requireActivity().finish()

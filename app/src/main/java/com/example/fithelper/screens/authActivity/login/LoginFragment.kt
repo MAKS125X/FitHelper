@@ -1,7 +1,9 @@
 package com.example.fithelper.screens.authActivity.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,60 +11,25 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentLoginBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
-import com.example.fithelper.services.UserService
+import com.example.fithelper.services.AuthenticationService
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var launcher: ActivityResultLauncher<Intent>
 
-    private fun getClient(): GoogleSignInClient {
-        val gso = GoogleSignInOptions
-            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        return GoogleSignIn.getClient(requireActivity(), gso)
-    }
+    private lateinit var googleSignInClient: GoogleSignInClient
 
-    private fun signInWithGoogle() {
-        val signInClient = getClient()
-        launcher.launch(signInClient.signInIntent)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        googleSignInClient = AuthenticationService.getGoogleSignInClient(requireActivity())
     }
-
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        UserService.signInWithGoogle(idToken)
-            .addOnCompleteListener { task ->
-                when {
-                    task.isSuccessful -> checkAuthState()
-                    task.isCanceled -> Toast.makeText(
-                        requireContext(),
-                        "Auth canceled",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    else -> Toast.makeText(
-                        requireContext(),
-                        task.exception?.localizedMessage.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-    }
-
-    private fun checkAuthState() {
-        if (UserService.userIsAuthorized()) {
-            val i = Intent(requireContext(), MainActivity::class.java)
-            startActivity(i)
-            requireActivity().finish()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,23 +43,30 @@ class LoginFragment : Fragment() {
 
         launcher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                val accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 try {
-                    val account = task.getResult(ApiException::class.java)
-                    if (account != null) {
-                        firebaseAuthWithGoogle(account.idToken!!)
-                    }
+                    val account = accountTask.getResult(ApiException::class.java)
+                    AuthenticationService.signInWithGoogleAccount(account)
+                        .addOnSuccessListener { authResult ->
+                            val message =
+                                if (authResult.additionalUserInfo!!.isNewUser) "Account created" else "SignIn Success"
+
+                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+
+                            val intent = Intent(context, MainActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("AUTH", e.message.toString())
+                        }
                 } catch (e: ApiException) {
-                    Toast.makeText(
-                        requireContext(),
-                        e.localizedMessage?.toString() ?: "Some error",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), e.localizedMessage?.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
 
         binding.accountButton.setOnClickListener {
-            signInWithGoogle()
+            launcher.launch(googleSignInClient.signInIntent)
         }
     }
 }
