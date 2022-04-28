@@ -1,8 +1,8 @@
-package com.example.fithelper.screens.common.createExerciseDialog
+package com.example.fithelper.screens.common.createExerciseDialogFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.fithelper.screens.common.createExerciseDialog.CreateExerciseDialogFragment.OnExerciseCreatedListener
+import com.example.fithelper.screens.common.createExerciseDialogFragment.CreateExerciseDialogFragment.OnExerciseCreatedListener
 
 class CreateExerciseFactory(private val listener: OnExerciseCreatedListener?) :
     ViewModelProvider.Factory {

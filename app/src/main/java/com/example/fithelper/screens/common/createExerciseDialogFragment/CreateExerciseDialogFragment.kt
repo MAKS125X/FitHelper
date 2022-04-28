@@ -1,4 +1,4 @@
-package com.example.fithelper.screens.common.createExerciseDialog
+package com.example.fithelper.screens.common.createExerciseDialogFragment
 
 import android.os.Bundle
 import android.text.Editable

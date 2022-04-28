@@ -17,7 +17,7 @@ import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
 import com.example.fithelper.extensions.getStringDateFromLong
 import com.example.fithelper.models.Exercise
-import com.example.fithelper.screens.common.createExerciseDialog.CreateExerciseDialogFragment
+import com.example.fithelper.screens.common.createExerciseDialogFragment.CreateExerciseDialogFragment
 import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
 import java.util.*
 
@@ -31,11 +31,14 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
 
     private fun initClicks() = with(binding) {
         addExercisesButton.setOnClickListener {
-            val action = CreateWorkoutFragmentDirections.actionCreateWorkoutFragmentToCreateExerciseDialogFragment(object : CreateExerciseDialogFragment.OnExerciseCreatedListener {
-                override fun onExerciseCreated(exercise: Exercise) {
-                    vm.addExercise(exercise)
-                }
-            })
+            val action =
+                CreateWorkoutFragmentDirections.actionCreateWorkoutFragmentToCreateExerciseDialogFragment(
+                    object :
+                        CreateExerciseDialogFragment.OnExerciseCreatedListener {
+                        override fun onExerciseCreated(exercise: Exercise) {
+                            vm.addExercise(exercise)
+                        }
+                    })
             findNavController().navigate(action)
         }
 
@@ -54,6 +57,7 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
             findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
         }
     }
+
     private fun initObservers() = with(binding) {
         vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
             val text =
@@ -72,6 +76,7 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
             adapter.notifyDataSetChanged()
         }
     }
+
     private fun initRecyclerView() = with(binding) {
         adapter = ExerciseAdapter(vm.exercises.value ?: mutableListOf(), isChangeable = false)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -85,6 +90,7 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
             findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,6 +98,7 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
         binding = FragmentCreatingOfWorkoutBinding.inflate(inflater)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

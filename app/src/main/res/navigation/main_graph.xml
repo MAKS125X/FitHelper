@@ -61,11 +61,11 @@
     </fragment>
     <dialog
         android:id="@+id/createExerciseDialogFragment"
-        android:name="com.example.fithelper.screens.common.createExerciseDialog.CreateExerciseDialogFragment"
+        android:name="com.example.fithelper.screens.common.createExerciseDialogFragment.CreateExerciseDialogFragment"
         android:label="CreateExerciseDialogFragment" >
         <argument
             android:name="listener"
-            app:argType="com.example.fithelper.screens.common.createExerciseDialog.CreateExerciseDialogFragment$OnExerciseCreatedListener" />
+            app:argType="com.example.fithelper.screens.common.createExerciseDialogFragment.CreateExerciseDialogFragment$OnExerciseCreatedListener" />
         <action
             android:id="@+id/action_createExerciseDialogFragment_to_createWorkoutFragment"
             app:destination="@id/createWorkoutFragment" />

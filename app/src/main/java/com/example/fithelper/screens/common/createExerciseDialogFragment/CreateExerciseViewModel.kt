@@ -1,4 +1,4 @@
-package com.example.fithelper.screens.common.createExerciseDialog
+package com.example.fithelper.screens.common.createExerciseDialogFragment
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
