@@ -32,10 +32,7 @@ class WorkoutsViewModel : ViewModel() {
                     return@addSnapshotListener
                 }
 
-                if (snapshots == null)
-                    return@addSnapshotListener
-
-                for (dc in snapshots.documentChanges) {
+                for (dc in snapshots!!.documentChanges) {
                     when (dc.type) {
                         DocumentChange.Type.ADDED -> {
                             val workout = dc.document.toObject(Workout::class.java)
@@ -48,7 +45,7 @@ class WorkoutsViewModel : ViewModel() {
                         }
                         DocumentChange.Type.REMOVED -> {
                             val workout = dc.document.toObject(Workout::class.java)
-                            workouts.value?.remove(workout)
+                            workouts.value?.removeIf { w -> w.id == workout.id }
                         }
                     }
                 }

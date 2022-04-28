@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fithelper.R
 import java.io.Serializable
@@ -17,21 +18,21 @@ class ConfirmationDialogFragment : DialogFragment() {
             .setMessage(args.message)
 
         val listener = args.listener
-        if(listener != null) {
+        if (listener != null) {
             builder
                 .setPositiveButton(getString(R.string.confirm)) { dialogInterface, buttonClicked ->
                     listener.confirmButtonClicked(
                         dialogInterface,
                         buttonClicked
                     )
-                    dismiss()
+                    findNavController().navigateUp()
                 }
                 .setNegativeButton(getString(R.string.cancel)) { dialogInterface, buttonClicked ->
                     listener.cancelButtonClicked(
                         dialogInterface,
                         buttonClicked
                     )
-                    dismiss()
+                    findNavController().navigateUp()
                 }
         }
 

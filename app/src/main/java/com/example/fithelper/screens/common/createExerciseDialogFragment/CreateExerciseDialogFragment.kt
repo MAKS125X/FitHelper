@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fithelper.R
 import com.example.fithelper.databinding.DialogCreateExerciseBinding
@@ -24,7 +25,7 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
     private fun initClicks() = with(binding) {
         completeAddExerciseButton.setOnClickListener {
             vm.completeCreateExercise()
-            dismiss()
+            findNavController().navigateUp()
         }
 
         decreaseSetsButton.setOnClickListener {
@@ -100,6 +101,7 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             vm.setWeight(weight)
         }
     }
+
     private fun initObservers() = with(binding) {
         vm.numberOfApproaches.observe(viewLifecycleOwner) { numberOfApproaches ->
             setsTV.text = root.resources.getString(

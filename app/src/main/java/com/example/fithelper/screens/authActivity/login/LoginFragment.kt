@@ -19,9 +19,49 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 
 class LoginFragment : Fragment() {
-
     private lateinit var binding: FragmentLoginBinding
     private lateinit var launcher: ActivityResultLauncher<Intent>
+
+    private fun getClient(): GoogleSignInClient {
+        val gso = GoogleSignInOptions
+            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        return GoogleSignIn.getClient(requireActivity(), gso)
+    }
+
+    private fun signInWithGoogle() {
+        val signInClient = getClient()
+        launcher.launch(signInClient.signInIntent)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        UserService.signInWithGoogle(idToken)
+            .addOnCompleteListener { task ->
+                when {
+                    task.isSuccessful -> checkAuthState()
+                    task.isCanceled -> Toast.makeText(
+                        requireContext(),
+                        "Auth canceled",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else -> Toast.makeText(
+                        requireContext(),
+                        task.exception?.localizedMessage.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+    private fun checkAuthState() {
+        if (UserService.userIsAuthorized()) {
+            val i = Intent(requireContext(), MainActivity::class.java)
+            startActivity(i)
+            requireActivity().finish()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,45 +83,16 @@ class LoginFragment : Fragment() {
                         firebaseAuthWithGoogle(account.idToken!!)
                     }
                 } catch (e: ApiException) {
-                    Toast.makeText(requireContext(), e.localizedMessage?.toString() ?: "Some error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        e.localizedMessage?.toString() ?: "Some error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+
         binding.accountButton.setOnClickListener {
             signInWithGoogle()
-        }
-
-    }
-
-    private fun getClient(): GoogleSignInClient {
-        val gso = GoogleSignInOptions
-            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        return GoogleSignIn.getClient(requireActivity(), gso)
-    }
-
-    private fun signInWithGoogle() {
-        val signInClient = getClient()
-        launcher.launch(signInClient.signInIntent)
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        UserService.signInWithGoogle(idToken)
-            .addOnCompleteListener { task ->
-                when {
-                    task.isSuccessful -> checkAuthState()
-                    task.isCanceled -> Toast.makeText(requireContext(), "Auth canceled", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(requireContext(), task.exception?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    private fun checkAuthState() {
-        if (UserService.userIsAuthorized()) {
-            val i = Intent(requireContext(), MainActivity::class.java)
-            startActivity(i)
-            requireActivity().finish()
         }
     }
 }

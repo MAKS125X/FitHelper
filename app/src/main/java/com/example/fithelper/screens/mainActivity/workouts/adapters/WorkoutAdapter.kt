@@ -42,21 +42,21 @@ class WorkoutAdapter(
         fun bind(workout: Workout) = with(binding) {
 
             // Отображение названия тренировки
-            trainingNameTV.text = workout.name ?: root.context.resources.getText(R.string.workout_name)
+            trainingNameTV.text =
+                workout.name ?: root.resources.getString(R.string.workout_name)
 
             // Отображение даты тренировки
             if (workout.dateInMilliseconds == null)
                 linearLayout.removeView(trainingDateTV)
             else
-                trainingDateTV.text = root.context.resources.getString(
+                trainingDateTV.text = root.resources.getString(
                     R.string.placeholder_workout_date,
                     getStringDateFromLong(workout.dateInMilliseconds, "dd.MM.yyyy")
                 )
 
-
             // Отображение упражнений
             val countExercises = workout.exerciseList.count()
-            if (countExercises <= 3) {
+            if (countExercises == 0) {
                 dividingLine.isVisible = false
                 anotherExercisesCountTV.isVisible = false
             } else {
@@ -65,18 +65,23 @@ class WorkoutAdapter(
             }
 
             if (countExercises == 0) {
-                exercisesNameTV.text = root.context.resources.getString(R.string.no_exercises)
+                exercisesNameTV.text = root.resources.getString(R.string.no_exercises)
             } else {
                 // Вывод первых трех
                 var exercisesString = ""
                 for (i in 0 until min(countExercises, 3))
-                    exercisesString += "${workout.exerciseList[i].name ?: root.context.resources.getString(R.string.exercise_name)}\n"
+                    exercisesString += "${
+                        workout.exerciseList[i].name ?: root.resources.getString(
+                            R.string.exercise_name
+                        )
+                    }\n"
                 exercisesNameTV.text = exercisesString.dropLast(1)
 
                 // Информация об оставшихся упражнениях
-               anotherExercisesCountTV.text = root.context.resources.getString(R.string.placeholder_exercise_total_count,
-                   countExercises
-               )
+                anotherExercisesCountTV.text = root.resources.getString(
+                    R.string.placeholder_exercise_total_count,
+                    countExercises
+                )
             }
         }
     }

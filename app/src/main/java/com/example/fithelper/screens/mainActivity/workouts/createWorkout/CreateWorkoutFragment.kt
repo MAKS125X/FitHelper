@@ -65,7 +65,7 @@ open class CreateWorkoutFragment : Fragment() {
 
         binding.confirmWorkoutCreationButton.setOnClickListener {
             vm.create()
-            findNavController().navigate(R.id.action_createWorkoutFragment_to_workoutsFragment)
+            findNavController().navigateUp()
         }
     }
 
@@ -73,7 +73,7 @@ open class CreateWorkoutFragment : Fragment() {
         vm.dateInMilliseconds.observe(viewLifecycleOwner) { date ->
             val text =
                 if (date == null)
-                    resources.getText(R.string.specify_workout_date)
+                    resources.getString(R.string.specify_workout_date)
                 else
                     resources.getString(
                         R.string.placeholder_workout_date,

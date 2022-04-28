@@ -24,13 +24,16 @@
         tools:layout="@layout/fragment_workout" >
         <action
             android:id="@+id/action_workoutsFragment_to_changeWorkoutFragment"
-            app:destination="@id/changeWorkoutFragment" />
+            app:destination="@id/changeWorkoutFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_workoutsFragment_to_createWorkoutFragment"
-            app:destination="@id/createWorkoutFragment" />
+            app:destination="@id/createWorkoutFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_workoutsFragment_to_confirmationDialogFragment"
-            app:destination="@id/confirmationDialogFragment" />
+            app:destination="@id/confirmationDialogFragment"
+            app:launchSingleTop="true" />
     </fragment>
 
     <fragment

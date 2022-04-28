@@ -10,8 +10,10 @@ import com.example.fithelper.R
 import com.example.fithelper.databinding.ItemExerciseBinding
 import com.example.fithelper.models.Exercise
 
-class ExerciseAdapter(private val exercises: MutableList<Exercise>, private val isChangeable: Boolean = true) :
-    RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
+class ExerciseAdapter(
+    private val exercises: MutableList<Exercise>,
+    private val isChangeable: Boolean = true
+) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -31,11 +33,20 @@ class ExerciseAdapter(private val exercises: MutableList<Exercise>, private val 
         private val binding = ItemExerciseBinding.bind(itemView)
 
         fun bind(exercise: Exercise, isChangeable: Boolean) = with(binding) {
-
-            exerciseNameTV.text = exercise.name ?: root.context.resources.getText(R.string.exercise_name)
-            exerciseSetsTV.text = root.context.resources.getString(R.string.placeholder_count_approaches, exercise.numberOfApproaches)
-            exerciseRepsTV.text = root.context.resources.getString(R.string.placeholder_count_repeats, exercise.numberOfRepetitions)
-            exerciseWeightTV.text = root.context.resources.getString(R.string.placeholder_weigh, exercise.weight)
+            exerciseNameTV.text =
+                exercise.name ?: root.resources.getString(R.string.exercise_name)
+            exerciseSetsTV.text = root.resources.getString(
+                R.string.placeholder_count_approaches,
+                exercise.numberOfApproaches
+            )
+            exerciseRepsTV.text = root.resources.getString(
+                R.string.placeholder_count_repeats,
+                exercise.numberOfRepetitions
+            )
+            exerciseWeightTV.text = root.resources.getString(
+                R.string.placeholder_weigh,
+                exercise.weight
+            )
 
             if (!isChangeable) {
                 isCompleteCheckBox.isVisible = false

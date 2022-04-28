@@ -16,27 +16,10 @@ import com.example.fithelper.screens.common.confirmationDialogFragment.Confirmat
 import com.example.fithelper.screens.mainActivity.workouts.adapters.WorkoutAdapter
 
 class WorkoutsFragment : Fragment() {
-    lateinit var binding: FragmentWorkoutBinding
-
-    private val vm: WorkoutsViewModel by viewModels()
-
+    private lateinit var binding: FragmentWorkoutBinding
     private lateinit var adapter: WorkoutAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentWorkoutBinding.inflate(inflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initRecyclerView()
-        initObservers()
-        initClicks()
-    }
+    private val vm: WorkoutsViewModel by viewModels()
 
     private fun initClicks() = with(binding) {
         createNewWorkoutFlActButton.setOnClickListener {
@@ -50,7 +33,7 @@ class WorkoutsFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerView() {
+    private fun initRecyclerView() = with(binding) {
         adapter = WorkoutAdapter(
             vm.workouts.value ?: mutableListOf(),
             object : WorkoutAdapter.OnWorkoutItemClickListener {
@@ -83,7 +66,23 @@ class WorkoutsFragment : Fragment() {
                     findNavController().navigate(action)
                 }
             })
-        binding.workoutRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.workoutRecyclerView.adapter = adapter
+        workoutRecyclerView.layoutManager = LinearLayoutManager(context)
+        workoutRecyclerView.adapter = adapter
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentWorkoutBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initRecyclerView()
+        initObservers()
+        initClicks()
     }
 }
