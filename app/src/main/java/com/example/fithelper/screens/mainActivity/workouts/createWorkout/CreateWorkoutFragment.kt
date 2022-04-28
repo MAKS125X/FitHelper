@@ -18,11 +18,11 @@ import com.example.fithelper.databinding.FragmentCreatingOfWorkoutBinding
 import com.example.fithelper.extensions.getStringDateFromLong
 import com.example.fithelper.models.Exercise
 import com.example.fithelper.screens.common.createExerciseDialogFragment.CreateExerciseDialogFragment
+import com.example.fithelper.screens.common.datePickerDialogFragment.DatePickerDialogFragment
 import com.example.fithelper.screens.mainActivity.workouts.adapters.ExerciseAdapter
 import java.util.*
 
-open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListener,
-    CreateExerciseDialogFragment.OnExerciseCreatedListener {
+open class CreateWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentCreatingOfWorkoutBinding
     private lateinit var adapter: ExerciseAdapter
 
@@ -43,13 +43,24 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
         }
 
         changeWorkoutDateButton.setOnClickListener {
-            DatePickerDialog(
-                requireContext(),
-                this@CreateWorkoutFragment,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            val action =
+                CreateWorkoutFragmentDirections.actionCreateWorkoutFragmentToDatePickerDialogFragment(
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+                ).setListener(object : DatePickerDialogFragment.OnDateSetListener {
+                    override fun onDateSet(
+                        datePicker: DatePicker?,
+                        year: Int,
+                        monthOfYear: Int,
+                        dayOfMonth: Int
+                    ) {
+                        calendar.set(year, monthOfYear, dayOfMonth)
+                        vm.setDate(calendar.timeInMillis)
+                    }
+
+                })
+            findNavController().navigate(action)
         }
 
         binding.confirmWorkoutCreationButton.setOnClickListener {
@@ -114,15 +125,5 @@ open class CreateWorkoutFragment : Fragment(), DatePickerDialog.OnDateSetListene
                 vm.setName(p0.toString())
             }
         })
-
-    }
-
-    override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        calendar.set(year, monthOfYear, dayOfMonth)
-        vm.setDate(calendar.timeInMillis)
-    }
-
-    override fun onExerciseCreated(exercise: Exercise) {
-        vm.addExercise(exercise)
     }
 }

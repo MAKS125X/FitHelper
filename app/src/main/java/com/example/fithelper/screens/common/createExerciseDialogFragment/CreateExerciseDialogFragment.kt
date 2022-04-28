@@ -34,7 +34,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setNumberOfApproaches(numberOfApproaches)
         }
-
         increaseSetsButton.setOnClickListener {
             val numberOfApproaches = vm.numberOfApproaches.value?.add(
                 SLOW_CHANGE_VALUE,
@@ -50,7 +49,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setNumberOfRepetitions(numberOfRepetitions)
         }
-
         increaseRepsButton.setOnClickListener {
             val numberOfRepetitions = vm.numberOfRepetitions.value?.add(
                 SLOW_CHANGE_VALUE,
@@ -58,7 +56,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setNumberOfRepetitions(numberOfRepetitions)
         }
-
         fastDecreaseRepsButton.setOnClickListener {
             val numberOfRepetitions = vm.numberOfRepetitions.value?.add(
                 -FAST_CHANGE_VALUE,
@@ -66,7 +63,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setNumberOfRepetitions(numberOfRepetitions)
         }
-
         fastIncreaseRepsButton.setOnClickListener {
             val numberOfRepetitions = vm.numberOfRepetitions.value?.add(
                 FAST_CHANGE_VALUE,
@@ -82,7 +78,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setWeight(weight)
         }
-
         increaseWeightButton.setOnClickListener {
             val weight = vm.weight.value?.add(
                 SLOW_CHANGE_VALUE,
@@ -90,7 +85,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setWeight(weight)
         }
-
         fastDecreaseWeightButton.setOnClickListener {
             val weight = vm.weight.value?.add(
                 -FAST_CHANGE_VALUE,
@@ -98,7 +92,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setWeight(weight)
         }
-
         fastIncreaseWeightButton.setOnClickListener {
             val weight = vm.weight.value?.add(
                 FAST_CHANGE_VALUE,
@@ -107,7 +100,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             vm.setWeight(weight)
         }
     }
-
     private fun initObservers() = with(binding) {
         vm.numberOfApproaches.observe(viewLifecycleOwner) { numberOfApproaches ->
             setsTV.text = root.resources.getString(
@@ -136,7 +128,7 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogCreateExerciseBinding.inflate(layoutInflater)
+        binding = DialogCreateExerciseBinding.inflate(inflater)
         return binding.root
     }
 

@@ -1,6 +1,6 @@
 package com.example.fithelper.screens.mainActivity.workouts.workouts
 
-import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentWorkoutBinding
 import com.example.fithelper.models.Workout
+import com.example.fithelper.screens.common.confirmationDialogFragment.ConfirmationDialogFragment
 import com.example.fithelper.screens.mainActivity.workouts.adapters.WorkoutAdapter
 
 class WorkoutsFragment : Fragment() {
@@ -50,24 +51,38 @@ class WorkoutsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = WorkoutAdapter(vm.workouts.value ?: mutableListOf(), object : WorkoutAdapter.OnWorkoutItemClickListener {
-            override fun getDetails(workout: Workout) {
-                val action =
-                    WorkoutsFragmentDirections.actionWorkoutsFragmentToChangeWorkoutFragment(workout)
-                findNavController().navigate(action)
-            }
+        adapter = WorkoutAdapter(
+            vm.workouts.value ?: mutableListOf(),
+            object : WorkoutAdapter.OnWorkoutItemClickListener {
+                override fun getDetails(workout: Workout) {
+                    val action =
+                        WorkoutsFragmentDirections.actionWorkoutsFragmentToChangeWorkoutFragment(
+                            workout
+                        )
+                    findNavController().navigate(action)
+                }
 
-            override fun deleteById(workoutId: String) {
-                AlertDialog.Builder(requireContext())
-                    .setMessage(getString(R.string.confirmation_delete_workout))
-                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                        vm.deleteWorkout(workoutId)
-                    }
-                    .setNegativeButton(getString(R.string.no)) { _, _ ->
-                    }
-                    .create().show()
-            }
-        })
+                override fun deleteById(workoutId: String) {
+                    val action =
+                        WorkoutsFragmentDirections.actionWorkoutsFragmentToConfirmationDialogFragment(
+                            getString(R.string.confirmation_delete_workout)
+                        ).setListener(object : ConfirmationDialogFragment.OnConfirmationListener {
+                            override fun confirmButtonClicked(
+                                dialogInterface: DialogInterface,
+                                buttonClicked: Int
+                            ) {
+                                vm.deleteWorkout(workoutId)
+                            }
+
+                            override fun cancelButtonClicked(
+                                dialogInterface: DialogInterface,
+                                buttonClicked: Int
+                            ) {
+                            }
+                        })
+                    findNavController().navigate(action)
+                }
+            })
         binding.workoutRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.workoutRecyclerView.adapter = adapter
     }

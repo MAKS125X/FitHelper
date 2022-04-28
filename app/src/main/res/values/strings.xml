@@ -52,8 +52,8 @@
     <string name="placeholder_exercise_total_count">Всего упражнений: %d</string>
 
     <!-- Confirm dialog -->
-    <string name="yes">Да</string>
-    <string name="no">Нет</string>
     <string name="confirmation_delete_workout">Вы действительно хотите удалить данную тренировку?</string>
+    <string name="confirm">Да</string>
+    <string name="cancel">Нет</string>
 
 </resources>
