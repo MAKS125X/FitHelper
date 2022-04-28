@@ -2,6 +2,7 @@ package com.example.fithelper.services
 
 import android.content.Context
 import com.example.fithelper.R
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -36,7 +37,6 @@ object AuthenticationService {
     }
 
     fun userIsAuthorized() = auth.currentUser != null
-    fun userIsAuthorized(callback: (Boolean) -> Unit) = callback(userIsAuthorized())
 
     private fun signOutFirebase() {
         auth.signOut()
