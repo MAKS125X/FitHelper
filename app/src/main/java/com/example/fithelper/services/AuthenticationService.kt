@@ -21,10 +21,12 @@ object AuthenticationService {
             .setAvailableProviders(arrayListOf(provider))
             .build()
 
-    fun createSignInIntent(): Intent =
-        authUI.createSignInIntentBuilder()
-        .setAvailableProviders(providers)
-        .build()
+
+    fun signUpWithEmailAndPassword(email: String, password: String) =
+        auth.createUserWithEmailAndPassword(email, password)
+
+    fun signInWithEmailAndPassword(email: String, password: String) =
+        auth.signInWithEmailAndPassword(email, password)
 
     fun userIsAuthorized(): Boolean = auth.currentUser != null
     fun signOut(context: Context) {

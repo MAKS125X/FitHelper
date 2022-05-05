@@ -12,9 +12,8 @@
         <activity
             android:name=".screens.mainActivity.MainActivity"
             android:exported="false" />
-        <activity android:name=".screens.authActivity.AuthActivity" />
         <activity
-            android:name=".FirebaseUIActivity"
+            android:name=".screens.authenticationActivity.AuthenticationActivity"
             android:exported="true"
             android:theme="@style/Theme.FitHelper">
             <intent-filter>

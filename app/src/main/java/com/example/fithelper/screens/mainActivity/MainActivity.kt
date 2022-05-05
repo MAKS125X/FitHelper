@@ -8,9 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fithelper.R
 import com.example.fithelper.databinding.ActivityMainBinding
-import com.example.fithelper.screens.authActivity.AuthActivity
+import com.example.fithelper.screens.authenticationActivity.AuthenticationActivity
 import com.example.fithelper.services.AuthenticationService
-import com.example.fithelper.services.UserService
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (!AuthenticationService.userIsAuthorized()) {
-            val intent = Intent(this, AuthActivity::class.java)
+            val intent = Intent(this, AuthenticationActivity::class.java)
             startActivity(intent)
             finish()
         }

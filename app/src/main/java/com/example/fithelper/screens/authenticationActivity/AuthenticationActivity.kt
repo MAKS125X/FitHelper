@@ -1,4 +1,4 @@
-package com.example.fithelper
+package com.example.fithelper.screens.authenticationActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.example.fithelper.services.AuthenticationService
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 
-class FirebaseUIActivity : AppCompatActivity() {
+class AuthenticationActivity : AppCompatActivity() {
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
     ) { res ->
@@ -19,7 +19,7 @@ class FirebaseUIActivity : AppCompatActivity() {
         } else {
             Toast.makeText(
                 this,
-                res.idpResponse?.error?.message.toString(), // "Please try again"
+                "Please try again",
                 Toast.LENGTH_SHORT
             ).show()
         }

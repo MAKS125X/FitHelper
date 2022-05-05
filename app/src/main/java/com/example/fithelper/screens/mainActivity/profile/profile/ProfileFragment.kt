@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.fithelper.FirebaseUIActivity
-import com.example.fithelper.services.UserService
+import com.example.fithelper.screens.authenticationActivity.AuthenticationActivity
 import com.example.fithelper.databinding.FragmentProfileBinding
-import com.example.fithelper.screens.authActivity.AuthActivity
 import com.example.fithelper.services.AuthenticationService
 
 class ProfileFragment : Fragment() {
@@ -28,7 +26,7 @@ class ProfileFragment : Fragment() {
 
         binding.logoutButton.setOnClickListener {
             AuthenticationService.signOut(requireContext())
-            val i = Intent(context, FirebaseUIActivity::class.java)
+            val i = Intent(requireContext(), AuthenticationActivity::class.java)
             startActivity(i)
             requireActivity().finish()
         }
