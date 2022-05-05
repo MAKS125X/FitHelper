@@ -28,4 +28,8 @@
     <string name="confirmation_delete_workout">Are you sure you want to delete a specific workout?</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="password">Password</string>
+    <string name="signIn">SignIn</string>
+    <string name="repeatPassword">Повторите пароль</string>
 </resources>

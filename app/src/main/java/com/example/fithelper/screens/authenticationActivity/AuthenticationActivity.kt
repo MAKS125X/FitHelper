@@ -39,7 +39,6 @@ class AuthenticationActivity : AppCompatActivity() {
         binding.signInWithGoogleBTN.setOnClickListener {
             val intent = AuthenticationService.createSignInIntentWithCurrentProvider(
                 AuthUI.IdpConfig.GoogleBuilder().build()
-            )
 
             signInLauncher.launch(intent)
         }

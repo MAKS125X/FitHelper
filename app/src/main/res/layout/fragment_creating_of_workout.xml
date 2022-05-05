@@ -48,10 +48,10 @@
 
             <Button
                 android:id="@+id/changeWorkoutDateButton"
+                style="@style/AppButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:textColor="?android:attr/textColorPrimary"
                 android:text="@string/change" />
         </LinearLayout>
 
@@ -78,7 +78,7 @@
             <Button
                 android:id="@+id/addExercisesButton"
                 android:textSize="11sp"
-                android:textColor="?android:attr/textColorPrimary"
+                style="@style/AppButtonStyle"
                 android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             <Button
                 android:id="@+id/confirmWorkoutCreationButton"
                 android:layout_gravity="end"
-                android:textColor="?android:attr/textColorPrimary"
+                style="@style/AppButtonStyle"
                 android:textSize="11sp"
                 android:layout_marginEnd="4dp"
                 android:layout_width="wrap_content"
