@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fithelper.databinding.ActivityFirebaseBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.services.AuthenticationService
+import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 
 class FirebaseUIActivity : AppCompatActivity() {
@@ -14,19 +16,41 @@ class FirebaseUIActivity : AppCompatActivity() {
     ) { res ->
         if (res.resultCode == RESULT_OK) {
             startMainActivity()
-        }
-        else {
-            Toast.makeText(this, res.idpResponse?.error?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(
+                this,
+                res.idpResponse?.error?.message.toString(), // "Please try again"
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
+    private lateinit var binding: ActivityFirebaseBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         if (AuthenticationService.userIsAuthorized())
             startMainActivity()
-        else {
-            val signInIntent = AuthenticationService.createSignInIntent()
-            signInLauncher.launch(signInIntent)
+
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityFirebaseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.signInWithGoogleBTN.setOnClickListener {
+            val intent = AuthenticationService.createSignInIntentWithCurrentProvider(
+                AuthUI.IdpConfig.GoogleBuilder().build()
+            )
+
+            signInLauncher.launch(intent)
+        }
+
+        // todo: должна быть регистрация по почте во фрагменте, тестовая штука
+        binding.signInWithTV.setOnClickListener {
+            val intent = AuthenticationService.createSignInIntentWithCurrentProvider(
+                AuthUI.IdpConfig.EmailBuilder().build()
+            )
+
+            signInLauncher.launch(intent)
         }
     }
 

@@ -3,7 +3,6 @@ package com.example.fithelper.services
 import android.content.Context
 import android.content.Intent
 import com.firebase.ui.auth.AuthUI
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 
 object AuthenticationService {
@@ -16,6 +15,11 @@ object AuthenticationService {
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
     }
+
+    fun createSignInIntentWithCurrentProvider(provider: AuthUI.IdpConfig): Intent =
+        authUI.createSignInIntentBuilder()
+            .setAvailableProviders(arrayListOf(provider))
+            .build()
 
     fun createSignInIntent(): Intent =
         authUI.createSignInIntentBuilder()
