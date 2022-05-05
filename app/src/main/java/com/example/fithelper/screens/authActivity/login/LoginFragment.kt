@@ -28,7 +28,7 @@ class LoginFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        googleSignInClient = AuthenticationService.getGoogleSignInClient(requireActivity())
+        //googleSignInClient = AuthenticationService.getGoogleSignInClient(requireActivity())
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,25 +44,25 @@ class LoginFragment : Fragment() {
         launcher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 val accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                try {
-                    val account = accountTask.getResult(ApiException::class.java)
-                    AuthenticationService.signInWithGoogleAccount(account)
-                        .addOnSuccessListener { authResult ->
-                            val message =
-                                if (authResult.additionalUserInfo!!.isNewUser) "Account created" else "SignIn Success"
-
-                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-
-                            val intent = Intent(context, MainActivity::class.java)
-                            startActivity(intent)
-                            requireActivity().finish()
-                        }
-                        .addOnFailureListener { e ->
-                            Log.e("AUTH", e.message.toString())
-                        }
-                } catch (e: ApiException) {
-                    Toast.makeText(requireContext(), e.localizedMessage?.toString(), Toast.LENGTH_SHORT).show()
-                }
+          //      try {
+          //          val account = accountTask.getResult(ApiException::class.java)
+          //          AuthenticationService.signInWithGoogleAccount(account)
+          //              .addOnSuccessListener { authResult ->
+          //                  val message =
+          //                      if (authResult.additionalUserInfo!!.isNewUser) "Account created" else "SignIn Success"
+//
+          //                  Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+//
+          //                  val intent = Intent(context, MainActivity::class.java)
+          //                  startActivity(intent)
+          //                  requireActivity().finish()
+          //              }
+          //              .addOnFailureListener { e ->
+          //                  Log.e("AUTH", e.message.toString())
+          //              }
+          //      } catch (e: ApiException) {
+          //          Toast.makeText(requireContext(), e.localizedMessage?.toString(), Toast.LENGTH_SHORT).show()
+          //      }
             }
 
         binding.accountButton.setOnClickListener {

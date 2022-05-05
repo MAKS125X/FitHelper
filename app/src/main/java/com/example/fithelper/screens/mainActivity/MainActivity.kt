@@ -11,10 +11,15 @@ import com.example.fithelper.databinding.ActivityMainBinding
 import com.example.fithelper.screens.authActivity.AuthActivity
 import com.example.fithelper.services.AuthenticationService
 import com.example.fithelper.services.UserService
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract()
+    ) { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (!AuthenticationService.userIsAuthorized()) {

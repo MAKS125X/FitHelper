@@ -1,48 +1,29 @@
 package com.example.fithelper.services
 
 import android.content.Context
-import com.example.fithelper.R
-import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import android.content.Intent
+import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 
 object AuthenticationService {
+    private val authUI by lazy { AuthUI.getInstance() }
     private val auth by lazy { FirebaseAuth.getInstance() }
 
-    fun getGoogleSignInClient(context: Context): GoogleSignInClient {
-        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(context.getString(R.string.default_web_client_id))
-            .requestEmail()
-            .requestProfile()
-            .build()
-        return GoogleSignIn.getClient(context, options)
+    private val providers by lazy {
+        arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
+        )
     }
 
-    fun signInWithGoogleAccount(
-        account: GoogleSignInAccount?,
-    ): Task<AuthResult> {
-        val credential = GoogleAuthProvider.getCredential(account!!.idToken, null)
-        return auth.signInWithCredential(credential)
-    }
+    fun createSignInIntent(): Intent =
+        authUI.createSignInIntentBuilder()
+        .setAvailableProviders(providers)
+        .build()
 
+    fun userIsAuthorized(): Boolean = auth.currentUser != null
     fun signOut(context: Context) {
-        signOutFirebase()
-        signOutGoogle(context)
-    }
-
-    fun userIsAuthorized() = auth.currentUser != null
-
-    private fun signOutFirebase() {
-        auth.signOut()
-    }
-
-    private fun signOutGoogle(context: Context) {
-        getGoogleSignInClient(context).signOut()
+        authUI.signOut(context)
     }
 }

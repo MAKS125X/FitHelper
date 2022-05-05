@@ -34,7 +34,7 @@ class CreateWorkoutViewModel : ViewModel() {
 
     fun create() {
         val workout = Workout(
-            UserService.getUserId(),
+            UserService.getUserId()!!,
             name.value,
             dateInMilliseconds.value,
             exercises.value ?: mutableListOf()
