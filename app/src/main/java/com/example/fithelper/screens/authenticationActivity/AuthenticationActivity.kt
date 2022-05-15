@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fithelper.databinding.ActivityFirebaseBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.services.AuthenticationService
+import com.example.fithelper.services.Providers
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 
@@ -37,17 +38,16 @@ class AuthenticationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signInWithGoogleBTN.setOnClickListener {
-            val intent = AuthenticationService.createSignInIntentWithCurrentProvider(
-                AuthUI.IdpConfig.GoogleBuilder().build()
+            val intent =
+                AuthenticationService.createSignInIntentWithCurrentProvider(Providers.Google)
 
             signInLauncher.launch(intent)
         }
 
         // todo: должна быть регистрация по почте во фрагменте, тестовая штука
         binding.signInWithTV.setOnClickListener {
-            val intent = AuthenticationService.createSignInIntentWithCurrentProvider(
-                AuthUI.IdpConfig.EmailBuilder().build()
-            )
+            val intent =
+                AuthenticationService.createSignInIntentWithCurrentProvider(Providers.Email)
 
             signInLauncher.launch(intent)
         }

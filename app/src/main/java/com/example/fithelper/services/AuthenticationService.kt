@@ -10,15 +10,16 @@ object AuthenticationService {
     private val auth by lazy { FirebaseAuth.getInstance() }
 
     private val providers by lazy {
-        arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build()
+        mapOf(
+            Providers.Email to AuthUI.IdpConfig.EmailBuilder().build(),
+            Providers.Google to AuthUI.IdpConfig.GoogleBuilder().build()
         )
     }
 
-    fun createSignInIntentWithCurrentProvider(provider: AuthUI.IdpConfig): Intent =
+
+    fun createSignInIntentWithCurrentProvider(provider: Enum<Providers>): Intent =
         authUI.createSignInIntentBuilder()
-            .setAvailableProviders(arrayListOf(provider))
+            .setDefaultProvider(providers[provider])
             .build()
 
 
@@ -32,4 +33,8 @@ object AuthenticationService {
     fun signOut(context: Context) {
         authUI.signOut(context)
     }
+}
+
+enum class Providers {
+    Email, Google
 }
