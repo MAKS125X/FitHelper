@@ -12,6 +12,7 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -19,7 +20,13 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            android:id="@+id/action_signUpFragment_to_initialProfileData"
+            app:destination="@id/initialProfileData"
+            app:popUpTo="@id/initialProfileData" />
     </fragment>
+    <fragment
+        android:id="@+id/initialProfileData"
+        android:name="com.example.fithelper.InitialProfileData"
+        android:label="fragment_initial_profile_data"
+        tools:layout="@layout/fragment_initial_profile_data" />
 </navigation>

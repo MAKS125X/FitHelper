@@ -10,6 +10,7 @@
     <color name="toolBarColor">#FFFFFFFF</color>
     <color name="red">#E12B2B</color>
     <!-- <color name="bNavCheckedItem">#FFF335FF</color> -->
+    <color name="material_red">#FF5858</color>
     <color name="bNavCheckedItem">#E61546</color>
     <color name="bNavUncheckedItem">#7A7A7A</color>
     <color name="recyclerviewWorkoutItem">#F0F0F0</color>

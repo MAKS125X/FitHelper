@@ -19,7 +19,7 @@ object AuthenticationService {
 
     fun createSignInIntentWithCurrentProvider(provider: Enum<Providers>): Intent =
         authUI.createSignInIntentBuilder()
-            .setDefaultProvider(providers[provider])
+            .setAvailableProviders(arrayListOf(providers[provider]))
             .build()
 
 

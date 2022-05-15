@@ -23,27 +23,28 @@ class SignUpFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.signUpConfirmBTN.setOnClickListener {
+        binding.confirmSignUpButton.setOnClickListener {
             val email = binding.emailSignUpET.text.toString()
             val password = binding.passwordSignUpET.text.toString()
 
             AuthenticationService.signUpWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                    requireActivity().finish()
+                    val action = SignUpFragmentDirections.actionSignUpFragmentToInitialProfileData()
+                    findNavController().navigate(action)
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
                 }
         }
 
-        binding.signInBTN.setOnClickListener {
-            val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
-            findNavController().navigate(action)
-        }
+//
+//        binding.signInBTN.setOnClickListener {
+//            val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
+//            findNavController().navigate(action)
+//        }
     }
 }

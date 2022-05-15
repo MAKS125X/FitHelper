@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.example.fithelper.databinding.FragmentSignInBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.services.AuthenticationService
+import com.example.fithelper.services.Providers
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
@@ -23,12 +26,28 @@ class SignInFragment : Fragment() {
         return binding.root
     }
 
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract()
+    ) { res ->
+        if (res.resultCode == AppCompatActivity.RESULT_OK) {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Please try again",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signInConfirmBTN.setOnClickListener {
-            val email = binding.emailSignUpET.text.toString()
-            val password = binding.passwordSignUpET.text.toString()
+            val email = binding.emailSignInET.text.toString()
+            val password = binding.passwordSignInET.text.toString()
 
             AuthenticationService.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
@@ -41,9 +60,16 @@ class SignInFragment : Fragment() {
                 }
         }
 
-        binding.signUpBTN.setOnClickListener {
+        binding.registerTextView.setOnClickListener {
             val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
             findNavController().navigate(action)
+        }
+
+        binding.googleImageView.setOnClickListener{
+            val intent =
+                AuthenticationService.createSignInIntentWithCurrentProvider(Providers.Google)
+
+            signInLauncher.launch(intent)
         }
     }
 }

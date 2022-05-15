@@ -5,49 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.authenticationActivity.AuthenticationActivity">
-
+/
     <fragment
         android:id="@+id/holder"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/signInWithTV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTV"
+        app:layout_constraintTop_toBottomOf="parent"
         app:navGraph="@navigation/auth_graph" />
 
-    <ImageButton
-        android:id="@+id/signInWithGoogleBTN"
-        android:layout_width="60dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="64dp"
-        android:background="@color/fui_transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/fui_ic_googleg_color_24dp" />
-
-    <TextView
-        android:id="@+id/signInWithTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="signInWithTV"
-        app:layout_constraintBottom_toTopOf="@+id/signInWithGoogleBTN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/welcomeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Welcome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
