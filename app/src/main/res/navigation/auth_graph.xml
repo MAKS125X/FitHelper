@@ -23,10 +23,13 @@
             android:id="@+id/action_signUpFragment_to_initialProfileData"
             app:destination="@id/initialProfileData"
             app:popUpTo="@id/initialProfileData" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/initialProfileData"
-        android:name="com.example.fithelper.InitialProfileData"
+        android:name="com.example.fithelper.InitialProfileDataFragment"
         android:label="fragment_initial_profile_data"
         tools:layout="@layout/fragment_initial_profile_data" />
 </navigation>
