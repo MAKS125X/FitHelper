@@ -49,15 +49,21 @@ class SignInFragment : Fragment() {
             val email = binding.emailSignInET.text.toString()
             val password = binding.passwordSignInET.text.toString()
 
-            AuthenticationService.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                    requireActivity().finish()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-                }
+            if(email != "" || password != ""){
+                AuthenticationService.signInWithEmailAndPassword(email, password)
+                    .addOnSuccessListener {
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                        requireActivity().finish()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+            }
+            else{
+                Toast.makeText(requireContext(), "Заполните данные об электронной почте и пароле для входа", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         binding.registerTextView.setOnClickListener {
