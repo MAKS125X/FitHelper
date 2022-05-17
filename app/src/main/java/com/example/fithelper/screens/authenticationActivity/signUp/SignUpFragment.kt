@@ -7,13 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
+import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentSignUpBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.services.AuthenticationService
 
 class SignUpFragment : Fragment() {
     private lateinit var  binding: FragmentSignUpBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +39,16 @@ class SignUpFragment : Fragment() {
         binding.confirmSignUpButton.setOnClickListener {
             val email = binding.emailSignUpET.text.toString()
             val password = binding.passwordSignUpET.text.toString()
+            val repeatPassword = binding.repeatPasswordSignUpET.toString()
 
+            if(email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()){
+                Toast.makeText(requireContext(), "Заполните все поля", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if(password != repeatPassword){
+                Toast.makeText(requireContext(), "", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             AuthenticationService.signUpWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     val action = SignUpFragmentDirections.actionSignUpFragmentToInitialProfileData()
