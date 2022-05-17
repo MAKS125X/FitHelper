@@ -39,4 +39,9 @@
 
     </style>
 
+    <style name="SeekBarStyle"
+        parent="Widget.AppCompat.SeekBar">
+        <item name="colorAccent">?android:attr/colorPrimary</item>
+    </style>
+
 </resources>

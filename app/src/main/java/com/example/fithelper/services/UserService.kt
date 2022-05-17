@@ -15,6 +15,8 @@ object UserService {
     fun updatePassword(password: String) =
         auth.currentUser?.updatePassword(password)
 
+    fun getUser() = auth.currentUser
+
     fun updateProfile(requestBuilder: ((UserProfileChangeRequest.Builder) -> UserProfileChangeRequest)): Task<Void>? {
         val request = requestBuilder(UserProfileChangeRequest.Builder())
         return auth.currentUser?.updateProfile(request)

@@ -1,7 +1,9 @@
 package com.example.fithelper
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -17,9 +19,15 @@ import com.example.fithelper.services.AuthenticationService
 import com.example.fithelper.services.UserService
 
 
-class InitialProfileData : Fragment() {
+class InitialProfileDataFragment : Fragment() {
 
     lateinit var binding: FragmentInitialProfileDataBinding
+//    private lateinit var prefs: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +40,26 @@ class InitialProfileData : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         binding.confirmProfileDataButton.setOnClickListener{
+
+            val userName = binding.nameEditText.text.toString()
+            if(userName.isEmpty()){
+                Toast.makeText(requireContext(), "Введите имя пользователя", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             UserService.updateProfile { builder ->
-                builder.displayName = binding.nameEditText.text.toString()
+                builder.displayName = userName
 
                 //TODO("Photo Uri")
                 builder.build()
             }
+
+//            val editor = prefs.edit()
+//            editor.putString("APP_PREFERENCES_USERNAME", userName).apply()
+
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
             requireActivity().finish()

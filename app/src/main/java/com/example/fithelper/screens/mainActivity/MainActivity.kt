@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fithelper.R
+import com.example.fithelper.SettingsDialogFragment
 import com.example.fithelper.databinding.ActivityMainBinding
 import com.example.fithelper.screens.authenticationActivity.AuthenticationActivity
 import com.example.fithelper.services.AuthenticationService
@@ -36,5 +37,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setupWithNavController(navController)
 
+        binding.imageButton.setOnClickListener{
+            val fm = supportFragmentManager
+            val settingsDialogFragment = SettingsDialogFragment()
+            settingsDialogFragment.show(fm, "SettingsDialogFragment")
+        }
     }
 }
