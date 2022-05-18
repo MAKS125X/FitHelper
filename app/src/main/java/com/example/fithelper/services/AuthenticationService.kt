@@ -16,12 +16,10 @@ object AuthenticationService {
         )
     }
 
-
     fun createSignInIntentWithCurrentProvider(provider: Enum<Providers>): Intent =
         authUI.createSignInIntentBuilder()
             .setAvailableProviders(arrayListOf(providers[provider]))
             .build()
-
 
     fun signUpWithEmailAndPassword(email: String, password: String) =
         auth.createUserWithEmailAndPassword(email, password)

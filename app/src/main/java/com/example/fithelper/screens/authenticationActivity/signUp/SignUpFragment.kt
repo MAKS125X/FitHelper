@@ -1,6 +1,5 @@
 package com.example.fithelper.screens.authenticationActivity.signUp
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentSignUpBinding
-import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.services.AuthenticationService
 
 class SignUpFragment : Fragment() {
@@ -36,17 +34,17 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.confirmSignUpButton.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             val email = binding.emailSignUpET.text.toString()
             val password = binding.passwordSignUpET.text.toString()
-            val repeatPassword = binding.repeatPasswordSignUpET.toString()
+            val repeatPassword = binding.confirmPasswordSignUpET.text.toString()
 
             if(email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()){
-                Toast.makeText(requireContext(), "Заполните все поля", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), resources.getString(R.string.fill_all_registration_details), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(password != repeatPassword){
-                Toast.makeText(requireContext(), "", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), resources.getString(R.string.password_mismatch), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             AuthenticationService.signUpWithEmailAndPassword(email, password)
@@ -58,11 +56,5 @@ class SignUpFragment : Fragment() {
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
                 }
         }
-
-//
-//        binding.signInBTN.setOnClickListener {
-//            val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
-//            findNavController().navigate(action)
-//        }
     }
 }

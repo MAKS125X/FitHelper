@@ -75,35 +75,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setNumberOfRepetitions(numberOfRepetitions)
         }
-
-//        decreaseWeightButton.setOnClickListener {
-//            val weight = vm.weight.value?.add(
-//                -SLOW_CHANGE_VALUE,
-//                LOWER_BOUND_WEIGHT
-//            )
-//            vm.setWeight(weight)
-//        }
-//        increaseWeightButton.setOnClickListener {
-//            val weight = vm.weight.value?.add(
-//                SLOW_CHANGE_VALUE,
-//                LOWER_BOUND_WEIGHT
-//            )
-//            vm.setWeight(weight)
-//        }
-//        fastDecreaseWeightButton.setOnClickListener {
-//            val weight = vm.weight.value?.add(
-//                -FAST_CHANGE_VALUE,
-//                LOWER_BOUND_WEIGHT
-//            )
-//            vm.setWeight(weight)
-//        }
-//        fastIncreaseWeightButton.setOnClickListener {
-//            val weight = vm.weight.value?.add(
-//                FAST_CHANGE_VALUE,
-//                LOWER_BOUND_WEIGHT
-//            )
-//            vm.setWeight(weight)
-//        }
     }
 
     private fun initObservers() = with(binding) {
@@ -141,15 +112,12 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        prefs = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-
-        val maxWeight = prefs.getInt("APP_PREFERENCES_WEIGHT_COUNTER", 25)
-        binding.weightTV
         initClicks()
         initObservers()
 
-        binding.weightSeekBar.max = prefs.getInt("APP_PREFERENCES_MAX_WEIGHT", 100)
+        binding.weightSeekBar.max = prefs.getInt(PREF_STAG, 100)
         binding.weightSeekBar.progress = vm.weight.value ?: 0
 
         binding.weightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
@@ -178,8 +146,11 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
         const val FAST_CHANGE_VALUE = 5
         const val SLOW_CHANGE_VALUE = 1
 
-        const val LOWER_BOUND_WEIGHT = 0
         const val LOWER_BOUND_REPETITIONS = 1
         const val LOWER_BOUND_APPROACHES = 1
+
+        const val PREFS_NAME = "settings"
+        const val PREF_STAG = "APP_PREFERENCES_MAX_WEIGHT"
+
     }
 }

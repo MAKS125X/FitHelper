@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.fragment.findNavController
+import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentSignInBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.services.AuthenticationService
@@ -36,7 +38,7 @@ class SignInFragment : Fragment() {
         } else {
             Toast.makeText(
                 requireContext(),
-                "Please try again",
+                resources.getString(R.string.try_again),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -49,21 +51,24 @@ class SignInFragment : Fragment() {
             val email = binding.emailSignInET.text.toString()
             val password = binding.passwordSignInET.text.toString()
 
-            if(email != "" || password != ""){
-                AuthenticationService.signInWithEmailAndPassword(email, password)
-                    .addOnSuccessListener {
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-                    }
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    resources.getString(R.string.fill_all_details_to_sign_in),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
             }
-            else{
-                Toast.makeText(requireContext(), "Заполните данные об электронной почте и пароле для входа", Toast.LENGTH_SHORT).show()
-            }
-
+            AuthenticationService.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener {
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT)
+                        .show()
+                }
         }
 
         binding.registerTextView.setOnClickListener {
@@ -71,11 +76,13 @@ class SignInFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        binding.googleImageView.setOnClickListener{
+        binding.googleImageView.setOnClickListener {
             val intent =
                 AuthenticationService.createSignInIntentWithCurrentProvider(Providers.Google)
 
             signInLauncher.launch(intent)
         }
+
+        //TODO: Forget password
     }
 }
