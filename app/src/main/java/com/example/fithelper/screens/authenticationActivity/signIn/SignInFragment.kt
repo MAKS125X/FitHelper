@@ -83,6 +83,12 @@ class SignInFragment : Fragment() {
             signInLauncher.launch(intent)
         }
 
-        //TODO: Forget password
+        binding.forgetPasswordTV.setOnClickListener {
+            val email = binding.emailSignInET.text.toString()
+            val action = SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment()
+            action.email = email
+
+            findNavController().navigate(action)
+        }
     }
 }

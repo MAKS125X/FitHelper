@@ -8,7 +8,7 @@
     tools:context=".screens.mainActivity.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/appToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorOnPrimary"
@@ -16,7 +16,8 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/toolbar_menu" />
 
     <TextView
         android:id="@+id/textView"
@@ -28,7 +29,7 @@
         android:textColor="?android:attr/textColorPrimary"
         android:text="@string/app_name"
         android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/appToolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
@@ -39,7 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/appToolbar"
         app:navGraph = "@navigation/main_graph"
         />
 
@@ -53,17 +54,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu"/>
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorOnPrimary"
-        app:tint="?android:attr/textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@id/toolbar"
-        app:srcCompat="@drawable/ic_settings" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

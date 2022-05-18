@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.actionCodeSettings
 
 object AuthenticationService {
     private val authUI by lazy { AuthUI.getInstance() }
@@ -26,6 +27,12 @@ object AuthenticationService {
 
     fun signInWithEmailAndPassword(email: String, password: String) =
         auth.signInWithEmailAndPassword(email, password)
+
+    fun sendEmailVerification() =
+        auth.currentUser?.sendEmailVerification() ?: Unit
+
+    fun resetPassword(email: String) =
+        auth.sendPasswordResetEmail(email)
 
     fun userIsAuthorized(): Boolean = auth.currentUser != null
     fun signOut(context: Context) {

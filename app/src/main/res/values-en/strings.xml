@@ -19,7 +19,7 @@
     <string name="add_exercise">Add exercise</string>
     <string name="add_workout">Add workout</string>
     <string name="remove_workout">Delete workout</string>
-    <string name="hello_user">Hello %s!</string>
+    <string name="hello_user">Hello, %s!</string>
     <string name="hello_empty_user">Hello!</string>
     <string name="specify_workout_date">Specify workout date</string>
     <string name="no_exercises">No exercises</string>
@@ -50,4 +50,9 @@
     <string name="Login">Login</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="enter_email" >Enter email</string>
+    <string name="check_email_for" >Check email for %s</string>
+    <string name="change_password" >change password</string>
+    <string name="reset_password" >Reset password</string>
 </resources>

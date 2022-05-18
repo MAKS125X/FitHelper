@@ -79,5 +79,11 @@
     <string name="sign_in_with">Войти с помощью</string>
     <string name="Login">Вход</string>
     <string name="forgot_password">Забыли пароль?</string>
+    <string name="sign_in">Войти в систему</string>
+    
+    <string name="enter_email" >Введите почту</string>
+    <string name="check_email_for" >Проверьте почту, чтобы %s</string>
+    <string name="change_password" >изменить пароль</string>
+    <string name="reset_password" >Восстановить пароль</string>
 
 </resources>
