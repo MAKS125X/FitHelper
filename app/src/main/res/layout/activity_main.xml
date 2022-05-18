@@ -49,10 +49,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:itemIconTint="@drawable/bottom_nav_selector"
-        app:itemTextColor="@color/bNavCheckedItem"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"/>
+        app:menu="@menu/bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
