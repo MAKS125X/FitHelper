@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.actionCodeSettings
 
 object AuthenticationService {
     private val authUI by lazy { AuthUI.getInstance() }

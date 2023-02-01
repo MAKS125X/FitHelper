@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentForgotPasswordBinding
-import com.example.fithelper.databinding.FragmentSignInBinding
 import com.example.fithelper.services.AuthenticationService
 
 class ForgotPasswordFragment : Fragment() {

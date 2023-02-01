@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.fragment.findNavController
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentSignInBinding

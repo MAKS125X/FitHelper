@@ -12,7 +12,6 @@ import com.example.fithelper.databinding.ActivityMainBinding
 import com.example.fithelper.screens.authenticationActivity.AuthenticationActivity
 import com.example.fithelper.services.AuthenticationService
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
