@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitHelper">
-        <activity android:name=".screens.authActivity.AuthActivity" />
         <activity
             android:name=".screens.mainActivity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screens.authenticationActivity.AuthenticationActivity"
             android:exported="true"
             android:theme="@style/Theme.FitHelper">
             <intent-filter>
@@ -20,7 +22,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
-
 </manifest>

@@ -17,8 +17,8 @@
     <!-- Workout -->
     <string name="workout_name">Название тренировки</string>
     <string name="count_approaches">Количество подходов</string>
-    <string name="workout_date">Дата тренировки</string>
-    <string name="placeholder_workout_date">Дата тренировки: %s</string>
+    <string name="workout_date">Дата</string>
+    <string name="placeholder_workout_date">Дата: %s</string>
     <string name="specify_workout_date">Укажите дату тренировки</string>
 
     <!-- Exercise -->
@@ -39,21 +39,51 @@
     <string name="plus_plus" translatable="false">++</string>
 
     <!-- Actions -->
-    <string name="sign_in">Вход</string>
-    <string name="sign_out">Выход</string>
+    <string name="sign_out">Выход из аккаунта</string>
     <string name="change">Изменить</string>
     <string name="add_exercise">Добавить упражнение</string>
     <string name="add_workout">Добавить тренировку</string>
     <string name="remove_workout">Удалить тренировку</string>
 
     <!-- Messages -->
-    <string name="hello_user">Привет, пользователь!</string>
+    <string name="hello_user">Привет, %s!</string>
     <string name="no_exercises">Упражнений нет</string>
     <string name="placeholder_exercise_total_count">Всего упражнений: %d</string>
+    <string name="hello_empty_user">Привет!</string>
 
     <!-- Confirm dialog -->
     <string name="confirmation_delete_workout">Вы действительно хотите удалить данную тренировку?</string>
     <string name="confirm">Да</string>
     <string name="cancel">Нет</string>
+
+    <string name="emailAddress">Адрес эл. почты</string>
+    <string name="password">Пароль</string>
+    <string name="repeatPassword">Повторите пароль</string>
+    <string name="have_not_account">Нет аккаунта?\u00A0</string>
+    <string name="register">Зарегистрируйтесь</string>
+    <string name="registration">Регистрация</string>
+    <string name="sign_up">Зарегистрироваться</string>
+
+
+    <string name="try_again">Пожалуйста, попробуйте снова</string>
+    <string name="fill_all_details_to_sign_in">Заполните данные об электронной почте и пароле для входа</string>
+    <string name="fill_all_registration_details">Заполните все данные для регистрации</string>
+    <string name="password_mismatch">Пароли не совпадают</string>
+    <string name="empty_username">Введите имя пользователя"</string>
+    <string name="settings">Настройки</string>
+    <string name="maximum_weight">Предельный вес</string>
+    <string name="username">Имя пользователя</string>
+    <string name="skip">Пропустить</string>
+    <string name="confirm_information">Подтвердить данные</string>
+    <string name="enter_data">Введите данные: \n(позже их можно будет изменить)</string>
+    <string name="sign_in_with">Войти с помощью</string>
+    <string name="Login">Вход</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="sign_in">Войти в систему</string>
+    
+    <string name="enter_email" >Введите почту</string>
+    <string name="check_email_for" >Проверьте почту, чтобы %s</string>
+    <string name="change_password" >изменить пароль</string>
+    <string name="reset_password" >Восстановить пароль</string>
 
 </resources>

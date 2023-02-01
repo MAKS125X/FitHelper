@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_graph"
-    app:startDestination="@id/loginFragment">
-
+    app:startDestination="@id/signInFragment">
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.fithelper.screens.authActivity.login.LoginFragment"
-        android:label="LoginFragment" />
+        android:id="@+id/signInFragment"
+        android:name="com.example.fithelper.screens.authenticationActivity.signIn.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.fithelper.screens.authenticationActivity.signUp.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_initialProfileData"
+            app:destination="@id/initialProfileData"
+            app:popUpTo="@id/initialProfileData" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/initialProfileData"
+        android:name="com.example.fithelper.screens.authenticationActivity.signUp.InitialProfileDataFragment"
+        android:label="fragment_initial_profile_data"
+        tools:layout="@layout/fragment_initial_profile_data" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.fithelper.screens.authenticationActivity.forgotPassword.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="&quot;&quot;" />
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>

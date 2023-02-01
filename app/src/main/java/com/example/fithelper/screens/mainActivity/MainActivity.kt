@@ -7,10 +7,10 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fithelper.R
+import com.example.fithelper.screens.mainActivity.settings.SettingsDialogFragment
 import com.example.fithelper.databinding.ActivityMainBinding
-import com.example.fithelper.screens.authActivity.AuthActivity
+import com.example.fithelper.screens.authenticationActivity.AuthenticationActivity
 import com.example.fithelper.services.AuthenticationService
-import com.example.fithelper.services.UserService
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (!AuthenticationService.userIsAuthorized()) {
-            val intent = Intent(this, AuthActivity::class.java)
+            val intent = Intent(this, AuthenticationActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -32,5 +32,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setupWithNavController(navController)
 
+
+        binding.appToolbar.setOnMenuItemClickListener {
+            if (it.itemId == R.id.settingsItem) {
+                val fm = supportFragmentManager
+                val settingsDialogFragment = SettingsDialogFragment()
+                settingsDialogFragment.show(fm, "SettingsDialogFragment")
+            }
+            return@setOnMenuItemClickListener true
+        }
     }
 }

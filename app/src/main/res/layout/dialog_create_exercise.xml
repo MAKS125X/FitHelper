@@ -102,29 +102,17 @@
                 android:id="@+id/weightTV"
                 style="@style/BottomSheetTextViewStyle"
                 android:text="@string/weight" />
-            <Button
-                android:id="@+id/fastDecreaseWeightButton"
-                style="@style/ChangeButtonsStyle"
-                android:text="@string/minus_minus"
-                tools:ignore="TouchTargetSizeCheck" />
 
-            <Button
-                android:id="@+id/decreaseWeightButton"
-                style="@style/ChangeButtonsStyle"
-                android:text="@string/minus"
-                tools:ignore="TouchTargetSizeCheck" />
+            <SeekBar
+                android:id="@+id/weightSeekBar"
+                android:layout_width="204dp"
+                android:layout_height="match_parent"
+                android:theme="@style/SeekBarStyle"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                />
 
-            <Button
-                android:id="@+id/increaseWeightButton"
-                style="@style/ChangeButtonsStyle"
-                android:text="@string/plus"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/fastIncreaseWeightButton"
-                style="@style/ChangeButtonsStyle"
-                android:text="@string/plus_plus"
-                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <Button
@@ -135,6 +123,5 @@
             android:layout_margin="4dp"
             android:text="@string/add_exercise"
             app:cornerRadius="20dp" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,14 @@
 package com.example.fithelper.screens.common.createExerciseDialogFragment
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,6 +21,7 @@ import java.io.Serializable
 
 class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
     private lateinit var binding: DialogCreateExerciseBinding
+    private lateinit var prefs: SharedPreferences
 
     private val args by navArgs<CreateExerciseDialogFragmentArgs>()
     private val vm: CreateExerciseViewModel by viewModels { CreateExerciseFactory(args.listener) }
@@ -71,35 +75,6 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
             )
             vm.setNumberOfRepetitions(numberOfRepetitions)
         }
-
-        decreaseWeightButton.setOnClickListener {
-            val weight = vm.weight.value?.add(
-                -SLOW_CHANGE_VALUE,
-                LOWER_BOUND_WEIGHT
-            )
-            vm.setWeight(weight)
-        }
-        increaseWeightButton.setOnClickListener {
-            val weight = vm.weight.value?.add(
-                SLOW_CHANGE_VALUE,
-                LOWER_BOUND_WEIGHT
-            )
-            vm.setWeight(weight)
-        }
-        fastDecreaseWeightButton.setOnClickListener {
-            val weight = vm.weight.value?.add(
-                -FAST_CHANGE_VALUE,
-                LOWER_BOUND_WEIGHT
-            )
-            vm.setWeight(weight)
-        }
-        fastIncreaseWeightButton.setOnClickListener {
-            val weight = vm.weight.value?.add(
-                FAST_CHANGE_VALUE,
-                LOWER_BOUND_WEIGHT
-            )
-            vm.setWeight(weight)
-        }
     }
 
     private fun initObservers() = with(binding) {
@@ -137,8 +112,21 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        prefs = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
         initClicks()
         initObservers()
+
+        binding.weightSeekBar.max = prefs.getInt(PREF_STAG, 100)
+        binding.weightSeekBar.progress = vm.weight.value ?: 0
+
+        binding.weightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                vm.setWeight(p1)
+            }
+            override fun onStartTrackingTouch(p0: SeekBar?) {}
+            override fun onStopTrackingTouch(p0: SeekBar?) {}
+        })
 
         binding.exerciseNameET.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -158,8 +146,11 @@ class CreateExerciseDialogFragment : BottomSheetDialogFragment() {
         const val FAST_CHANGE_VALUE = 5
         const val SLOW_CHANGE_VALUE = 1
 
-        const val LOWER_BOUND_WEIGHT = 0
         const val LOWER_BOUND_REPETITIONS = 1
         const val LOWER_BOUND_APPROACHES = 1
+
+        const val PREFS_NAME = "settings"
+        const val PREF_STAG = "APP_PREFERENCES_MAX_WEIGHT"
+
     }
 }

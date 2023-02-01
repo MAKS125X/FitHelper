@@ -25,7 +25,7 @@ class WorkoutsViewModel : ViewModel() {
     }
 
     private fun addSnapshotListener() =
-        WorkoutRepository.getWorkoutByUserId(userId)
+        WorkoutRepository.getWorkoutByUserId(userId!!)
             .addSnapshotListener { snapshots, e ->
                 if (e != null) {
                     Log.w("Database", e.message.toString())

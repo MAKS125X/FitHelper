@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.authenticationActivity.signUp.SignUpFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/labelTextView"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/ethna_demo"
+            android:text="@string/registration"
+            android:textAlignment="textStart"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/signInLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <EditText
+                android:id="@+id/emailSignUpET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/emailAddress"
+                android:inputType="textEmailAddress"
+                />
+
+            <EditText
+                android:id="@+id/passwordSignUpET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                />
+
+            <EditText
+                android:id="@+id/confirmPasswordSignUpET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/repeatPassword"
+                android:inputType="textPassword"
+                />
+
+            <Button
+                android:id="@+id/signUpButton"
+                style="@style/AppButtonStyle"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                />
+
+        </LinearLayout>
+
+
+       <!--
+        <Button
+            android:id="@+id/signInConfirmBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Войти в систему"
+            android:layout_margin="16dp"
+            style="@style/AppButtonStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordSignUpET" />
+
+            -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

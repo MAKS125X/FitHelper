@@ -11,25 +11,31 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/helloTextView"
             style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:gravity="center_horizontal"
             android:text="@string/hello_user"
-            app:layout_constraintBottom_toTopOf="@+id/logoutButton"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            android:textSize="32sp"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.257" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            style="@style/AppButtonStyle"
             android:text="@string/sign_out"
             android:textColor="?android:attr/textColorPrimaryInverse"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -1,48 +1,44 @@
 package com.example.fithelper.services
 
 import android.content.Context
-import com.example.fithelper.R
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import android.content.Intent
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 
 object AuthenticationService {
+    private val authUI by lazy { AuthUI.getInstance() }
     private val auth by lazy { FirebaseAuth.getInstance() }
 
-    fun getGoogleSignInClient(context: Context): GoogleSignInClient {
-        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(context.getString(R.string.default_web_client_id))
-            .requestEmail()
-            .requestProfile()
+    private val providers by lazy {
+        mapOf(
+            Providers.Email to AuthUI.IdpConfig.EmailBuilder().build(),
+            Providers.Google to AuthUI.IdpConfig.GoogleBuilder().build()
+        )
+    }
+
+    fun createSignInIntentWithCurrentProvider(provider: Enum<Providers>): Intent =
+        authUI.createSignInIntentBuilder()
+            .setAvailableProviders(arrayListOf(providers[provider]))
             .build()
-        return GoogleSignIn.getClient(context, options)
-    }
 
-    fun signInWithGoogleAccount(
-        account: GoogleSignInAccount?,
-    ): Task<AuthResult> {
-        val credential = GoogleAuthProvider.getCredential(account!!.idToken, null)
-        return auth.signInWithCredential(credential)
-    }
+    fun signUpWithEmailAndPassword(email: String, password: String) =
+        auth.createUserWithEmailAndPassword(email, password)
 
+    fun signInWithEmailAndPassword(email: String, password: String) =
+        auth.signInWithEmailAndPassword(email, password)
+
+    fun sendEmailVerification() =
+        auth.currentUser?.sendEmailVerification() ?: Unit
+
+    fun resetPassword(email: String) =
+        auth.sendPasswordResetEmail(email)
+
+    fun userIsAuthorized(): Boolean = auth.currentUser != null
     fun signOut(context: Context) {
-        signOutFirebase()
-        signOutGoogle(context)
+        authUI.signOut(context)
     }
+}
 
-    fun userIsAuthorized() = auth.currentUser != null
-    fun userIsAuthorized(callback: (Boolean) -> Unit) = callback(userIsAuthorized())
-
-    private fun signOutFirebase() {
-        auth.signOut()
-    }
-
-    private fun signOutGoogle(context: Context) {
-        getGoogleSignInClient(context).signOut()
-    }
+enum class Providers {
+    Email, Google
 }
