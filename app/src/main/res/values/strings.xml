@@ -17,8 +17,8 @@
     <!-- Workout -->
     <string name="workout_name">Название тренировки</string>
     <string name="count_approaches">Количество подходов</string>
-    <string name="workout_date">Дата тренировки</string>
-    <string name="placeholder_workout_date">Дата тренировки: %s</string>
+    <string name="workout_date">Дата</string>
+    <string name="placeholder_workout_date">Дата: %s</string>
     <string name="specify_workout_date">Укажите дату тренировки</string>
 
     <!-- Exercise -->

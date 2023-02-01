@@ -4,9 +4,9 @@
     <string name="workouts">Workouts</string>
     <string name="profile">Profile</string>
     <string name="workout_name">Workout name</string>
-    <string name="workout_date">Training date</string>
+    <string name="workout_date">Date</string>
     <string name="count_approaches">Number of approaches</string>
-    <string name="placeholder_workout_date">Training date: %s</string>
+    <string name="placeholder_workout_date">Date: %s</string>
     <string name="exercise_name">Exercise name</string>
     <string name="count_repeats">Number of repetitions</string>
     <string name="exercise_total_count">Total exercises</string>
