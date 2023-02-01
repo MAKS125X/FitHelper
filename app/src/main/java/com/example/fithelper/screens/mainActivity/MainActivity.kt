@@ -2,14 +2,12 @@ package com.example.fithelper.screens.mainActivity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fithelper.R
-import com.example.fithelper.SettingsDialogFragment
+import com.example.fithelper.screens.mainActivity.settings.SettingsDialogFragment
 import com.example.fithelper.databinding.ActivityMainBinding
 import com.example.fithelper.screens.authenticationActivity.AuthenticationActivity
 import com.example.fithelper.services.AuthenticationService

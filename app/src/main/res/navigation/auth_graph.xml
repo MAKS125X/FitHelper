@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/initialProfileData"
-        android:name="com.example.fithelper.InitialProfileDataFragment"
+        android:name="com.example.fithelper.screens.authenticationActivity.signUp.InitialProfileDataFragment"
         android:label="fragment_initial_profile_data"
         tools:layout="@layout/fragment_initial_profile_data" />
     <fragment

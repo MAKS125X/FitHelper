@@ -1,4 +1,4 @@
-package com.example.fithelper
+package com.example.fithelper.screens.authenticationActivity.signUp
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentInitialProfileDataBinding
 import com.example.fithelper.screens.mainActivity.MainActivity
 import com.example.fithelper.services.UserService
