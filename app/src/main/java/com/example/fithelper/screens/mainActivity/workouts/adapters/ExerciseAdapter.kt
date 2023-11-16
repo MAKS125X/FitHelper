@@ -5,15 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fithelper.R
 import com.example.fithelper.databinding.ItemExerciseBinding
 import com.example.fithelper.models.Exercise
 
 class ExerciseAdapter(
-    private val exercises: MutableList<Exercise>,
     private val isChangeable: Boolean = true
-) : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
+) : ListAdapter<Exercise, ExerciseAdapter.ExerciseViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -22,11 +23,11 @@ class ExerciseAdapter(
     }
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
-        holder.bind(exercises[position], isChangeable)
+        holder.bind(currentList[position], isChangeable)
     }
 
     override fun getItemCount(): Int {
-        return exercises.size
+        return currentList.size
     }
 
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -69,6 +70,24 @@ class ExerciseAdapter(
             else
                 exerciseNameTV.paintFlags =
                     exerciseNameTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        }
+    }
+
+    companion object{
+        private val DiffCallback = object : DiffUtil.ItemCallback<Exercise>() {
+            override fun areItemsTheSame(
+                oldItem: Exercise,
+                newItem: Exercise
+            ): Boolean {
+                return oldItem.name == newItem.name
+            }
+
+            override fun areContentsTheSame(
+                oldItem: Exercise,
+                newItem: Exercise
+            ): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.example.fithelper.screens.mainActivity.profile.profile.ProfileViewModel
+import com.example.fithelper.screens.mainActivity.profile.ProfileViewModel
 import com.example.fithelper.databinding.DialogSettingsBinding
 
 

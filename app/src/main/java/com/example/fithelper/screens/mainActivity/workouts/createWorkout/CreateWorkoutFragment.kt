@@ -83,12 +83,13 @@ open class CreateWorkoutFragment : Fragment() {
         }
 
         vm.exercises.observe(viewLifecycleOwner) {
-            adapter.notifyDataSetChanged()
+            adapter.submitList(it.toMutableList())
+//            adapter.notifyDataSetChanged()
         }
     }
 
     private fun initRecyclerView() = with(binding) {
-        adapter = ExerciseAdapter(vm.exercises.value ?: mutableListOf(), isChangeable = false)
+        adapter = ExerciseAdapter(isChangeable = false)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }

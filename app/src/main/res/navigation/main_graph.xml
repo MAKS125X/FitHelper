@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.fithelper.screens.mainActivity.home.home.HomeFragment"
+        android:name="com.example.fithelper.screens.mainActivity.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/guideFragment"
-        android:name="com.example.fithelper.screens.mainActivity.guide.guide.GuideFragment"
+        android:name="com.example.fithelper.screens.mainActivity.guide.GuideFragment"
         android:label="fragment_guide"
         tools:layout="@layout/fragment_guide" />
 
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.fithelper.screens.mainActivity.profile.profile.ProfileFragment"
+        android:name="com.example.fithelper.screens.mainActivity.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment

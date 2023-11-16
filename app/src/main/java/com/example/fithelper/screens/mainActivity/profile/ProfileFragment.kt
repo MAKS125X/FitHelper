@@ -1,4 +1,4 @@
-package com.example.fithelper.screens.mainActivity.profile.profile
+package com.example.fithelper.screens.mainActivity.profile
 
 import android.content.Intent
 import android.os.Bundle

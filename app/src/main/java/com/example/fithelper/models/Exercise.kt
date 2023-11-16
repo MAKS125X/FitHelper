@@ -1,7 +1,5 @@
 package com.example.fithelper.models
 
-import java.lang.IllegalArgumentException
-
 class Exercise(
     val name: String? = null,
     numberOfApproaches: Int = 1,
@@ -13,7 +11,7 @@ class Exercise(
 
     var numberOfApproaches: Int = numberOfApproaches
         set(value) {
-            if(value < LOWER_BOUND_APPROACHES)
+            if (value < LOWER_BOUND_APPROACHES)
                 throw IllegalArgumentException("Число подходов должно быть положительным!")
 
             field = value
@@ -45,6 +43,17 @@ class Exercise(
 
     override fun toString(): String {
         return name ?: ""
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is Exercise) {
+            name == other.name &&
+                    numberOfApproaches == other.numberOfApproaches &&
+                    numberOfRepetitions == other.numberOfRepetitions &&
+                    isComplete == other.isComplete &&
+                    weight == other.weight
+        } else
+            false
     }
 
     companion object {

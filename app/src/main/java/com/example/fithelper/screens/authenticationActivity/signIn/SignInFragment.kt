@@ -2,12 +2,13 @@ package com.example.fithelper.screens.authenticationActivity.signIn
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.fithelper.R
 import com.example.fithelper.databinding.FragmentSignInBinding
@@ -65,6 +66,7 @@ class SignInFragment : Fragment() {
                     requireActivity().finish()
                 }
                 .addOnFailureListener {
+                    Log.d("aaa", it.message.toString())
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT)
                         .show()
                 }

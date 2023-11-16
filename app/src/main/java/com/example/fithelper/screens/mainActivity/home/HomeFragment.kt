@@ -1,4 +1,4 @@
-package com.example.fithelper.screens.mainActivity.home.home
+package com.example.fithelper.screens.mainActivity.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

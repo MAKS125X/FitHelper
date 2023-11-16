@@ -4,17 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fithelper.extensions.getStringDateFromLong
-import com.example.fithelper.models.Workout
 import com.example.fithelper.R
 import com.example.fithelper.databinding.ItemWorkoutBinding
+import com.example.fithelper.extensions.getStringDateFromLong
+import com.example.fithelper.models.Workout
 import kotlin.math.min
 
 class WorkoutAdapter(
-    private val workouts: MutableList<Workout>,
     private val onWorkoutItemClickListener: OnWorkoutItemClickListener
-) : RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
+) : ListAdapter<Workout, WorkoutAdapter.WorkoutViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -23,17 +24,19 @@ class WorkoutAdapter(
     }
 
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
-        holder.bind(workouts[position])
+        holder.bind(currentList[position])
         holder.binding.deleteWorkoutButton.setOnClickListener {
-            onWorkoutItemClickListener.deleteById(workouts[position].id)
+            onWorkoutItemClickListener.deleteById(currentList[position].id)
         }
         holder.binding.cardView.setOnClickListener {
-            onWorkoutItemClickListener.getDetails(workouts[position])
+            onWorkoutItemClickListener.getDetails(
+                currentList[position]
+            )
         }
     }
 
     override fun getItemCount(): Int {
-        return workouts.size
+        return currentList.size
     }
 
     class WorkoutViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -89,5 +92,23 @@ class WorkoutAdapter(
     interface OnWorkoutItemClickListener {
         fun getDetails(workout: Workout)
         fun deleteById(workoutId: String)
+    }
+
+    companion object {
+        private val DiffCallback = object : DiffUtil.ItemCallback<Workout>() {
+            override fun areItemsTheSame(
+                oldItem: Workout,
+                newItem: Workout
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(
+                oldItem: Workout,
+                newItem: Workout
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

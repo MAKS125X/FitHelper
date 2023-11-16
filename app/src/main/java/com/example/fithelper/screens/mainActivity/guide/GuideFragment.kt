@@ -1,4 +1,4 @@
-package com.example.fithelper.screens.mainActivity.guide.guide
+package com.example.fithelper.screens.mainActivity.guide
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

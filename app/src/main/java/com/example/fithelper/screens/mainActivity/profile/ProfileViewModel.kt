@@ -1,4 +1,4 @@
-package com.example.fithelper.screens.mainActivity.profile.profile
+package com.example.fithelper.screens.mainActivity.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

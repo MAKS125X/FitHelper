@@ -48,7 +48,8 @@ class ChangeWorkoutFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = ExerciseAdapter(workoutForChangeViewModel.exerciseList.value ?: mutableListOf())
+        adapter = ExerciseAdapter()
+        adapter.submitList(workoutForChangeViewModel.exerciseList.value)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
     }

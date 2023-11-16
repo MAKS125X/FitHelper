@@ -2,6 +2,7 @@ package com.example.fithelper.screens.mainActivity.workouts.workouts
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,14 +29,15 @@ class WorkoutsFragment : Fragment() {
     }
 
     private fun initObservers() {
+
         vm.workouts.observe(viewLifecycleOwner) {
-            adapter.notifyDataSetChanged()
+            Log.d("aaa","Observe: $it")
+            adapter.submitList(it.toMutableList())
         }
     }
 
     private fun initRecyclerView() = with(binding) {
         adapter = WorkoutAdapter(
-            vm.workouts.value ?: mutableListOf(),
             object : WorkoutAdapter.OnWorkoutItemClickListener {
                 override fun getDetails(workout: Workout) {
                     val action =
@@ -66,6 +68,7 @@ class WorkoutsFragment : Fragment() {
                     findNavController().navigate(action)
                 }
             })
+//        adapter.submitList(vm.workouts.value)
         workoutRecyclerView.layoutManager = LinearLayoutManager(context)
         workoutRecyclerView.adapter = adapter
     }
